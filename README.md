@@ -1,6 +1,6 @@
 # Mike Davies: case study portfolio
 
-A single scrollable page of five case studies, each telling the problem, the build and the outcome, with a live demo where a browser can run one and an honest visual where it cannot. It is a plain static site: one `index.html`, one stylesheet, one script, no framework and no build step for the shell. GitHub Pages serves it from the root of `main` at https://jammydav.github.io.
+A single scrollable page of five case studies, each telling the problem, the build and the outcome, with a live demo where a browser can run one and an honest visual where it cannot. It is a plain static site: one `index.html`, one stylesheet, one script, no framework and no build step for the shell. It is live at https://jammydav.github.io: every push to `main` runs `.github/workflows/pages.yml`, which publishes the repo root to GitHub Pages as is (no build step).
 
 | # | Case study | Panel |
 |---|---|---|
@@ -146,4 +146,6 @@ demos/procedure-library/       index.html (built, three tabs), register-index.ht
                                engine/ (neutral Word engine stand-in),
                                example/ (master .md, gaps.xlsx, check_report.txt, page-1..3.webp)
 tools/                         anon_check.sh, deep_check.py, sync_noscript.py, list_placeholders.py, make_posters.py
+.github/workflows/pages.yml    deploys the repo root to GitHub Pages on every push to main
+.nojekyll                      tells Pages to serve the files as they are
 ```
