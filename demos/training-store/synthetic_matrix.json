@@ -1,0 +1,1223 @@
+{
+ "meta": {
+  "verbs": {
+   "pm": "PM",
+   "rep": "Repair",
+   "ins": "Install",
+   "cal": "Calibrate",
+   "oq": "OQ"
+  },
+  "note": "Synthetic"
+ },
+ "records": {
+  "HPLC fundamentals": {
+   "LC SYSTEM\u0001HPLC": {
+    "pm": 2
+   }
+  },
+  "HPLC: preventive maintenance": {
+   "LC SYSTEM": {
+    "pm": 1
+   }
+  },
+  "HPLC troubleshooting workshop": {
+   "LC SYSTEM": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "HPLC observation checklist": {
+   "LC SYSTEM\u0001HPLC": {
+    "pm": 2
+   }
+  },
+  "HPLC on-the-job practical": {
+   "LC SYSTEM": {
+    "pm": 2
+   }
+  },
+  "HPLC advanced diagnostics": {
+   "LC SYSTEM": {
+    "rep": 1
+   }
+  },
+  "HPLC daily checks and cleaning": {
+   "LC SYSTEM": {
+    "pm": 2
+   }
+  },
+  "HPLC refresher": {
+   "LC SYSTEM\u0001HPLC": {
+    "pm": 1
+   }
+  },
+  "HPLC practical assessment": {
+   "LC SYSTEM\u0001HPLC": {
+    "pm": 2
+   }
+  },
+  "Gas chromatography fundamentals": {
+   "GC SYSTEM": {
+    "pm": 2
+   }
+  },
+  "Gas chromatography: preventive maintenance": {
+   "GC SYSTEM": {
+    "pm": 1
+   }
+  },
+  "Gas chromatography installation and qualification": {
+   "GC SYSTEM\u0001GC-FID": {
+    "ins": 1,
+    "oq": 1
+   }
+  },
+  "Gas chromatography knowledge check": {
+   "GC SYSTEM\u0001HEADSPACE SAMPLER": {
+    "pm": 2
+   }
+  },
+  "Gas chromatography observation checklist": {
+   "GC SYSTEM\u0001HEADSPACE SAMPLER": {
+    "pm": 2
+   }
+  },
+  "Gas chromatography advanced diagnostics": {
+   "GC SYSTEM\u0001GC-FID": {
+    "rep": 1
+   }
+  },
+  "Gas chromatography module replacement": {
+   "GC SYSTEM\u0001HEADSPACE SAMPLER": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "Gas chromatography decontamination and handover": {
+   "GC SYSTEM": {
+    "pm": 2
+   }
+  },
+  "Gas chromatography refresher": {
+   "GC SYSTEM\u0001HEADSPACE SAMPLER": {
+    "pm": 1
+   }
+  },
+  "Gas chromatography performance verification": {
+   "GC SYSTEM": {
+    "cal": 1,
+    "oq": 1
+   }
+  },
+  "LC-MS fundamentals": {
+   "ORGANIC MASS SPECTROMETERS\u0001TRIPLE QUADRUPOLE": {
+    "pm": 2
+   }
+  },
+  "LC-MS: preventive maintenance": {
+   "ORGANIC MASS SPECTROMETERS\u0001Q-TOF": {
+    "pm": 1
+   }
+  },
+  "LC-MS troubleshooting workshop": {
+   "ORGANIC MASS SPECTROMETERS\u0001Q-TOF": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "LC-MS observation checklist": {
+   "ORGANIC MASS SPECTROMETERS": {
+    "pm": 2
+   }
+  },
+  "LC-MS on-the-job practical": {
+   "ORGANIC MASS SPECTROMETERS\u0001TRIPLE QUADRUPOLE": {
+    "pm": 2
+   }
+  },
+  "LC-MS advanced diagnostics": {
+   "ORGANIC MASS SPECTROMETERS": {
+    "rep": 1
+   }
+  },
+  "LC-MS refresher": {
+   "ORGANIC MASS SPECTROMETERS": {
+    "pm": 1
+   }
+  },
+  "Centrifuge fundamentals": {
+   "CENTRIFUGES\u0001ULTRACENTRIFUGE": {
+    "pm": 2
+   }
+  },
+  "Centrifuge: preventive maintenance": {
+   "CENTRIFUGES\u0001ULTRACENTRIFUGE": {
+    "pm": 1
+   }
+  },
+  "Centrifuge daily checks and cleaning": {
+   "CENTRIFUGES\u0001BENCHTOP CENTRIFUGE": {
+    "pm": 2
+   }
+  },
+  "Centrifuge practical assessment": {
+   "CENTRIFUGES\u0001ULTRACENTRIFUGE": {
+    "pm": 2
+   }
+  },
+  "Analytical balance fundamentals": {
+   "ANALYTICAL BALANCES": {
+    "pm": 2
+   }
+  },
+  "Analytical balance: preventive maintenance": {
+   "ANALYTICAL BALANCES\u0001SEMI-MICRO BALANCE": {
+    "pm": 1
+   }
+  },
+  "Analytical balance troubleshooting workshop": {
+   "ANALYTICAL BALANCES": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "Analytical balance observation checklist": {
+   "ANALYTICAL BALANCES": {
+    "pm": 2
+   }
+  },
+  "Analytical balance daily checks and cleaning": {
+   "ANALYTICAL BALANCES": {
+    "pm": 2
+   }
+  },
+  "Analytical balance module replacement": {
+   "ANALYTICAL BALANCES": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "Analytical balance decontamination and handover": {
+   "ANALYTICAL BALANCES": {
+    "pm": 2
+   }
+  },
+  "Analytical balance refresher": {
+   "ANALYTICAL BALANCES": {
+    "pm": 1
+   }
+  },
+  "Analytical balance practical assessment": {
+   "ANALYTICAL BALANCES\u0001SEMI-MICRO BALANCE": {
+    "pm": 2
+   }
+  },
+  "Analytical balance performance verification": {
+   "ANALYTICAL BALANCES\u0001SEMI-MICRO BALANCE": {
+    "cal": 1,
+    "oq": 1
+   }
+  },
+  "Pipette fundamentals": {
+   "PIPETTES": {
+    "pm": 2
+   }
+  },
+  "Pipette: preventive maintenance": {
+   "PIPETTES\u0001SINGLE CHANNEL PIPETTE": {
+    "pm": 1
+   }
+  },
+  "Pipette on-the-job practical": {
+   "PIPETTES": {
+    "pm": 2
+   }
+  },
+  "Pipette daily checks and cleaning": {
+   "PIPETTES": {
+    "pm": 2
+   }
+  },
+  "Pipette performance verification": {
+   "PIPETTES\u0001MULTICHANNEL PIPETTE": {
+    "cal": 1,
+    "oq": 1
+   }
+  },
+  "Liquid handler: preventive maintenance": {
+   "LIQUID HANDLER": {
+    "pm": 1
+   }
+  },
+  "Liquid handler knowledge check": {
+   "LIQUID HANDLER": {
+    "pm": 2
+   }
+  },
+  "Liquid handler on-the-job practical": {
+   "LIQUID HANDLER": {
+    "pm": 2
+   }
+  },
+  "Liquid handler daily checks and cleaning": {
+   "LIQUID HANDLER": {
+    "pm": 2
+   }
+  },
+  "Liquid handler module replacement": {
+   "LIQUID HANDLER\u00018-CHANNEL WORKSTATION": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "Liquid handler refresher": {
+   "LIQUID HANDLER\u00018-CHANNEL WORKSTATION": {
+    "pm": 1
+   }
+  },
+  "Plate reader: preventive maintenance": {
+   "PLATE READER\u0001MULTIMODE READER": {
+    "pm": 1
+   }
+  },
+  "Plate reader troubleshooting workshop": {
+   "PLATE READER": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "Plate reader knowledge check": {
+   "PLATE READER": {
+    "pm": 2
+   }
+  },
+  "Plate reader advanced diagnostics": {
+   "PLATE READER\u0001MULTIMODE READER": {
+    "rep": 1
+   }
+  },
+  "Plate reader module replacement": {
+   "PLATE READER\u0001MULTIMODE READER": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "Plate reader practical assessment": {
+   "PLATE READER": {
+    "pm": 2
+   }
+  },
+  "UV-Vis spectrophotometer fundamentals": {
+   "SPECTROPHOTOMETERS\u0001UV-VIS SPECTROPHOTOMETER": {
+    "pm": 2
+   }
+  },
+  "UV-Vis spectrophotometer troubleshooting workshop": {
+   "SPECTROPHOTOMETERS\u0001UV-VIS SPECTROPHOTOMETER": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "UV-Vis spectrophotometer installation and qualification": {
+   "SPECTROPHOTOMETERS\u0001UV-VIS SPECTROPHOTOMETER": {
+    "ins": 1,
+    "oq": 1
+   }
+  },
+  "UV-Vis spectrophotometer on-the-job practical": {
+   "SPECTROPHOTOMETERS\u0001UV-VIS SPECTROPHOTOMETER": {
+    "pm": 2
+   }
+  },
+  "UV-Vis spectrophotometer decontamination and handover": {
+   "SPECTROPHOTOMETERS\u0001UV-VIS SPECTROPHOTOMETER": {
+    "pm": 2
+   }
+  },
+  "UV-Vis spectrophotometer refresher": {
+   "SPECTROPHOTOMETERS": {
+    "pm": 1
+   }
+  },
+  "UV-Vis spectrophotometer performance verification": {
+   "SPECTROPHOTOMETERS\u0001UV-VIS SPECTROPHOTOMETER": {
+    "cal": 1,
+    "oq": 1
+   }
+  },
+  "Ultra-low freezer fundamentals": {
+   "FREEZERS\u0001ULT FREEZER": {
+    "pm": 2
+   }
+  },
+  "Ultra-low freezer: preventive maintenance": {
+   "FREEZERS": {
+    "pm": 1
+   }
+  },
+  "Ultra-low freezer calibration procedure walkthrough": {
+   "FREEZERS\u0001ULT FREEZER": {
+    "cal": 1
+   }
+  },
+  "Ultra-low freezer observation checklist": {
+   "FREEZERS\u0001ULT FREEZER": {
+    "pm": 2
+   }
+  },
+  "Ultra-low freezer on-the-job practical": {
+   "FREEZERS\u0001ULT FREEZER": {
+    "pm": 2
+   }
+  },
+  "Ultra-low freezer module replacement": {
+   "FREEZERS\u0001ULT FREEZER": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "Ultra-low freezer decontamination and handover": {
+   "FREEZERS\u0001ULT FREEZER": {
+    "pm": 2
+   }
+  },
+  "Ultra-low freezer refresher": {
+   "FREEZERS\u0001ULT FREEZER": {
+    "pm": 1
+   }
+  },
+  "Laboratory refrigerator fundamentals": {
+   "REFRIGERATORS": {
+    "pm": 2
+   }
+  },
+  "Laboratory refrigerator knowledge check": {
+   "REFRIGERATORS": {
+    "pm": 2
+   }
+  },
+  "Laboratory refrigerator refresher": {
+   "REFRIGERATORS": {
+    "pm": 1
+   }
+  },
+  "Laboratory refrigerator practical assessment": {
+   "REFRIGERATORS": {
+    "pm": 2
+   }
+  },
+  "CO2 incubator fundamentals": {
+   "INCUBATORS": {
+    "pm": 2
+   }
+  },
+  "CO2 incubator troubleshooting workshop": {
+   "INCUBATORS\u0001CO2 INCUBATOR": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "CO2 incubator module replacement": {
+   "INCUBATORS\u0001CO2 INCUBATOR": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "CO2 incubator performance verification": {
+   "INCUBATORS\u0001CO2 INCUBATOR": {
+    "cal": 1,
+    "oq": 1
+   }
+  },
+  "Autoclave fundamentals": {
+   "STERILIZING/AUTOCLAVE": {
+    "pm": 2
+   }
+  },
+  "Autoclave: preventive maintenance": {
+   "STERILIZING/AUTOCLAVE\u0001STEAM AUTOCLAVE": {
+    "pm": 1
+   }
+  },
+  "Autoclave knowledge check": {
+   "STERILIZING/AUTOCLAVE\u0001STEAM AUTOCLAVE": {
+    "pm": 2
+   }
+  },
+  "Autoclave observation checklist": {
+   "STERILIZING/AUTOCLAVE\u0001STEAM AUTOCLAVE": {
+    "pm": 2
+   }
+  },
+  "Autoclave daily checks and cleaning": {
+   "STERILIZING/AUTOCLAVE\u0001STEAM AUTOCLAVE": {
+    "pm": 2
+   }
+  },
+  "Autoclave module replacement": {
+   "STERILIZING/AUTOCLAVE\u0001STEAM AUTOCLAVE": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "Autoclave decontamination and handover": {
+   "STERILIZING/AUTOCLAVE\u0001STEAM AUTOCLAVE": {
+    "pm": 2
+   }
+  },
+  "Autoclave refresher": {
+   "STERILIZING/AUTOCLAVE": {
+    "pm": 1
+   }
+  },
+  "Autoclave practical assessment": {
+   "STERILIZING/AUTOCLAVE": {
+    "pm": 2
+   }
+  },
+  "Autoclave performance verification": {
+   "STERILIZING/AUTOCLAVE\u0001STEAM AUTOCLAVE": {
+    "cal": 1,
+    "oq": 1
+   }
+  },
+  "Dissolution tester fundamentals": {
+   "DISSOLUTION SYSTEM": {
+    "pm": 2
+   }
+  },
+  "Dissolution tester: preventive maintenance": {
+   "DISSOLUTION SYSTEM\u0001PADDLE APPARATUS": {
+    "pm": 1
+   }
+  },
+  "Dissolution tester troubleshooting workshop": {
+   "DISSOLUTION SYSTEM": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "Dissolution tester knowledge check": {
+   "DISSOLUTION SYSTEM\u0001PADDLE APPARATUS": {
+    "pm": 2
+   }
+  },
+  "Dissolution tester observation checklist": {
+   "DISSOLUTION SYSTEM": {
+    "pm": 2
+   }
+  },
+  "Dissolution tester on-the-job practical": {
+   "DISSOLUTION SYSTEM\u0001PADDLE APPARATUS": {
+    "pm": 2
+   }
+  },
+  "Dissolution tester daily checks and cleaning": {
+   "DISSOLUTION SYSTEM\u0001PADDLE APPARATUS": {
+    "pm": 2
+   }
+  },
+  "Dissolution tester refresher": {
+   "DISSOLUTION SYSTEM\u0001PADDLE APPARATUS": {
+    "pm": 1
+   }
+  },
+  "Dissolution tester performance verification": {
+   "DISSOLUTION SYSTEM": {
+    "cal": 1,
+    "oq": 1
+   }
+  },
+  "Karl Fischer titrator fundamentals": {
+   "TITRATORS\u0001KARL FISCHER TITRATOR": {
+    "pm": 2
+   }
+  },
+  "Karl Fischer titrator: preventive maintenance": {
+   "TITRATORS": {
+    "pm": 1
+   }
+  },
+  "Karl Fischer titrator troubleshooting workshop": {
+   "TITRATORS": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "Karl Fischer titrator installation and qualification": {
+   "TITRATORS": {
+    "ins": 1,
+    "oq": 1
+   }
+  },
+  "Karl Fischer titrator observation checklist": {
+   "TITRATORS\u0001KARL FISCHER TITRATOR": {
+    "pm": 2
+   }
+  },
+  "Karl Fischer titrator advanced diagnostics": {
+   "TITRATORS": {
+    "rep": 1
+   }
+  },
+  "Karl Fischer titrator daily checks and cleaning": {
+   "TITRATORS": {
+    "pm": 2
+   }
+  },
+  "Karl Fischer titrator module replacement": {
+   "TITRATORS\u0001KARL FISCHER TITRATOR": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "PCR instrument fundamentals": {
+   "PCR EQUIPMENT": {
+    "pm": 2
+   }
+  },
+  "PCR instrument: preventive maintenance": {
+   "PCR EQUIPMENT\u0001REAL-TIME PCR": {
+    "pm": 1
+   }
+  },
+  "PCR instrument calibration procedure walkthrough": {
+   "PCR EQUIPMENT\u0001REAL-TIME PCR": {
+    "cal": 1
+   }
+  },
+  "PCR instrument knowledge check": {
+   "PCR EQUIPMENT\u0001REAL-TIME PCR": {
+    "pm": 2
+   }
+  },
+  "PCR instrument observation checklist": {
+   "PCR EQUIPMENT\u0001REAL-TIME PCR": {
+    "pm": 2
+   }
+  },
+  "PCR instrument daily checks and cleaning": {
+   "PCR EQUIPMENT": {
+    "pm": 2
+   }
+  },
+  "PCR instrument module replacement": {
+   "PCR EQUIPMENT": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "PCR instrument decontamination and handover": {
+   "PCR EQUIPMENT": {
+    "pm": 2
+   }
+  },
+  "PCR instrument practical assessment": {
+   "PCR EQUIPMENT": {
+    "pm": 2
+   }
+  },
+  "Optical microscope fundamentals": {
+   "MICROSCOPE OPTICAL BASIC": {
+    "pm": 2
+   }
+  },
+  "Optical microscope troubleshooting workshop": {
+   "MICROSCOPE OPTICAL BASIC": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "Optical microscope calibration procedure walkthrough": {
+   "MICROSCOPE OPTICAL BASIC": {
+    "cal": 1
+   }
+  },
+  "Optical microscope knowledge check": {
+   "MICROSCOPE OPTICAL BASIC": {
+    "pm": 2
+   }
+  },
+  "Optical microscope observation checklist": {
+   "MICROSCOPE OPTICAL BASIC": {
+    "pm": 2
+   }
+  },
+  "Optical microscope daily checks and cleaning": {
+   "MICROSCOPE OPTICAL BASIC": {
+    "pm": 2
+   }
+  },
+  "Optical microscope refresher": {
+   "MICROSCOPE OPTICAL BASIC": {
+    "pm": 1
+   }
+  },
+  "Optical microscope practical assessment": {
+   "MICROSCOPE OPTICAL BASIC": {
+    "pm": 2
+   }
+  },
+  "Vacuum pump observation checklist": {
+   "VACUUM PUMPS": {
+    "pm": 2
+   }
+  },
+  "Vacuum pump daily checks and cleaning": {
+   "VACUUM PUMPS": {
+    "pm": 2
+   }
+  },
+  "Vacuum pump refresher": {
+   "VACUUM PUMPS": {
+    "pm": 1
+   }
+  },
+  "Vacuum pump practical assessment": {
+   "VACUUM PUMPS": {
+    "pm": 2
+   }
+  },
+  "Water purification system troubleshooting workshop": {
+   "WATER TREATMENT/PURIFICATION\u0001ULTRAPURE WATER SYSTEM": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "Water purification system calibration procedure walkthrough": {
+   "WATER TREATMENT/PURIFICATION": {
+    "cal": 1
+   }
+  },
+  "Water purification system knowledge check": {
+   "WATER TREATMENT/PURIFICATION\u0001ULTRAPURE WATER SYSTEM": {
+    "pm": 2
+   }
+  },
+  "Water purification system observation checklist": {
+   "WATER TREATMENT/PURIFICATION\u0001ULTRAPURE WATER SYSTEM": {
+    "pm": 2
+   }
+  },
+  "Water purification system on-the-job practical": {
+   "WATER TREATMENT/PURIFICATION\u0001ULTRAPURE WATER SYSTEM": {
+    "pm": 2
+   }
+  },
+  "Water purification system daily checks and cleaning": {
+   "WATER TREATMENT/PURIFICATION\u0001ULTRAPURE WATER SYSTEM": {
+    "pm": 2
+   }
+  },
+  "Water purification system module replacement": {
+   "WATER TREATMENT/PURIFICATION\u0001ULTRAPURE WATER SYSTEM": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "Water purification system refresher": {
+   "WATER TREATMENT/PURIFICATION\u0001ULTRAPURE WATER SYSTEM": {
+    "pm": 1
+   }
+  },
+  "ICP-OES fundamentals": {
+   "ICP-OES": {
+    "pm": 2
+   }
+  },
+  "ICP-OES installation and qualification": {
+   "ICP-OES": {
+    "ins": 1,
+    "oq": 1
+   }
+  },
+  "ICP-OES knowledge check": {
+   "ICP-OES": {
+    "pm": 2
+   }
+  },
+  "ICP-OES advanced diagnostics": {
+   "ICP-OES": {
+    "rep": 1
+   }
+  },
+  "ICP-OES refresher": {
+   "ICP-OES": {
+    "pm": 1
+   }
+  },
+  "ICP-OES practical assessment": {
+   "ICP-OES": {
+    "pm": 2
+   }
+  },
+  "Fume cupboard fundamentals": {
+   "FUME HOODS": {
+    "pm": 2
+   }
+  },
+  "Fume cupboard: preventive maintenance": {
+   "FUME HOODS": {
+    "pm": 1
+   }
+  },
+  "Fume cupboard troubleshooting workshop": {
+   "FUME HOODS": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "Fume cupboard installation and qualification": {
+   "FUME HOODS": {
+    "ins": 1,
+    "oq": 1
+   }
+  },
+  "Fume cupboard on-the-job practical": {
+   "FUME HOODS": {
+    "pm": 2
+   }
+  },
+  "Fume cupboard daily checks and cleaning": {
+   "FUME HOODS": {
+    "pm": 2
+   }
+  },
+  "Fume cupboard module replacement": {
+   "FUME HOODS": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "Nitrogen generator fundamentals": {
+   "GAS/AIR CONTROL\u0001NITROGEN GENERATOR": {
+    "pm": 2
+   }
+  },
+  "Nitrogen generator installation and qualification": {
+   "GAS/AIR CONTROL\u0001NITROGEN GENERATOR": {
+    "ins": 1,
+    "oq": 1
+   }
+  },
+  "Nitrogen generator knowledge check": {
+   "GAS/AIR CONTROL": {
+    "pm": 2
+   }
+  },
+  "Nitrogen generator on-the-job practical": {
+   "GAS/AIR CONTROL\u0001NITROGEN GENERATOR": {
+    "pm": 2
+   }
+  },
+  "Nitrogen generator daily checks and cleaning": {
+   "GAS/AIR CONTROL\u0001NITROGEN GENERATOR": {
+    "pm": 2
+   }
+  },
+  "Nitrogen generator practical assessment": {
+   "GAS/AIR CONTROL\u0001NITROGEN GENERATOR": {
+    "pm": 2
+   }
+  },
+  "Nitrogen generator performance verification": {
+   "GAS/AIR CONTROL": {
+    "cal": 1,
+    "oq": 1
+   }
+  },
+  "UPS and power: preventive maintenance": {
+   "ELECTRICAL/POWER": {
+    "pm": 1
+   }
+  },
+  "UPS and power troubleshooting workshop": {
+   "ELECTRICAL/POWER": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "UPS and power module replacement": {
+   "ELECTRICAL/POWER\u0001UPS": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "UPS and power decontamination and handover": {
+   "ELECTRICAL/POWER\u0001UPS": {
+    "pm": 2
+   }
+  },
+  "UPS and power practical assessment": {
+   "ELECTRICAL/POWER": {
+    "pm": 2
+   }
+  },
+  "Data logger fundamentals": {
+   "DATA LOGGER": {
+    "pm": 2
+   }
+  },
+  "Data logger: preventive maintenance": {
+   "DATA LOGGER": {
+    "pm": 1
+   }
+  },
+  "Data logger on-the-job practical": {
+   "DATA LOGGER": {
+    "pm": 2
+   }
+  },
+  "Data logger advanced diagnostics": {
+   "DATA LOGGER": {
+    "rep": 1
+   }
+  },
+  "Data logger daily checks and cleaning": {
+   "DATA LOGGER": {
+    "pm": 2
+   }
+  },
+  "Data logger performance verification": {
+   "DATA LOGGER": {
+    "cal": 1,
+    "oq": 1
+   }
+  },
+  "Viscometer: preventive maintenance": {
+   "PHYSICAL PROPERTIES - LIQUID\u0001VISCOMETER": {
+    "pm": 1
+   }
+  },
+  "Viscometer module replacement": {
+   "PHYSICAL PROPERTIES - LIQUID\u0001VISCOMETER": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "Viscometer decontamination and handover": {
+   "PHYSICAL PROPERTIES - LIQUID\u0001VISCOMETER": {
+    "pm": 2
+   }
+  },
+  "Viscometer practical assessment": {
+   "PHYSICAL PROPERTIES - LIQUID": {
+    "pm": 2
+   }
+  },
+  "Rotary evaporator fundamentals": {
+   "EVAPORATORS": {
+    "pm": 2
+   }
+  },
+  "Rotary evaporator: preventive maintenance": {
+   "EVAPORATORS": {
+    "pm": 1
+   }
+  },
+  "Rotary evaporator troubleshooting workshop": {
+   "EVAPORATORS": {
+    "rep": 1,
+    "pm": 1
+   }
+  },
+  "Rotary evaporator installation and qualification": {
+   "EVAPORATORS": {
+    "ins": 1,
+    "oq": 1
+   }
+  },
+  "Rotary evaporator knowledge check": {
+   "EVAPORATORS\u0001ROTARY EVAPORATOR": {
+    "pm": 2
+   }
+  },
+  "Rotary evaporator module replacement": {
+   "EVAPORATORS\u0001ROTARY EVAPORATOR": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "Rotary evaporator refresher": {
+   "EVAPORATORS\u0001ROTARY EVAPORATOR": {
+    "pm": 1
+   }
+  },
+  "Cell counter: preventive maintenance": {
+   "CELL COUNTER/ANALYZER": {
+    "pm": 1
+   }
+  },
+  "Cell counter installation and qualification": {
+   "CELL COUNTER/ANALYZER": {
+    "ins": 1,
+    "oq": 1
+   }
+  },
+  "Cell counter knowledge check": {
+   "CELL COUNTER/ANALYZER": {
+    "pm": 2
+   }
+  },
+  "Cell counter advanced diagnostics": {
+   "CELL COUNTER/ANALYZER": {
+    "rep": 1
+   }
+  },
+  "Cell counter daily checks and cleaning": {
+   "CELL COUNTER/ANALYZER": {
+    "pm": 2
+   }
+  },
+  "Cell counter refresher": {
+   "CELL COUNTER/ANALYZER": {
+    "pm": 1
+   }
+  },
+  "Cell counter practical assessment": {
+   "CELL COUNTER/ANALYZER": {
+    "pm": 2
+   }
+  },
+  "Cell counter performance verification": {
+   "CELL COUNTER/ANALYZER": {
+    "cal": 1,
+    "oq": 1
+   }
+  },
+  "TOC analyser fundamentals": {
+   "ANALYZERS": {
+    "pm": 2
+   }
+  },
+  "TOC analyser observation checklist": {
+   "ANALYZERS\u0001TOC ANALYSER": {
+    "pm": 2
+   }
+  },
+  "TOC analyser daily checks and cleaning": {
+   "ANALYZERS\u0001TOC ANALYSER": {
+    "pm": 2
+   }
+  },
+  "TOC analyser module replacement": {
+   "ANALYZERS\u0001TOC ANALYSER": {
+    "rep": 1,
+    "pm": 2
+   }
+  },
+  "TOC analyser refresher": {
+   "ANALYZERS\u0001TOC ANALYSER": {
+    "pm": 1
+   }
+  },
+  "Torvik Vantor HPLC: module service": {
+   "LC SYSTEM\u0001HPLC": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Torvik Vantor Gas chromatography: module service": {
+   "GC SYSTEM\u0001GC-FID": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Torvik Kelda Analytical balance: module service": {
+   "ANALYTICAL BALANCES\u0001SEMI-MICRO BALANCE": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Torvik Kelda HPLC: module service": {
+   "LC SYSTEM\u0001HPLC": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Quenby Arcline Laboratory refrigerator: module service": {
+   "REFRIGERATORS": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Quenby Arcline Dissolution tester: module service": {
+   "DISSOLUTION SYSTEM\u0001PADDLE APPARATUS": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Quenby Stratum Pipette: module service": {
+   "PIPETTES\u0001SINGLE CHANNEL PIPETTE": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Quenby Stratum Liquid handler: module service": {
+   "LIQUID HANDLER\u00018-CHANNEL WORKSTATION": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Hollin Meridian Karl Fischer titrator: module service": {
+   "TITRATORS\u0001KARL FISCHER TITRATOR": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Hollin Meridian HPLC: module service": {
+   "LC SYSTEM\u0001HPLC": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Hollin Corra Liquid handler: module service": {
+   "LIQUID HANDLER\u00018-CHANNEL WORKSTATION": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Hollin Corra CO2 incubator: module service": {
+   "INCUBATORS\u0001CO2 INCUBATOR": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Pellucid Lumen Analytical balance: module service": {
+   "ANALYTICAL BALANCES\u0001SEMI-MICRO BALANCE": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Pellucid Lumen LC-MS: module service": {
+   "ORGANIC MASS SPECTROMETERS\u0001TRIPLE QUADRUPOLE": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Pellucid Opalis Plate reader: module service": {
+   "PLATE READER\u0001MULTIMODE READER": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Pellucid Opalis Liquid handler: module service": {
+   "LIQUID HANDLER\u00018-CHANNEL WORKSTATION": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Astrel Nexa Ultra-low freezer: module service": {
+   "FREEZERS\u0001ULT FREEZER": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Astrel Nexa Plate reader: module service": {
+   "PLATE READER\u0001MULTIMODE READER": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Astrel Brio Plate reader: module service": {
+   "PLATE READER\u0001MULTIMODE READER": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Astrel Brio Analytical balance: module service": {
+   "ANALYTICAL BALANCES\u0001SEMI-MICRO BALANCE": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Marrowfield Halden Karl Fischer titrator: module service": {
+   "TITRATORS\u0001KARL FISCHER TITRATOR": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Marrowfield Halden Gas chromatography: module service": {
+   "GC SYSTEM\u0001GC-FID": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Marrowfield Tessa Liquid handler: module service": {
+   "LIQUID HANDLER\u00018-CHANNEL WORKSTATION": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Marrowfield Tessa HPLC: module service": {
+   "LC SYSTEM\u0001HPLC": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Corvana Ostra Laboratory refrigerator: module service": {
+   "REFRIGERATORS": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Corvana Ostra Ultra-low freezer: module service": {
+   "FREEZERS\u0001ULT FREEZER": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Corvana Pivot Liquid handler: module service": {
+   "LIQUID HANDLER\u00018-CHANNEL WORKSTATION": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Corvana Pivot PCR instrument: module service": {
+   "PCR EQUIPMENT\u0001REAL-TIME PCR": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Lindqvist Fjell Dissolution tester: module service": {
+   "DISSOLUTION SYSTEM\u0001PADDLE APPARATUS": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Lindqvist Fjell Pipette: module service": {
+   "PIPETTES\u0001SINGLE CHANNEL PIPETTE": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Lindqvist Varde Liquid handler: module service": {
+   "LIQUID HANDLER\u00018-CHANNEL WORKSTATION": {
+    "pm": 1,
+    "rep": 2
+   }
+  },
+  "Lindqvist Varde PCR instrument: module service": {
+   "PCR EQUIPMENT\u0001REAL-TIME PCR": {
+    "pm": 1,
+    "rep": 2
+   }
+  }
+ },
+ "software": {
+  "records": {
+   "Chromatography data system basics": [
+    "Chromlex CDS"
+   ],
+   "Plate reader software essentials": [
+    "ReadSuite"
+   ],
+   "Liquid handler method editing": [
+    "FlowScript"
+   ],
+   "Mass spectrometer acquisition software": [
+    "IonDesk"
+   ]
+  }
+ }
+}

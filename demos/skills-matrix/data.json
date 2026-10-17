@@ -1,0 +1,1865 @@
+{
+ "meta": {
+  "seed": 20261017,
+  "note": "Synthetic data. Every engineer, site and level is invented by make_synthetic.py.",
+  "levels": [
+   {
+    "n": 0,
+    "label": "Not assessed"
+   },
+   {
+    "n": 1,
+    "label": "Aware",
+    "desc": "Knows what it is and the safety rules; does not work on it."
+   },
+   {
+    "n": 2,
+    "label": "Supervised",
+    "desc": "Carries out routine tasks with a competent engineer present."
+   },
+   {
+    "n": 3,
+    "label": "Competent",
+    "desc": "Maintains and repairs it unsupervised; signed off by observation."
+   },
+   {
+    "n": 4,
+    "label": "Can train",
+    "desc": "Competent, and qualified to train and assess others on it."
+   }
+  ],
+  "competent_min": 3,
+  "trainer_level": 4,
+  "gap_threshold": 2
+ },
+ "sites": [
+  {
+   "id": "alder",
+   "name": "Alder Park"
+  },
+  {
+   "id": "brook",
+   "name": "Brookvale"
+  },
+  {
+   "id": "cinder",
+   "name": "Cinder Hill"
+  },
+  {
+   "id": "dunmore",
+   "name": "Dunmore Quay"
+  },
+  {
+   "id": "elm",
+   "name": "Elmstead"
+  }
+ ],
+ "classes": [
+  {
+   "id": "balance",
+   "name": "Analytical balance",
+   "short": "Balance"
+  },
+  {
+   "id": "centrifuge",
+   "name": "Centrifuge",
+   "short": "Centrifuge"
+  },
+  {
+   "id": "hplc",
+   "name": "HPLC system",
+   "short": "HPLC"
+  },
+  {
+   "id": "gc",
+   "name": "Gas chromatograph",
+   "short": "GC"
+  },
+  {
+   "id": "ms",
+   "name": "Mass spectrometer",
+   "short": "Mass spec"
+  },
+  {
+   "id": "uvvis",
+   "name": "UV-Vis spectrophotometer",
+   "short": "UV-Vis"
+  },
+  {
+   "id": "plate",
+   "name": "Plate reader",
+   "short": "Plate reader"
+  },
+  {
+   "id": "liquid",
+   "name": "Liquid handler",
+   "short": "Liquid handler"
+  },
+  {
+   "id": "incubator",
+   "name": "Incubator",
+   "short": "Incubator"
+  },
+  {
+   "id": "freezer",
+   "name": "Ultra-low freezer",
+   "short": "ULT freezer"
+  },
+  {
+   "id": "autoclave",
+   "name": "Autoclave",
+   "short": "Autoclave"
+  },
+  {
+   "id": "dissolution",
+   "name": "Dissolution tester",
+   "short": "Dissolution"
+  }
+ ],
+ "engineers": [
+  {
+   "id": "E001",
+   "name": "Taylor Willow",
+   "site": "alder",
+   "role": "Senior engineer",
+   "skills": {
+    "balance": [
+     4,
+     1
+    ],
+    "centrifuge": [
+     2,
+     1
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "plate": [
+     4,
+     1
+    ],
+    "autoclave": [
+     3,
+     1
+    ],
+    "dissolution": [
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E002",
+   "name": "Finley Thistle",
+   "site": "alder",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     1,
+     0
+    ],
+    "gc": [
+     3,
+     0
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "incubator": [
+     1,
+     0
+    ],
+    "freezer": [
+     3,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E003",
+   "name": "Marlo Finch",
+   "site": "alder",
+   "role": "Site lead",
+   "skills": {
+    "hplc": [
+     4,
+     1
+    ],
+    "gc": [
+     3,
+     1
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E004",
+   "name": "Blair Yarrow",
+   "site": "alder",
+   "role": "Field engineer",
+   "skills": {
+    "hplc": [
+     2,
+     1
+    ],
+    "gc": [
+     4,
+     1
+    ],
+    "freezer": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E005",
+   "name": "Dallas Curlew",
+   "site": "alder",
+   "role": "Senior engineer",
+   "skills": {
+    "hplc": [
+     4,
+     1
+    ],
+    "gc": [
+     2,
+     1
+    ],
+    "incubator": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E006",
+   "name": "Parker Bracken",
+   "site": "alder",
+   "role": "Site lead",
+   "skills": {
+    "hplc": [
+     3,
+     1
+    ],
+    "gc": [
+     2,
+     1
+    ],
+    "plate": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E007",
+   "name": "Peyton Reed",
+   "site": "alder",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     2,
+     1
+    ],
+    "hplc": [
+     4,
+     1
+    ],
+    "gc": [
+     3,
+     1
+    ],
+    "ms": [
+     1,
+     0
+    ],
+    "plate": [
+     4,
+     1
+    ],
+    "incubator": [
+     1,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E008",
+   "name": "Toby Starling",
+   "site": "alder",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     3,
+     0
+    ],
+    "hplc": [
+     4,
+     1
+    ],
+    "gc": [
+     4,
+     1
+    ],
+    "plate": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E009",
+   "name": "Jordan Finch",
+   "site": "alder",
+   "role": "Field engineer",
+   "skills": {
+    "centrifuge": [
+     2,
+     0
+    ],
+    "hplc": [
+     2,
+     1
+    ],
+    "gc": [
+     3,
+     1
+    ],
+    "plate": [
+     2,
+     1
+    ],
+    "incubator": [
+     3,
+     1
+    ],
+    "freezer": [
+     2,
+     1
+    ],
+    "autoclave": [
+     1,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E010",
+   "name": "Charlie Linden",
+   "site": "alder",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     2,
+     0
+    ],
+    "centrifuge": [
+     2,
+     0
+    ],
+    "hplc": [
+     1,
+     1
+    ],
+    "gc": [
+     4,
+     1
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "uvvis": [
+     2,
+     1
+    ],
+    "liquid": [
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E011",
+   "name": "Nova Heron",
+   "site": "alder",
+   "role": "Apprentice",
+   "skills": {
+    "hplc": [
+     3,
+     1
+    ],
+    "gc": [
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E012",
+   "name": "Val Quill",
+   "site": "alder",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     3,
+     1
+    ],
+    "centrifuge": [
+     3,
+     0
+    ],
+    "hplc": [
+     3,
+     1
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "plate": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E013",
+   "name": "Hayden Wren",
+   "site": "alder",
+   "role": "Field engineer",
+   "skills": {
+    "hplc": [
+     4,
+     1
+    ],
+    "gc": [
+     3,
+     1
+    ],
+    "uvvis": [
+     2,
+     1
+    ],
+    "liquid": [
+     1,
+     1
+    ],
+    "incubator": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E014",
+   "name": "Frankie Egret",
+   "site": "alder",
+   "role": "Senior engineer",
+   "skills": {
+    "gc": [
+     2,
+     1
+    ],
+    "plate": [
+     3,
+     1
+    ],
+    "liquid": [
+     2,
+     0
+    ],
+    "dissolution": [
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E015",
+   "name": "Harper Willow",
+   "site": "brook",
+   "role": "Senior engineer",
+   "skills": {
+    "hplc": [
+     4,
+     0
+    ],
+    "ms": [
+     1,
+     1
+    ],
+    "incubator": [
+     4,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E016",
+   "name": "Eden Teal",
+   "site": "brook",
+   "role": "Field engineer",
+   "skills": {
+    "centrifuge": [
+     4,
+     1
+    ],
+    "gc": [
+     4,
+     1
+    ],
+    "uvvis": [
+     3,
+     1
+    ],
+    "plate": [
+     2,
+     1
+    ],
+    "liquid": [
+     2,
+     1
+    ],
+    "freezer": [
+     4,
+     1
+    ],
+    "autoclave": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E017",
+   "name": "Dana Sorrel",
+   "site": "brook",
+   "role": "Senior engineer",
+   "skills": {
+    "plate": [
+     2,
+     1
+    ],
+    "liquid": [
+     3,
+     1
+    ],
+    "dissolution": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E018",
+   "name": "Drew Linden",
+   "site": "brook",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     1,
+     1
+    ],
+    "hplc": [
+     2,
+     1
+    ],
+    "gc": [
+     1,
+     1
+    ],
+    "uvvis": [
+     4,
+     1
+    ],
+    "plate": [
+     3,
+     0
+    ],
+    "liquid": [
+     2,
+     0
+    ],
+    "freezer": [
+     2,
+     0
+    ],
+    "dissolution": [
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E019",
+   "name": "Reese Reed",
+   "site": "brook",
+   "role": "Site lead",
+   "skills": {
+    "ms": [
+     1,
+     1
+    ],
+    "plate": [
+     3,
+     1
+    ],
+    "incubator": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E020",
+   "name": "Yael Rowan",
+   "site": "brook",
+   "role": "Senior engineer",
+   "skills": {
+    "gc": [
+     2,
+     0
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "liquid": [
+     3,
+     1
+    ],
+    "autoclave": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E021",
+   "name": "Sage Aspen",
+   "site": "brook",
+   "role": "Site lead",
+   "skills": {
+    "balance": [
+     4,
+     1
+    ],
+    "ms": [
+     3,
+     0
+    ],
+    "plate": [
+     4,
+     0
+    ],
+    "freezer": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E022",
+   "name": "Casey Pippin",
+   "site": "brook",
+   "role": "Field engineer",
+   "skills": {
+    "centrifuge": [
+     2,
+     1
+    ],
+    "uvvis": [
+     1,
+     1
+    ],
+    "plate": [
+     3,
+     1
+    ],
+    "liquid": [
+     2,
+     1
+    ],
+    "incubator": [
+     2,
+     1
+    ],
+    "freezer": [
+     1,
+     1
+    ],
+    "dissolution": [
+     2,
+     0
+    ]
+   }
+  },
+  {
+   "id": "E023",
+   "name": "Umi Larch",
+   "site": "brook",
+   "role": "Field engineer",
+   "skills": {
+    "centrifuge": [
+     2,
+     1
+    ],
+    "liquid": [
+     1,
+     1
+    ],
+    "incubator": [
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E024",
+   "name": "Avery Linden",
+   "site": "brook",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     2,
+     1
+    ],
+    "liquid": [
+     3,
+     1
+    ],
+    "freezer": [
+     2,
+     0
+    ]
+   }
+  },
+  {
+   "id": "E025",
+   "name": "Zion Ivy",
+   "site": "brook",
+   "role": "Site lead",
+   "skills": {
+    "ms": [
+     3,
+     1
+    ],
+    "plate": [
+     3,
+     1
+    ],
+    "liquid": [
+     3,
+     1
+    ],
+    "incubator": [
+     4,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E026",
+   "name": "Perry Starling",
+   "site": "brook",
+   "role": "Field engineer",
+   "skills": {
+    "centrifuge": [
+     1,
+     1
+    ],
+    "gc": [
+     3,
+     1
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "plate": [
+     2,
+     1
+    ],
+    "liquid": [
+     2,
+     1
+    ],
+    "incubator": [
+     2,
+     1
+    ],
+    "freezer": [
+     3,
+     1
+    ],
+    "dissolution": [
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E027",
+   "name": "Logan Ivy",
+   "site": "cinder",
+   "role": "Senior engineer",
+   "skills": {
+    "balance": [
+     4,
+     1
+    ],
+    "centrifuge": [
+     4,
+     1
+    ],
+    "gc": [
+     2,
+     1
+    ],
+    "plate": [
+     3,
+     1
+    ],
+    "liquid": [
+     3,
+     0
+    ],
+    "incubator": [
+     3,
+     1
+    ],
+    "freezer": [
+     3,
+     1
+    ],
+    "autoclave": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E028",
+   "name": "Milan Reed",
+   "site": "cinder",
+   "role": "Senior engineer",
+   "skills": {
+    "balance": [
+     4,
+     1
+    ],
+    "centrifuge": [
+     3,
+     1
+    ],
+    "gc": [
+     4,
+     1
+    ],
+    "ms": [
+     1,
+     1
+    ],
+    "plate": [
+     3,
+     1
+    ],
+    "incubator": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E029",
+   "name": "Kit Gorse",
+   "site": "cinder",
+   "role": "Field engineer",
+   "skills": {
+    "centrifuge": [
+     2,
+     1
+    ],
+    "hplc": [
+     1,
+     1
+    ],
+    "gc": [
+     4,
+     1
+    ],
+    "ms": [
+     1,
+     1
+    ],
+    "uvvis": [
+     2,
+     1
+    ],
+    "liquid": [
+     2,
+     1
+    ],
+    "autoclave": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E030",
+   "name": "Cam Juniper",
+   "site": "cinder",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     3,
+     0
+    ],
+    "hplc": [
+     2,
+     1
+    ],
+    "liquid": [
+     2,
+     1
+    ],
+    "incubator": [
+     3,
+     1
+    ],
+    "freezer": [
+     3,
+     1
+    ],
+    "autoclave": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E031",
+   "name": "Shay Willow",
+   "site": "cinder",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     3,
+     0
+    ],
+    "centrifuge": [
+     3,
+     0
+    ],
+    "plate": [
+     3,
+     1
+    ],
+    "liquid": [
+     2,
+     1
+    ],
+    "incubator": [
+     4,
+     0
+    ],
+    "autoclave": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E032",
+   "name": "Morgan Kestrel",
+   "site": "cinder",
+   "role": "Senior engineer",
+   "skills": {
+    "balance": [
+     4,
+     1
+    ],
+    "centrifuge": [
+     4,
+     1
+    ],
+    "gc": [
+     2,
+     1
+    ],
+    "plate": [
+     1,
+     1
+    ],
+    "incubator": [
+     3,
+     1
+    ],
+    "freezer": [
+     3,
+     1
+    ],
+    "autoclave": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E033",
+   "name": "Flynn Reed",
+   "site": "cinder",
+   "role": "Senior engineer",
+   "skills": {
+    "balance": [
+     4,
+     1
+    ],
+    "centrifuge": [
+     4,
+     1
+    ],
+    "hplc": [
+     1,
+     1
+    ],
+    "gc": [
+     3,
+     1
+    ],
+    "liquid": [
+     2,
+     1
+    ],
+    "incubator": [
+     4,
+     1
+    ],
+    "autoclave": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E034",
+   "name": "Hollis Yarrow",
+   "site": "cinder",
+   "role": "Apprentice",
+   "skills": {
+    "centrifuge": [
+     3,
+     1
+    ],
+    "hplc": [
+     2,
+     1
+    ],
+    "gc": [
+     1,
+     1
+    ],
+    "autoclave": [
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E035",
+   "name": "Sam Sedge",
+   "site": "cinder",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     4,
+     0
+    ],
+    "centrifuge": [
+     4,
+     0
+    ],
+    "gc": [
+     1,
+     0
+    ],
+    "uvvis": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E036",
+   "name": "Lennon Hazel",
+   "site": "cinder",
+   "role": "Site lead",
+   "skills": {
+    "balance": [
+     4,
+     1
+    ],
+    "gc": [
+     3,
+     1
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "uvvis": [
+     3,
+     1
+    ],
+    "incubator": [
+     4,
+     1
+    ],
+    "dissolution": [
+     3,
+     0
+    ]
+   }
+  },
+  {
+   "id": "E037",
+   "name": "Rory Nettle",
+   "site": "cinder",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     3,
+     1
+    ],
+    "centrifuge": [
+     3,
+     1
+    ],
+    "incubator": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E038",
+   "name": "Remy Birch",
+   "site": "dunmore",
+   "role": "Field engineer",
+   "skills": {
+    "hplc": [
+     2,
+     1
+    ],
+    "gc": [
+     1,
+     0
+    ],
+    "uvvis": [
+     2,
+     1
+    ],
+    "plate": [
+     4,
+     1
+    ],
+    "incubator": [
+     4,
+     1
+    ],
+    "autoclave": [
+     1,
+     1
+    ],
+    "dissolution": [
+     1,
+     0
+    ]
+   }
+  },
+  {
+   "id": "E039",
+   "name": "Gray Dunlin",
+   "site": "dunmore",
+   "role": "Apprentice",
+   "skills": {
+    "centrifuge": [
+     2,
+     0
+    ],
+    "dissolution": [
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E040",
+   "name": "Wren Willow",
+   "site": "dunmore",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     2,
+     1
+    ],
+    "gc": [
+     2,
+     1
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "freezer": [
+     2,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E041",
+   "name": "Emery Starling",
+   "site": "dunmore",
+   "role": "Senior engineer",
+   "skills": {
+    "centrifuge": [
+     3,
+     1
+    ],
+    "uvvis": [
+     2,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E042",
+   "name": "Bailey Larch",
+   "site": "dunmore",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     1,
+     0
+    ],
+    "hplc": [
+     3,
+     1
+    ],
+    "incubator": [
+     3,
+     1
+    ],
+    "freezer": [
+     4,
+     0
+    ],
+    "dissolution": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E043",
+   "name": "Indy Elder",
+   "site": "dunmore",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     3,
+     1
+    ],
+    "centrifuge": [
+     1,
+     1
+    ],
+    "hplc": [
+     4,
+     1
+    ],
+    "gc": [
+     1,
+     1
+    ],
+    "uvvis": [
+     4,
+     1
+    ],
+    "freezer": [
+     4,
+     1
+    ],
+    "autoclave": [
+     3,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E044",
+   "name": "Oakley Cedar",
+   "site": "dunmore",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     3,
+     1
+    ],
+    "hplc": [
+     1,
+     1
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "uvvis": [
+     2,
+     1
+    ],
+    "autoclave": [
+     3,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E045",
+   "name": "Alex Alder",
+   "site": "dunmore",
+   "role": "Senior engineer",
+   "skills": {
+    "balance": [
+     3,
+     1
+    ],
+    "hplc": [
+     4,
+     1
+    ],
+    "uvvis": [
+     4,
+     1
+    ],
+    "incubator": [
+     1,
+     1
+    ],
+    "autoclave": [
+     4,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E046",
+   "name": "Tatum Linden",
+   "site": "dunmore",
+   "role": "Senior engineer",
+   "skills": {
+    "balance": [
+     4,
+     1
+    ],
+    "centrifuge": [
+     3,
+     1
+    ],
+    "hplc": [
+     3,
+     1
+    ],
+    "gc": [
+     2,
+     1
+    ],
+    "ms": [
+     1,
+     1
+    ],
+    "uvvis": [
+     3,
+     1
+    ],
+    "liquid": [
+     2,
+     1
+    ],
+    "dissolution": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E047",
+   "name": "Jules Wren",
+   "site": "dunmore",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     3,
+     1
+    ],
+    "uvvis": [
+     2,
+     1
+    ],
+    "plate": [
+     2,
+     1
+    ],
+    "incubator": [
+     1,
+     1
+    ],
+    "autoclave": [
+     2,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E048",
+   "name": "Kai Merlin",
+   "site": "dunmore",
+   "role": "Site lead",
+   "skills": {
+    "balance": [
+     4,
+     1
+    ],
+    "centrifuge": [
+     2,
+     1
+    ],
+    "hplc": [
+     4,
+     1
+    ],
+    "ms": [
+     3,
+     1
+    ],
+    "uvvis": [
+     4,
+     0
+    ],
+    "dissolution": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E049",
+   "name": "Ellis Thistle",
+   "site": "dunmore",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     2,
+     1
+    ],
+    "centrifuge": [
+     3,
+     1
+    ],
+    "hplc": [
+     1,
+     1
+    ],
+    "gc": [
+     1,
+     1
+    ],
+    "ms": [
+     1,
+     1
+    ],
+    "liquid": [
+     3,
+     1
+    ],
+    "dissolution": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E050",
+   "name": "Ollie Heron",
+   "site": "elm",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     3,
+     1
+    ],
+    "uvvis": [
+     3,
+     1
+    ],
+    "plate": [
+     2,
+     1
+    ],
+    "incubator": [
+     3,
+     0
+    ],
+    "freezer": [
+     2,
+     1
+    ],
+    "autoclave": [
+     2,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E051",
+   "name": "Quinn Cedar",
+   "site": "elm",
+   "role": "Apprentice",
+   "skills": {
+    "freezer": [
+     2,
+     1
+    ],
+    "dissolution": [
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E052",
+   "name": "Robin Egret",
+   "site": "elm",
+   "role": "Apprentice",
+   "skills": {
+    "gc": [
+     1,
+     1
+    ],
+    "freezer": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E053",
+   "name": "Noel Sedge",
+   "site": "elm",
+   "role": "Field engineer",
+   "skills": {
+    "centrifuge": [
+     3,
+     1
+    ],
+    "uvvis": [
+     3,
+     1
+    ],
+    "plate": [
+     4,
+     1
+    ],
+    "liquid": [
+     1,
+     1
+    ],
+    "freezer": [
+     2,
+     1
+    ],
+    "autoclave": [
+     4,
+     0
+    ],
+    "dissolution": [
+     1,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E054",
+   "name": "Ari Gorse",
+   "site": "elm",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     3,
+     1
+    ],
+    "centrifuge": [
+     2,
+     1
+    ],
+    "hplc": [
+     3,
+     1
+    ],
+    "gc": [
+     1,
+     1
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "uvvis": [
+     3,
+     1
+    ],
+    "plate": [
+     3,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E055",
+   "name": "Brook Elder",
+   "site": "elm",
+   "role": "Field engineer",
+   "skills": {
+    "centrifuge": [
+     4,
+     1
+    ],
+    "uvvis": [
+     2,
+     0
+    ],
+    "incubator": [
+     1,
+     1
+    ],
+    "freezer": [
+     4,
+     1
+    ],
+    "autoclave": [
+     2,
+     1
+    ],
+    "dissolution": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E056",
+   "name": "Gale Linden",
+   "site": "elm",
+   "role": "Senior engineer",
+   "skills": {
+    "balance": [
+     4,
+     1
+    ],
+    "centrifuge": [
+     4,
+     1
+    ],
+    "gc": [
+     2,
+     1
+    ],
+    "uvvis": [
+     4,
+     1
+    ],
+    "plate": [
+     3,
+     1
+    ],
+    "freezer": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E057",
+   "name": "Jesse Ivy",
+   "site": "elm",
+   "role": "Field engineer",
+   "skills": {
+    "balance": [
+     3,
+     1
+    ],
+    "centrifuge": [
+     2,
+     1
+    ],
+    "hplc": [
+     3,
+     1
+    ],
+    "uvvis": [
+     1,
+     1
+    ],
+    "plate": [
+     2,
+     1
+    ],
+    "liquid": [
+     2,
+     0
+    ],
+    "autoclave": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E058",
+   "name": "Nico Maple",
+   "site": "elm",
+   "role": "Field engineer",
+   "skills": {
+    "centrifuge": [
+     2,
+     1
+    ],
+    "hplc": [
+     2,
+     0
+    ],
+    "gc": [
+     4,
+     1
+    ],
+    "uvvis": [
+     3,
+     1
+    ],
+    "liquid": [
+     1,
+     1
+    ],
+    "freezer": [
+     4,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E059",
+   "name": "Kendall Hazel",
+   "site": "elm",
+   "role": "Field engineer",
+   "skills": {
+    "uvvis": [
+     2,
+     0
+    ],
+    "plate": [
+     4,
+     1
+    ],
+    "liquid": [
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "id": "E060",
+   "name": "Lane Yarrow",
+   "site": "elm",
+   "role": "Field engineer",
+   "skills": {
+    "centrifuge": [
+     3,
+     1
+    ],
+    "ms": [
+     2,
+     1
+    ],
+    "plate": [
+     2,
+     1
+    ],
+    "autoclave": [
+     2,
+     1
+    ]
+   }
+  }
+ ]
+}

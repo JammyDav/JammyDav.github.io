@@ -1,0 +1,15 @@
+EX-01_Closing a corrective work order.docx   2 FAIL
+  PASS appendix     
+  PASS phase        
+  PASS numbering    
+  PASS roles        
+  PASS decisions    
+  PASS cmms         
+  PASS clients      
+  FAIL banned       ensure
+  PASS punctuation  
+  PASS spelling     
+  PASS sentences    0 over 20 words (enumerations excluded where a colon precedes the list)
+  PASS links        
+  FAIL verify       2 markers; not in register: whether follow-up work keeps the original priority
+  WARN pages        LibreOffice not available; check the PDF page count by hand

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Skills matrix (synthetic demo)</title>
+<link rel="icon" href="../../assets/img/mark.svg" type="image/svg+xml">
+<style>
+:root {
+  --bg: #faf7f2; --surface: #fff; --ink: #1b2428; --ink-2: #4a5559; --line: #e2dbcf; --accent: #0b6e69;
+  --l0: #f3efe8; --l1: #d7ecea; --l2: #9fd1cb; --l3: #4fa69e; --l4: #0b6e69;
+  --gap: #9a4416; --gap-soft: #fbe6d8;
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 15px/1.45 var(--font); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+header { padding: 16px 20px 6px; }
+h1 { font-size: 1.25rem; margin: 0; }
+h1 small { font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin-left: 8px; }
+header p { margin: 4px 0 0; color: var(--ink-2); max-width: 60em; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: end; padding: 10px 20px 12px; border-bottom: 1px solid var(--line); }
+.controls label { display: flex; flex-direction: column; font-size: .78rem; font-weight: 700; color: var(--ink-2); text-transform: uppercase; letter-spacing: .05em; gap: 3px; }
+select { font: inherit; text-transform: none; letter-spacing: 0; font-weight: 500; color: var(--ink); padding: 6px 8px; border: 1.5px solid var(--line); border-radius: 6px; background: var(--surface); min-width: 9em; }
+.toggle { flex-direction: row !important; align-items: center; gap: 8px !important; text-transform: none !important; letter-spacing: 0 !important; font-size: .95rem !important; color: var(--ink) !important; cursor: pointer; padding: 6px 12px; border: 1.5px solid var(--line); border-radius: 999px; background: var(--surface); }
+.toggle input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; }
+.toggle:has(input:checked) { border-color: var(--accent); background: #dcefec; }
+.summary { padding: 10px 20px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; }
+.summary b { color: var(--ink); }
+.summary .gapn b { color: var(--gap); }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: .82rem; margin-left: auto; }
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend i { width: 14px; height: 14px; border-radius: 3px; display: inline-block; border: 1px solid rgba(0,0,0,.08); }
+.main { padding: 0 20px 20px; }
+.scroller { overflow: auto; max-height: calc(100vh - 210px); min-height: 300px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+table { border-collapse: separate; border-spacing: 0; width: 100%; }
+th, td { padding: 0; }
+thead th { position: sticky; top: 0; z-index: 2; background: var(--surface); border-bottom: 1px solid var(--line); font-size: .78rem; font-weight: 700; color: var(--ink-2); padding: 8px 4px; vertical-align: bottom; text-align: center; min-width: 58px; }
+thead th.gapcol { color: var(--gap); background: var(--gap-soft); }
+thead th .gapflag { display: block; font-size: .7rem; font-weight: 800; letter-spacing: .04em; margin-top: 2px; }
+th.rowh, thead th.corner { position: sticky; left: 0; z-index: 1; background: var(--surface); text-align: left; min-width: 190px; border-right: 1px solid var(--line); }
+thead th.corner { z-index: 3; }
+th.rowh { font-weight: 400; border-bottom: 1px solid #f0ebe3; }
+th.rowh button { all: unset; display: block; width: 100%; box-sizing: border-box; padding: 6px 10px; cursor: pointer; }
+th.rowh button:hover .nm { text-decoration: underline; }
+th.rowh button:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+.nm { font-weight: 600; }
+.sub { display: block; font-size: .78rem; color: var(--ink-2); }
+td { border-bottom: 1px solid #f0ebe3; text-align: center; }
+td .c { display: flex; align-items: center; justify-content: center; height: 34px; margin: 2px; border-radius: 4px; font-weight: 700; font-variant-numeric: tabular-nums; position: relative; }
+td:focus { outline: none; }
+td:focus-visible .c { outline: 3px solid var(--ink); outline-offset: 1px; }
+.c.l0 { background: var(--l0); color: #9a948a; font-weight: 400; }
+.c.l1 { background: var(--l1); }
+.c.l2 { background: var(--l2); }
+.c.l3 { background: var(--l3); color: var(--ink); }
+.c.l4 { background: var(--l4); color: #fff; }
+.c.pending { background-image: repeating-linear-gradient(135deg, rgba(255,255,255,.55) 0 3px, transparent 3px 7px); box-shadow: inset 0 0 0 1.5px rgba(27,36,40,.45); }
+td.gapcol { background: var(--gap-soft); }
+tfoot td, tfoot th { position: sticky; bottom: 0; background: #fbf9f5; border-top: 1px solid var(--line); font-size: .82rem; padding: 6px 4px; font-weight: 700; }
+tfoot th { left: 0; z-index: 1; text-align: left; padding-left: 10px; }
+tfoot td.low { color: var(--gap); }
+.dim { opacity: .28; }
+.trainers { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.tcard { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+.tcard.gapcol { border-color: var(--gap); background: var(--gap-soft); }
+.tcard h2 { font-size: .98rem; margin: 0 0 6px; display: flex; justify-content: space-between; gap: 8px; }
+.tcard h2 span { font-size: .78rem; color: var(--ink-2); font-weight: 600; }
+.tcard ul { margin: 0; padding: 0; list-style: none; }
+.tcard li button { all: unset; cursor: pointer; display: block; padding: 3px 0; }
+.tcard li button:hover { text-decoration: underline; }
+.tcard li button:focus-visible { outline: 3px solid var(--accent); }
+.tcard .none { color: var(--gap); font-weight: 600; margin: 0; }
+.empty { padding: 40px; text-align: center; color: var(--ink-2); }
+dialog { border: 0; border-radius: 12px; padding: 0; width: min(520px, calc(100vw - 32px)); box-shadow: 0 20px 60px rgba(0,0,0,.25); color: var(--ink); }
+dialog::backdrop { background: rgba(27, 36, 40, .45); }
+.dlg { padding: 20px 22px; }
+.dlg h2 { margin: 0; font-size: 1.2rem; }
+.dlg .sub { margin-bottom: 12px; }
+.dlg table { font-size: .92rem; }
+.dlg td, .dlg th { text-align: left; padding: 5px 6px; border-bottom: 1px solid #f0ebe3; }
+.dlg .lv { display: inline-block; min-width: 26px; text-align: center; border-radius: 4px; padding: 1px 6px; font-weight: 700; }
+.lv.l1 { background: var(--l1); } .lv.l2 { background: var(--l2); } .lv.l3 { background: var(--l3); } .lv.l4 { background: var(--l4); color: #fff; }
+.dlg .close { float: right; font: inherit; font-weight: 700; border: 1.5px solid var(--line); background: var(--surface); border-radius: 6px; padding: 5px 12px; cursor: pointer; }
+footer { padding: 0 20px 16px; font-size: .8rem; color: var(--ink-2); }
+@media (max-width: 640px) { .legend { margin-left: 0; } header, .controls, .summary, .main, footer { padding-left: 12px; padding-right: 12px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Workforce skills matrix <small>Synthetic data</small></h1>
+  <p>60 invented engineers, five invented sites, twelve generic equipment classes. Filter, switch on the gap view to find classes with fewer than two competent engineers, or the trainer view to see who can train each class. Select an engineer for their row.</p>
+</header>
+<main>
+<div class="controls" role="group" aria-label="Filters">
+  <label>Site <select id="f-site"></select></label>
+  <label>Equipment class <select id="f-class"></select></label>
+  <label>Show engineers at <select id="f-level"></select></label>
+  <label class="toggle"><input type="checkbox" id="t-gap"> Gap view</label>
+  <label class="toggle"><input type="checkbox" id="t-train"> Trainer view</label>
+</div>
+<div class="summary" id="summary" aria-live="polite"></div>
+<div class="main" id="main"></div>
+</main>
+<footer id="foot"></footer>
+<dialog id="dlg" aria-labelledby="dlg-title"><div class="dlg" id="dlg-in"></div></dialog>
+<script src="matrix.js" defer></script>
+</body>
+</html>

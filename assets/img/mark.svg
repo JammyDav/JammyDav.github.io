@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="MD monogram">
+  <rect width="64" height="64" rx="14" fill="#0b6e69"/>
+  <!-- M and D share one cap height (19 to 45), one stroke weight (5) and sit centred on x = 32 -->
+  <g fill="#faf7f2" fill-rule="evenodd">
+    <path d="M13 45V19h5.2L22 27.5 25.8 19H31v26h-5V29l-2.4 5.5h-3.2L18 29v16z"/>
+    <path d="M35 19h6.5C47.5 19 51 23.8 51 32s-3.5 13-9.5 13H35zm5 5v16h1.3c3.1 0 4.7-2.6 4.7-8s-1.6-8-4.7-8z"/>
+  </g>
+</svg>

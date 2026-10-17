@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Document Index (synthetic demo)</title>
+<style>
+:root{
+  --ground:#FAF7F2; --surface:#FFFFFF; --surface-2:#EDF1EE; --line:#CFD8D2; --line-soft:#E3E9E5;
+  --ink:#1B2623; --ink-2:#435254; --ink-3:#6F7F7B;
+  --accent:#0B6E69; --accent-ink:#FFFFFF; --accent-soft:#DCEBE4; --celadon:#80BBAD; --sage:#538184;
+  --st-planned:#8A97A0; --st-draft:#B7791F; --st-draft-bg:#F7EBD5; --st-review:#2F6FB2; --st-review-bg:#DCE8F6;
+  --st-issued:#1F7A4D; --st-issued-bg:#D8EFE1; --st-superseded:#7A8280; --st-superseded-bg:#E6EAE8; --st-live:#0B6E69; --st-live-bg:#DCEBE4;
+  --warn:#A03530; --warn-bg:#FBEEEE;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --ground:#0F1816; --surface:#16211E; --surface-2:#1D2A26; --line:#2E3E39; --line-soft:#243330;
+  --ink:#E8EEEB; --ink-2:#B9C6C1; --ink-3:#86968F;
+  --accent:#5FC3B9; --accent-ink:#06231F; --accent-soft:#12372B; --celadon:#80BBAD; --sage:#7FA6A8;
+  --st-planned:#9AA6AE; --st-draft:#E0A84A; --st-draft-bg:#3A2C10; --st-review:#7FB1F0; --st-review-bg:#15304F;
+  --st-issued:#5FCB8E; --st-issued-bg:#123726; --st-superseded:#9AA39F; --st-superseded-bg:#2A3330; --st-live:#5FC3B9; --st-live-bg:#12372B;
+  --warn:#F08C86; --warn-bg:#3E1E1C;
+}}
+:root[data-theme="dark"]{
+  --ground:#0F1816; --surface:#16211E; --surface-2:#1D2A26; --line:#2E3E39; --line-soft:#243330;
+  --ink:#E8EEEB; --ink-2:#B9C6C1; --ink-3:#86968F;
+  --accent:#5FC3B9; --accent-ink:#06231F; --accent-soft:#12372B; --celadon:#80BBAD; --sage:#7FA6A8;
+  --st-planned:#9AA6AE; --st-draft:#E0A84A; --st-draft-bg:#3A2C10; --st-review:#7FB1F0; --st-review-bg:#15304F;
+  --st-issued:#5FCB8E; --st-issued-bg:#123726; --st-superseded:#9AA39F; --st-superseded-bg:#2A3330; --st-live:#5FC3B9; --st-live-bg:#12372B;
+  --warn:#F08C86; --warn-bg:#3E1E1C;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.45}
+.wrap{max-width:1280px;margin:0 auto;padding:28px 28px 64px}
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;border-bottom:2px solid var(--accent);padding-bottom:16px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:600}
+h1{margin:2px 0 0;font-size:30px;line-height:1.1;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
+.meta{font-size:13px;color:var(--ink-3);text-align:right;line-height:1.5}
+.meta b{color:var(--ink-2);font-weight:600}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:20px 0 18px}
+.tile{background:var(--surface);border:1px solid var(--line-soft);padding:12px 14px 10px;display:flex;flex-direction:column;gap:2px}
+.tile .n{font-size:28px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+.tile .l{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.tile.status .n{color:var(--c)}
+.tile.warn .n{color:var(--warn)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
+.filters .lbl{font-size:12px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-right:2px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink-2);padding:4px 10px;border-radius:999px;font-size:13px;cursor:pointer;font-family:inherit}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.chip:focus-visible,.row:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.search{margin-left:auto;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 10px;font:inherit;font-size:14px;min-width:220px}
+.group{margin-top:22px}
+.group h2{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 6px;font-weight:700;display:flex;gap:10px;align-items:baseline}
+.group h2 small{color:var(--ink-3);font-weight:600;letter-spacing:.04em}
+.tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line-soft)}
+table{width:100%;border-collapse:collapse;min-width:1040px}
+th{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);font-weight:600;white-space:nowrap;background:var(--surface-2)}
+td{padding:9px 10px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+tr.row{cursor:pointer}
+tr.row:hover td{background:var(--surface-2)}
+tr.row td:first-child{border-left:3px solid transparent}
+tr.row[data-status="Draft"] td:first-child{border-left-color:var(--st-draft)}
+tr.row[data-status="In Review"] td:first-child{border-left-color:var(--st-review)}
+tr.row[data-status="Issued"] td:first-child{border-left-color:var(--st-issued)}
+tr.row[data-status="Live"] td:first-child{border-left-color:var(--st-live)}
+.exp{all:unset;cursor:pointer;font:inherit;color:inherit}.exp:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.id{font-family:var(--mono);font-size:13px;font-weight:500;white-space:nowrap}
+.title{font-weight:600}
+.sub{display:block;color:var(--ink-3);font-size:12.5px;font-weight:400;margin-top:1px}
+.type{font-size:12px;color:var(--ink-2);border:1px solid var(--line);padding:1px 6px;border-radius:3px;white-space:nowrap}
+.rev{font-family:var(--mono);font-size:12.5px;white-space:nowrap}
+.rev .cur{background:var(--accent-soft);color:var(--accent);padding:1px 6px;border-radius:3px;font-weight:500}
+.rev .arrow{color:var(--ink-3);margin:0 3px}
+.date{font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--ink-2)}
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap;color:var(--c);background:var(--bg)}
+.people{font-size:13.5px}
+.people .pool{color:var(--ink-3);font-size:12px}
+.num{font-variant-numeric:tabular-nums;text-align:right}
+.num.v{color:var(--warn);font-weight:600}
+.num.v.zero{color:var(--st-issued)}
+tr.detail td{background:var(--surface-2);padding:12px 14px 14px 30px}
+.timeline{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.timeline li{display:grid;grid-template-columns:150px 100px 1fr;gap:14px;font-size:13.5px;align-items:baseline}
+.timeline .r{font-family:var(--mono);font-size:12.5px}
+.timeline .d{font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.timeline .s{color:var(--ink-3);font-size:12px;margin-left:8px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:13.5px;margin:0 0 12px}
+.kv dt{color:var(--ink-3)}
+.kv dd{margin:0;font-family:var(--mono);font-size:12.5px;word-break:break-all}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px;font-size:13px;color:var(--ink-3)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block;background:var(--c)}
+.empty{padding:26px;text-align:center;color:var(--ink-3)}
+footer{margin-top:34px;font-size:12.5px;color:var(--ink-3);border-top:1px solid var(--line-soft);padding-top:12px;line-height:1.6}
+@media (prefers-reduced-motion:no-preference){ .chip,tr.row td{transition:background .12s,color .12s} }
+</style>
+<main class="wrap">
+<header>
+  <div>
+    <div class="eyebrow">Synthetic demo · invented register</div>
+    <h1>Document Index</h1>
+  </div>
+  <div class="meta" id="meta"></div>
+</header>
+<section class="summary" id="summary" aria-label="Summary"></section>
+<div class="filters" id="filters" role="group" aria-label="Filters"></div>
+<div id="groups"></div>
+<div class="legend" id="legend"></div>
+<footer>Generated from <b>register.json</b> by <b>build_index.py</b>. Every entry is invented. The register is the record; this page is a view of it. A document is citable only once its status is Issued. Open VERIFY counts unresolved <span class="id">[VERIFY:]</span> markers in the current draft; they must reach zero, or be accepted as exceptions, before issue.</footer>
+</main>
+<script id="data" type="application/json">__DATA__</script>
+<script>
+(function(){
+const data=JSON.parse(document.getElementById('data').textContent);
+const ST={Planned:['--st-planned','--surface-2'],Draft:['--st-draft','--st-draft-bg'],'In Review':['--st-review','--st-review-bg'],Issued:['--st-issued','--st-issued-bg'],Superseded:['--st-superseded','--st-superseded-bg'],Live:['--st-live','--st-live-bg']};
+const docs=data.documents, revs=data.revisions;
+const state={status:null,type:null,q:''};
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=d=>d?new Date(d+'T00:00:00').toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}):'';
+function pill(s){const [c,bg]=ST[s]||ST.Planned;return `<span class="pill" style="--c:var(${c});--bg:var(${bg})">${esc(s)}</span>`}
+function meta(){document.getElementById('meta').innerHTML=`<b>${esc(data.library)}</b><br>Index generated ${fmt(data.generated)}<br>${docs.length} entries, ${revs.length} revision records`}
+function summary(){
+  const el=document.getElementById('summary'); const cnt={}; let ver=0;
+  docs.forEach(d=>{cnt[d.status]=(cnt[d.status]||0)+1; ver+= +d.verify_open||0});
+  const order=['Draft','In Review','Issued','Superseded','Live'];
+  el.innerHTML=`<div class="tile"><div class="n">${docs.filter(d=>d.type!=='Register').length}</div><div class="l">Documents</div></div>`+
+   order.filter(s=>cnt[s]).map(s=>`<div class="tile status" style="--c:var(${ST[s][0]})"><div class="n">${cnt[s]}</div><div class="l">${esc(s)}</div></div>`).join('')+
+   `<div class="tile warn"><div class="n">${ver}</div><div class="l">Open VERIFY markers</div></div>`;
+}
+function filters(){
+  const el=document.getElementById('filters');
+  const statuses=[...new Set(docs.map(d=>d.status))]; const types=[...new Set(docs.map(d=>d.type))];
+  el.innerHTML=`<span class="lbl">Status</span>`+statuses.map(s=>`<button class="chip" data-k="status" data-v="${esc(s)}" aria-pressed="${state.status===s}">${esc(s)}</button>`).join('')+
+    `<span class="lbl" style="margin-left:10px">Type</span>`+types.map(t=>`<button class="chip" data-k="type" data-v="${esc(t)}" aria-pressed="${state.type===t}">${esc(t)}</button>`).join('')+
+    `<input class="search" type="search" placeholder="Search ID, title, owner" value="${esc(state.q)}" aria-label="Search">`;
+  el.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.k,v=b.dataset.v;state[k]=state[k]===v?null:v;filters();groups();}));
+  el.querySelector('.search').addEventListener('input',e=>{state.q=e.target.value;groups();});
+}
+function visible(d){
+  if(state.status&&d.status!==state.status)return false; if(state.type&&d.type!==state.type)return false;
+  if(state.q){const q=state.q.toLowerCase();return [d.id,d.title,d.owner,d.reviewers,d.subsection].join(' ').toLowerCase().includes(q)}
+  return true;
+}
+function groups(){
+  const el=document.getElementById('groups'); const bySec={};
+  docs.filter(visible).forEach(d=>{(bySec[d.section]=bySec[d.section]||[]).push(d)});
+  const secs=Object.keys(bySec).sort((a,b)=>a.startsWith('_')-b.startsWith('_')||a.localeCompare(b));
+  if(!secs.length){el.innerHTML='<div class="empty">No entries match these filters.</div>';return}
+  el.innerHTML=secs.map(sec=>{
+    const rows=bySec[sec].sort((a,b)=>a.id.localeCompare(b.id,undefined,{numeric:true}));
+    return `<section class="group"><h2>${esc(sec)} <small>${rows.length} ${rows.length===1?'entry':'entries'}</small></h2><div class="tablewrap"><table>
+    <thead><tr><th>ID</th><th>Title</th><th>Type</th><th>Revision</th><th>Created</th><th>Modified</th><th>Owner</th><th>Reviewers</th><th>Status</th><th class="num">Pages</th><th class="num">Open VERIFY</th></tr></thead>
+    <tbody>${rows.map(row).join('')}</tbody></table></div></section>`}).join('');
+  el.querySelectorAll('tr.row').forEach(tr=>{const t=()=>{const d=tr.nextElementSibling;const open=d.hidden;d.hidden=!open;tr.querySelector('.exp').setAttribute('aria-expanded',open)};tr.addEventListener('click',t)});
+}
+function row(d){
+  const rv=revs.filter(r=>r.id===d.id);
+  const chain=rv.length?rv.map((r,i)=>`${i?'<span class="arrow">&rsaquo;</span>':''}<span class="${r.status==='Current'?'cur':''}">${esc(r.revision.replace(/ \(.*\)/,''))}</span>`).join(''):`<span class="cur">${esc(d.revision)}</span>`;
+  const reviewers=d.reviewers?esc(d.reviewers):(d.reviewer_pool?`<span class="pool">Panel to assign from: ${esc(d.reviewer_pool)}</span>`:'<span class="pool">n/a</span>');
+  const v=d.verify_open===''?'':`<span class="${+d.verify_open===0?'zero':''}">${d.verify_open}</span>`;
+  const isReg=d.type==='Register';
+  return `<tr class="row" data-status="${esc(d.status)}">
+    <td class="id"><button type="button" class="exp" aria-expanded="false" aria-label="${esc(d.id)}: show details">${esc(d.id)}</button></td>
+    <td><span class="title">${esc(d.title)}</span><span class="sub">${esc(d.subsection||d.location)}${d.parent?' · under '+esc(d.parent):''}</span></td>
+    <td><span class="type">${esc(d.type)}</span></td>
+    <td class="rev">${chain}</td>
+    <td class="date">${fmt(d.created)}</td><td class="date">${fmt(d.modified)}</td>
+    <td class="people">${esc(d.owner)}<span class="sub">Sponsor: ${esc(d.sponsor)}</span></td>
+    <td class="people">${reviewers}</td>
+    <td>${pill(d.status)}${d.next?`<span class="sub">Next: ${esc(d.next)}</span>`:''}</td>
+    <td class="num">${esc(d.pages)}</td><td class="num v">${v}</td></tr>
+  <tr class="detail" hidden><td colspan="11">
+    <dl class="kv"><dt>File</dt><dd>${esc(d.file)}</dd><dt>Location</dt><dd>${esc(d.location)}</dd><dt>Project</dt><dd>${esc(d.project)}</dd>${d.extra?`<dt>Contents</dt><dd>${esc(d.extra)}</dd>`:''}</dl>
+    ${rv.length?`<ul class="timeline">${rv.map(r=>`<li><span class="r">${esc(r.revision)}</span><span class="d">${fmt(r.date)}</span><span>${esc(r.note)}<span class="s">${esc(r.author)} · ${esc(r.status)}</span></span></li>`).join('')}</ul>`:(isReg?'<span class="sub">Register is maintained continuously; no revision chain.</span>':'')}
+  </td></tr>`;
+}
+function legend(){document.getElementById('legend').innerHTML=Object.keys(ST).map(s=>`<span><i style="--c:var(${ST[s][0]})"></i>${esc(s)}</span>`).join('')}
+meta();summary();filters();groups();legend();
+})();
+</script>

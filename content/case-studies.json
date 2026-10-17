@@ -1,0 +1,349 @@
+{
+  "_readme": "All site copy lives here. {{PLACEHOLDER:...}} renders a visible PLACEHOLDER marker; {{CONFIRM:...}} renders the text with a CONFIRM tag. After editing, run: python tools/sync_noscript.py (refreshes the crawler copy in index.html) and python tools/list_placeholders.py.",
+  "hero": {
+    "name": "Mike Davies",
+    "pitch": [
+      "I find the process that runs on paper, spreadsheets or goodwill, build the thing that fixes it, and teach people why it works.",
+      "Technical team lead in scientific services: learning technology, digital tooling and technical training."
+    ],
+    "proof": "Around 50 eLearning courses since 2022. A skills matrix covering 200+ engineers. Tools that replaced paper, spreadsheets and a paid product.",
+    "chips": [
+      "Learning technology and L&D",
+      "Systems lead, low-code and AI solutions builder",
+      "Technical team lead, scientific services"
+    ],
+    "links": [
+      {
+        "label": "Download CV (PDF)",
+        "href": "assets/cv/Mike_Davies_CV.pdf"
+      },
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/mike-davies-2a02b5b1/"
+      }
+    ]
+  },
+  "pattern": {
+    "title": "The pattern",
+    "intro": "Every case study below is the same three moves.",
+    "steps": [
+      {
+        "title": "Find it",
+        "text": "Look for the process that runs on paper, spreadsheets or goodwill."
+      },
+      {
+        "title": "Build it",
+        "text": "Build the smallest thing that fixes it, on tools the business already owns where that makes sense."
+      },
+      {
+        "title": "Teach it",
+        "text": "Teach people why it works, so they carry it without me."
+      }
+    ]
+  },
+  "caseStudies": [
+    {
+      "id": "training-designer",
+      "short": "Training Designer",
+      "title": "Training Designer: a course authoring and player app that replaced a paid product",
+      "pitch": "When the authoring tool licence came up for renewal, I built the replacement instead.",
+      "context": [
+        "The training team was producing eLearning in a paid authoring product. The licence cost more than £3,000 a year, the output format locked us in, and we used a small subset of the features: a block-based lesson editor, quizzes, media, and an export that played in the LMS. Course demand was rising (around 50 courses since 2022), and so was the number of people who needed to author."
+      ],
+      "built": [
+        "A Rise-style course authoring and player application: a block editor for text, media, callouts, steps and knowledge checks; a media manager; themes and covers; quiz settings; and export to standalone HTML and SCORM, so courses run in the LMS without the original tool. Courses save in a documented JSON format, which later let me generate complete draft courses from source manuals with an AI workflow."
+      ],
+      "how": [
+        "Built in phases, with AI assistance, against a written spec and a template export that acts as ground truth for the file format. The build-versus-buy call came down to three questions: do we use less than a third of the paid features, is lock-in costing us anything, and can the team maintain a replacement? Three yeses meant build."
+      ],
+      "outcome": [
+        "Replaced a paid product, saving more than £3,000 a year.",
+        "The open format enabled AI-drafted courses from manuals, cutting first drafts from days to under an hour.",
+        "More of the team can author, because the tool is ours."
+      ],
+      "stats": [
+        {
+          "value": 3000,
+          "prefix": "£",
+          "suffix": "+",
+          "label": "a year saved on licences"
+        },
+        {
+          "value": 50,
+          "label": "courses produced or commissioned since 2022",
+          "approx": true
+        },
+        {
+          "text": "HTML + SCORM",
+          "label": "exports that run in the existing LMS"
+        }
+      ],
+      "panel": {
+        "type": "live",
+        "status": "ready",
+        "title": "Play a sample course",
+        "src": "demos/training-designer/index.html",
+        "height": 720,
+        "poster": "assets/img/training-designer-poster.webp",
+        "posterSize": [
+          1280,
+          800
+        ],
+        "note": "The real export, unchanged: one 115 KB HTML file, five lessons on a neutral topic, knowledge checks and a quiz. The course source sits beside it as sample_course.json. {{PLACEHOLDER:sandbox editor view (needs the app source)}}",
+        "alt": "An embedded course player running a short sample course on gas chromatography, with text, media and one knowledge check."
+      }
+    },
+    {
+      "id": "skills-matrix",
+      "short": "Skills matrix",
+      "title": "Workforce skills matrix: from a spreadsheet to the system sales decisions run on",
+      "pitch": "Three generations of the same idea, each built when the last one stopped scaling.",
+      "context": [
+        "A global laboratory services business with 200+ engineers maintaining more than 25,000 pieces of equipment had no reliable way to answer who is competent on what, where the gaps are, and who is qualified to train or assess others. The information lived in managers' heads and in site-level spreadsheets that disagreed with each other."
+      ],
+      "built": [
+        "Generation one: an Excel matrix fed by Forms, to prove the data was worth collecting. Generation two: a Power BI dashboard joining competency data to the equipment hierarchy across 25,000+ assets, so gaps showed by site, equipment class and engineer. Generation three: a purpose-built matrix application with self-assessment, manager validation and a competency scale tied to observational sign-off records."
+      ],
+      "how": [
+        "Anchored everything to the equipment hierarchy rather than to course titles, so a competency means something specific and survives when courses change. Designed the competency scale with the trainers who would use it. Rolled out through site champions rather than from the centre. Kept each generation running until the next one was adopted."
+      ],
+      "outcome": [
+        "Covers 200+ engineers; used for gap analysis, training planning and trainer selection.",
+        "Now informs sales decisions: the business can show a prospective client what capability it has near their site.",
+        "Observational checklists and sign-off records anchored to the same hierarchy give the matrix an audit trail."
+      ],
+      "stats": [
+        {
+          "text": "200+",
+          "label": "engineers covered"
+        },
+        {
+          "value": 25000,
+          "suffix": "+",
+          "label": "pieces of equipment in the hierarchy"
+        },
+        {
+          "value": 3,
+          "label": "generations, each kept running until the next was adopted"
+        }
+      ],
+      "panel": {
+        "type": "live",
+        "status": "ready",
+        "title": "Explore a synthetic skills matrix",
+        "src": "demos/skills-matrix/index.html",
+        "height": 760,
+        "poster": "assets/img/skills-matrix-poster.webp",
+        "posterSize": [
+          1280,
+          800
+        ],
+        "strip": [
+          {
+            "title": "Excel and Forms",
+            "text": "Proved the data was worth collecting, then stopped scaling when every site kept its own copy."
+          },
+          {
+            "title": "Power BI",
+            "text": "Joined competency to the equipment hierarchy so gaps showed up, but had no way to validate a self-assessment."
+          },
+          {
+            "title": "Matrix app",
+            "text": "Self-assessment, manager validation and sign-off records in one place, built for 200+ engineers."
+          }
+        ],
+        "alt": "A heatmap of 60 invented engineers across five invented sites and twelve generic equipment classes. Visitors can filter by site, class and minimum level, switch on a gap view that highlights classes with fewer than two competent engineers, list who is qualified to train each class, and open any engineer's row."
+      }
+    },
+    {
+      "id": "asset-risk",
+      "short": "Asset risk",
+      "title": "Asset risk film and explorer: replacing a heavy dashboard with a 78-second answer",
+      "pitch": "A risk register of a few thousand rows and a dashboard nobody could get a decision from, turned into a short film that ends in the answer.",
+      "context": [
+        "The laboratory estate of an R&D sciences client had been risk-scored asset by asset on criticality, age, breakdowns and obsolescence. The output was a generic dashboard and a slide deck: heavy, arithmetic left to the reader, and silent on the questions the client actually had. What do we replace, when, what will it cost, and which cost centre pays?"
+      ],
+      "built": [
+        "One self-contained HTML file in two halves. A 78-second film in six scenes walks from the whole estate to the handful of High-risk assets to a phased replacement budget. Under it, an explorer: the estate, each cost centre with a plain-English headline and a copy-for-email summary, and a filterable replacement list with CSV export. Behind both, a Python build recomputes every score, applies tier and budget rules from one documented config block the client can challenge, and fails loudly if anything does not reconcile."
+      ],
+      "how": [
+        "Started from the questions a budget holder asks, not from the data. Built reconciliation in: estate totals against cost-centre sums against asset rows, and film against explorer, with an error on any mismatch. Found and explained a discrepancy between the earlier deck and the workbook rather than hiding it."
+      ],
+      "outcome": [
+        "A few thousand assets across about a dozen cost centres reduced to three numbers and a phased budget.",
+        "Every figure traceable to its field and aggregation.",
+        "One file, no server, with deep links to any scene, cost centre or filtered list."
+      ],
+      "stats": [
+        {
+          "value": 78,
+          "suffix": " s",
+          "label": "film that ends in the answer"
+        },
+        {
+          "value": 3,
+          "label": "explorer views: estate, cost centre, replacement list"
+        },
+        {
+          "value": 0,
+          "label": "reconciliation mismatches tolerated: the build fails instead"
+        }
+      ],
+      "panel": {
+        "type": "live",
+        "status": "ready",
+        "title": "Watch the film, then explore an invented estate",
+        "src": "demos/asset-risk/index.html",
+        "aspect": "16 / 9",
+        "poster": "assets/img/asset-risk-poster.webp",
+        "posterSize": [
+          1280,
+          720
+        ],
+        "note": "Synthetic register: every asset, cost centre, supplier and budget is invented. The scoring rules are the real ones.",
+        "alt": "A 78-second animated film in six scenes that walks from an invented estate of a few thousand laboratory assets to its High-risk assets and a phased replacement budget, followed by an explorer with estate, cost centre and replacement list views, a copy-summary button and CSV export."
+      }
+    },
+    {
+      "id": "training-store",
+      "short": "Training Store",
+      "title": "Training Store: find the course by the instrument in front of you",
+      "pitch": "Several hundred courses in the LMS and no way to search them by equipment. One file joined the LMS, the skills matrix and the asset table so an engineer can type a model number and see what training exists.",
+      "context": [
+        "A global laboratory services academy had several hundred courses, curricula, tests and observation checklists in its LMS. The LMS search only knew titles, so an engineer in front of an unfamiliar instrument could not ask the one question that mattered: is there training for this? Managers could not see what existed either, and requests arrived as unstructured email."
+      ],
+      "built": [
+        "A single self-contained HTML course finder on the intranet. It joins three sources: the LMS catalogue export, the skills-matrix mapping of courses to equipment, and the asset classification table, which adds thousands of model and series synonyms. Type a model number and the courses for its equipment type come back. Users filter, switch between Training and Validation, and export a selection as CSV."
+      ],
+      "how": [
+        "The first Training Store was a Power App built in 2022: it proved people wanted one place to find training, but it only searched titles and lived inside the tenant. The rebuild started with the data. A Python script reads the three exports, resolves duplicates, nests courses under curricula and emits one JSON. A React app renders it as one static file, so IT has nothing to host."
+      ],
+      "outcome": [
+        "Several hundred catalogue cards, most mapped to equipment.",
+        "Two dozen equipment classes and thousands of model synonyms searchable, so a model number finds its training.",
+        "Launched in August 2026 for a 500-plus-person business, replacing the Power App; rollout across the business is still under way."
+      ],
+      "stats": [
+        {
+          "value": 3,
+          "label": "systems joined: LMS, skills matrix, asset table"
+        },
+        {
+          "value": 24,
+          "label": "equipment classes searchable by model number"
+        },
+        {
+          "value": 1,
+          "label": "static file: nothing for IT to host"
+        }
+      ],
+      "panel": {
+        "type": "live",
+        "status": "ready",
+        "title": "Search an invented catalogue",
+        "src": "demos/training-store/index.html",
+        "height": 780,
+        "poster": "assets/img/training-store-poster.webp",
+        "posterSize": [
+          1280,
+          800
+        ],
+        "note": "Try the made-up model number AB500. Every course, manufacturer and model is invented; links and the request mailbox point nowhere.",
+        "alt": "A course finder over an invented catalogue of a few hundred training cards. Visitors search by course name, equipment class or a made-up model number, filter by category and class, switch between Training and Validation tabs, add courses to a selection and export it as CSV."
+      }
+    },
+    {
+      "id": "procedure-library",
+      "short": "Procedure library",
+      "title": "A procedure library run like a codebase, with an operating pack for the AI that drafts in it",
+      "pitch": "Markdown masters, a build, a checker, a register that is the only source of truth, and a read-first pack so every AI session works to the same rules.",
+      "context": [
+        "A global laboratory services business was rebuilding its procedure framework: five document types across eight workstreams, drafted by several people with AI assistance and reviewed by a panel. Documents edited by many hands drift in format and acquire client names and invented steps, and nobody could say what an AI session had been told before it wrote."
+      ],
+      "built": [
+        "A documentation-as-code library. Each document has a markdown master, built to Word and PDF. A checker runs the mechanical half of the reviewer checklist: structure, numbering, roles, banned words, client names and open VERIFY markers. A sync tool rebuilds the markdown from a reviewer's Word edits and shows the diff. A register records every document and generates the index. An AI context pack: reading order, writing rules, allowed roles, a glossary and six reusable prompts."
+      ],
+      "how": [
+        "Made the register the definition of existence: a document not in it does not exist. Made invention a build failure, not a request: where a source does not support a statement, the writer marks it VERIFY with who holds the answer, and the checker flags any marker without a register row. Kept humans on dispositions, sign-off and issue, and automated everything mechanical."
+      ],
+      "outcome": [
+        "82 documents in the register and growing quickly, across eight workstreams; one command builds, checks, registers and indexes.",
+        "Every AI session starts from the same ten-minute pack; the checker, not the model, holds the standard.",
+        "About 2,300 lines of Python and six prompts that other people run without me."
+      ],
+      "stats": [
+        {
+          "value": 82,
+          "label": "documents in the register, and growing quickly"
+        },
+        {
+          "value": 2300,
+          "label": "lines of Python tooling",
+          "approx": true
+        },
+        {
+          "value": 6,
+          "label": "reusable prompts other people run"
+        }
+      ],
+      "panel": {
+        "type": "live",
+        "status": "ready",
+        "title": "Filter a generated index, then see one procedure built and checked",
+        "src": "demos/procedure-library/index.html",
+        "height": 760,
+        "poster": "assets/img/procedure-library-poster.webp",
+        "posterSize": [
+          1280,
+          800
+        ],
+        "note": "The real build, check and index tools, run on an invented register and one invented procedure. The checker's two failures are deliberate: a banned word, and a VERIFY marker with no gap-register row.",
+        "alt": "A filterable document index generated from a synthetic register, and a three-pane strip for one invented procedure: the markdown master, a checker report with two deliberate failures, and the rendered page."
+      }
+    }
+  ],
+  "alsoBuilt": {
+    "title": "Also built",
+    "intro": "Smaller things that show range without a full case study.",
+    "tiles": [
+      {
+        "icon": "doc",
+        "title": "Controlled document system",
+        "text": "A Power Apps and Power Automate system taking hundreds of controlled training and procedural documents through authoring, review, approval and periodic review. Built where no system existed, on the tenant the business already paid for."
+      },
+      {
+        "icon": "flow",
+        "title": "Process Mapper",
+        "text": "A React app that turns a plain-text process description into a BPMN-style swim-lane diagram, with a layout engine I wrote for orthogonal routing and no overlaps. Diagrams in minutes instead of hours."
+      },
+      {
+        "icon": "leaf",
+        "title": "Greenhouse gas report that won a bid",
+        "text": "At a five-person licensed sample facility I wrote the company's first greenhouse gas report, with a ten-year net zero target. A client bid asked for one; we were the only bidder with it, and won."
+      },
+      {
+        "icon": "phone",
+        "title": "Paper to phone apps at a start-up",
+        "text": "Replaced paper quality records with SharePoint lists and phone-based apps for deviations, improvements and facility checks. People started logging things they previously did not."
+      },
+      {
+        "icon": "stack",
+        "title": "AI skills library for a training team",
+        "text": "Around 60 reusable skills for an agentic assistant: intake gates, production per document type, format QA, render verification and stakeholder tests. Every failure in a real build became a named rule."
+      },
+      {
+        "icon": "play",
+        "title": "Around 50 eLearning courses",
+        "text": "Produced or commissioned since 2022, from ten-person site-specific modules to organisation-wide mandatory programmes, with video and animation produced in-house."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Find the process that runs on paper, spreadsheets or goodwill; build the thing that fixes it; teach people why it works. If your team needs that, I would like to talk: learning technology, systems and low-code roles, or leading a technical team in scientific services.",
+    "email": "michaeldavies6@icloud.com",
+    "cv": "assets/cv/Mike_Davies_CV.pdf",
+    "location": "Based in Cheshire, UK.",
+    "linkedin": "https://www.linkedin.com/in/mike-davies-2a02b5b1/"
+  }
+}

@@ -1,0 +1,10 @@
+_source/
+node_modules/
+.DS_Store
+Thumbs.db
+.claude/
+__pycache__/
+# build intermediates (inlined into each demo's index.html)
+demos/asset-risk/data.json
+demos/training-store/course_data.json
+demos/procedure-library/example/build/

@@ -1,0 +1,700 @@
+{
+  "schemaVersion": 1,
+  "id": "demo-gas-chromatography-intro",
+  "title": "Introduction to Gas Chromatography",
+  "description": "A practical introduction to how a gas chromatograph works, what its major components do, and how to run a sample well. Built as the Phase 1 demonstration course for the training designer.",
+  "theme": {
+    "accentColor": "#1B5E3B",
+    "fontHeading": "Segoe UI",
+    "fontBody": "Segoe UI",
+    "darkCover": true
+  },
+  "cover": {
+    "image": {
+      "kind": "url",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='900'%3E%3Crect width='1600' height='900' fill='%231F3A2C'/%3E%3Ctext x='800' y='450' fill='%23A9C7B4' font-family='Arial' font-size='52' text-anchor='middle' dominant-baseline='middle'%3ECover%20image%20placeholder%3C/text%3E%3C/svg%3E",
+      "alt": "Placeholder cover image for the gas chromatography course"
+    },
+    "showTOC": true
+  },
+  "quizSettings": {
+    "passingScore": 75,
+    "retriesAllowed": "unlimited"
+  },
+  "lessons": [
+    {
+      "id": "lesson-welcome",
+      "title": "Welcome to the course",
+      "icon": "bookOpen",
+      "blocks": [
+        {
+          "id": "l1-hero",
+          "type": "image",
+          "layout": "full",
+          "media": {
+            "kind": "url",
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1600' height='700'%3E%3Crect width='1600' height='700' fill='%23DCE7DF'/%3E%3Ctext x='800' y='350' fill='%23345247' font-family='Arial' font-size='48' text-anchor='middle' dominant-baseline='middle'%3EAnalytical%20laboratory%20%E2%80%94%20placeholder%3C/text%3E%3C/svg%3E",
+            "alt": "Placeholder image of an analytical laboratory"
+          }
+        },
+        {
+          "id": "l1-intro",
+          "type": "paragraph",
+          "html": "<p>Gas chromatography (GC) is one of the workhorse techniques of the analytical laboratory. It separates the components of a mixture so each one can be identified and measured — quickly, repeatably, and with remarkable sensitivity.</p><p>This short course introduces the technique from the ground up. You do not need any prior chromatography experience, just a little curiosity about how the box on the bench actually works.</p>"
+        },
+        {
+          "id": "l1-note",
+          "type": "statement",
+          "style": "note",
+          "html": "<strong>How to use this course.</strong> Work through the lessons in order. Short knowledge checks appear as you go — they are not graded. The final lesson contains a graded quiz with a pass mark of 75%."
+        },
+        {
+          "id": "l1-objectives",
+          "type": "list",
+          "style": "checkbox",
+          "items": [
+            "Explain what gas chromatography is and when to use it",
+            "Name the major components of a gas chromatograph and describe what each one does",
+            "Follow a sample on its journey from injection to detection",
+            "Apply good practice when preparing and running a sample"
+          ]
+        },
+        {
+          "id": "l1-gate",
+          "type": "continueGate",
+          "label": "Continue"
+        },
+        {
+          "id": "l1-who-heading",
+          "type": "heading",
+          "level": 2,
+          "text": "Who this course is for"
+        },
+        {
+          "id": "l1-who",
+          "type": "paragraph",
+          "html": "<p>This course is written for laboratory technicians, engineers, and support staff who are new to gas chromatography — whether you will operate an instrument yourself or simply need to understand what it does and why it matters to the teams you support.</p>"
+        },
+        {
+          "id": "l1-divider",
+          "type": "divider",
+          "style": "line"
+        },
+        {
+          "id": "l1-need",
+          "type": "paragraph",
+          "html": "<p>You will need around <strong>25 minutes</strong> to complete all five lessons. Your progress is saved automatically, so you can close the course and pick up where you left off at any time.</p>"
+        }
+      ]
+    },
+    {
+      "id": "lesson-what-is-gc",
+      "title": "What is gas chromatography?",
+      "icon": "flask",
+      "blocks": [
+        {
+          "id": "l2-num1",
+          "type": "divider",
+          "style": "numbered"
+        },
+        {
+          "id": "l2-heading-problem",
+          "type": "heading",
+          "level": 1,
+          "text": "The separation problem"
+        },
+        {
+          "id": "l2-problem",
+          "type": "paragraph",
+          "html": "<p>Most real-world samples are mixtures. A drop of fuel, a headspace sample from a food package, a solvent used in manufacturing — each contains dozens or hundreds of different compounds. Before you can measure any single compound, you have to separate it from everything else.</p>"
+        },
+        {
+          "id": "l2-quote",
+          "type": "statement",
+          "style": "quote",
+          "html": "Chromatography does not identify anything by itself — it separates, so that identification becomes possible."
+        },
+        {
+          "id": "l2-image-split",
+          "type": "image",
+          "layout": "textRight",
+          "media": {
+            "kind": "url",
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='700'%3E%3Crect width='900' height='700' fill='%23D8DEE7'/%3E%3Ctext x='450' y='350' fill='%233C4654' font-family='Arial' font-size='40' text-anchor='middle' dominant-baseline='middle'%3EBenchtop%20GC%20%E2%80%94%20placeholder%3C/text%3E%3C/svg%3E",
+            "alt": "Placeholder image of a benchtop gas chromatograph"
+          },
+          "html": "<p>A modern benchtop gas chromatograph looks unassuming: an oven, a couple of ports on top, and a data cable. Inside, a sample is vaporised, swept through a long coated column by an inert gas, and detected as its components emerge — one after another.</p>",
+          "caption": "A typical benchtop gas chromatograph."
+        },
+        {
+          "id": "l2-num2",
+          "type": "divider",
+          "style": "numbered"
+        },
+        {
+          "id": "l2-heading-idea",
+          "type": "heading",
+          "level": 1,
+          "text": "The core idea"
+        },
+        {
+          "id": "l2-idea",
+          "type": "paragraph",
+          "html": "<p>Every compound in the sample interacts differently with the coating inside the column — the <em>stationary phase</em>. Compounds that cling to the coating travel slowly; compounds that prefer the moving gas — the <em>mobile phase</em> — travel quickly. Given a long enough column, the mixture spreads out into a neat procession.</p>"
+        },
+        {
+          "id": "l2-idea-list",
+          "type": "list",
+          "style": "bullet",
+          "items": [
+            "The <strong>mobile phase</strong> is an inert carrier gas, usually helium, hydrogen, or nitrogen.",
+            "The <strong>stationary phase</strong> is a thin film coated on the inside of the column.",
+            "Each compound's journey time through the column is called its <strong>retention time</strong>."
+          ]
+        },
+        {
+          "id": "l2-accordion",
+          "type": "accordion",
+          "items": [
+            {
+              "title": "Mobile phase (carrier gas)",
+              "html": "<p>The carrier gas does exactly one job: it carries. It must be inert so it never reacts with the sample, and clean so it never adds peaks of its own. Flow rate and pressure are controlled precisely, because separation quality depends on them.</p>"
+            },
+            {
+              "title": "Stationary phase (column coating)",
+              "html": "<p>The coating is chosen to suit the chemistry of the samples you run. A non-polar coating separates compounds mostly by boiling point; more polar coatings add selectivity for particular chemical families.</p>"
+            },
+            {
+              "title": "Retention time",
+              "html": "<p>Under fixed conditions, a compound's retention time is reproducible — which is what makes it useful for identification. Change the temperature programme, flow rate, or column, and the retention times change too.</p>"
+            }
+          ]
+        },
+        {
+          "id": "l2-kc",
+          "type": "knowledgeCheck",
+          "question": {
+            "id": "l2-kc-q",
+            "kind": "multipleChoice",
+            "prompt": "In gas chromatography, what is the mobile phase?",
+            "choices": [
+              {
+                "id": "a",
+                "text": "The thin film coated on the inside of the column"
+              },
+              {
+                "id": "b",
+                "text": "An inert carrier gas that sweeps the sample through the column"
+              },
+              {
+                "id": "c",
+                "text": "The solvent used to dissolve the sample before injection"
+              },
+              {
+                "id": "d",
+                "text": "The heated chamber that holds the column"
+              }
+            ],
+            "correctChoiceId": "b"
+          },
+          "feedbackCorrect": "Exactly right — the mobile phase is the inert carrier gas, most commonly helium, hydrogen, or nitrogen.",
+          "feedbackIncorrect": "Not quite. The mobile phase is the inert carrier gas that transports the sample through the column. The coating on the column wall is the stationary phase."
+        },
+        {
+          "id": "l2-gallery",
+          "type": "gallery",
+          "layout": "grid",
+          "items": [
+            {
+              "media": {
+                "kind": "url",
+                "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23E7E7EC'/%3E%3Ctext x='400' y='300' fill='%234A4A55' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='middle'%3ESample%20vials%3C/text%3E%3C/svg%3E",
+                "alt": "Placeholder image of autosampler vials"
+              },
+              "caption": "Samples are prepared in septum-capped vials."
+            },
+            {
+              "media": {
+                "kind": "url",
+                "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23F0E6CE'/%3E%3Ctext x='400' y='300' fill='%236B5B2A' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='middle'%3EInjector%20port%3C/text%3E%3C/svg%3E",
+                "alt": "Placeholder image of a GC injector port"
+              },
+              "caption": "The injector vaporises the sample instantly."
+            },
+            {
+              "media": {
+                "kind": "url",
+                "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%239FC2AE'/%3E%3Ctext x='400' y='300' fill='%2323402F' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='middle'%3ECapillary%20column%3C/text%3E%3C/svg%3E",
+                "alt": "Placeholder image of a coiled capillary column"
+              },
+              "caption": "A capillary column, coiled to fit inside the oven."
+            },
+            {
+              "media": {
+                "kind": "url",
+                "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='600'%3E%3Crect width='800' height='600' fill='%23D8DEE7'/%3E%3Ctext x='400' y='300' fill='%233C4654' font-family='Arial' font-size='36' text-anchor='middle' dominant-baseline='middle'%3EDetector%20module%3C/text%3E%3C/svg%3E",
+                "alt": "Placeholder image of a detector module"
+              },
+              "caption": "The detector responds as each compound emerges."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lesson-inside",
+      "title": "Inside the instrument",
+      "icon": "layers",
+      "blocks": [
+        {
+          "id": "l3-intro",
+          "type": "paragraph",
+          "html": "<p>Time to open the lid. A gas chromatograph is a chain of components, each with one clear responsibility. Explore the schematic below — select each marker to see what that part of the system does.</p>"
+        },
+        {
+          "id": "l3-schematic",
+          "type": "labeledGraphic",
+          "media": {
+            "kind": "url",
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='800'%3E%3Crect width='1400' height='800' fill='%23DCE7DF'/%3E%3Ctext x='700' y='400' fill='%23345247' font-family='Arial' font-size='46' text-anchor='middle' dominant-baseline='middle'%3EGC%20system%20schematic%20%E2%80%94%20placeholder%3C/text%3E%3C/svg%3E",
+            "alt": "Placeholder schematic of a gas chromatography system"
+          },
+          "hotspots": [
+            {
+              "x": 8,
+              "y": 28,
+              "title": "Carrier gas supply",
+              "html": "<p>A cylinder or generator supplies the inert mobile phase. Pressure regulators and flow controllers keep delivery precise and stable.</p>"
+            },
+            {
+              "x": 30,
+              "y": 42,
+              "title": "Injector",
+              "html": "<p>The sample enters here — typically a microlitre or less — and is flash-vaporised in a heated liner before being swept onto the column.</p>"
+            },
+            {
+              "x": 52,
+              "y": 60,
+              "title": "Column",
+              "html": "<p>The heart of the instrument: a long, thin capillary whose internal coating separates the mixture into individual compounds.</p>"
+            },
+            {
+              "x": 52,
+              "y": 85,
+              "title": "Oven",
+              "html": "<p>The column sits inside a precisely controlled oven. Ramping the temperature during a run speeds up late-eluting compounds and sharpens their peaks.</p>"
+            },
+            {
+              "x": 76,
+              "y": 42,
+              "title": "Detector",
+              "html": "<p>As each compound leaves the column it produces a signal — a peak. Peak position tells you <em>what</em>; peak area tells you <em>how much</em>.</p>"
+            }
+          ]
+        },
+        {
+          "id": "l3-tabs",
+          "type": "tabs",
+          "items": [
+            {
+              "title": "Injector",
+              "html": "<p>Injection quality decides run quality. The liner must be clean, the septum sound, and the injection volume small and repeatable. Split injection discards a fixed fraction of the sample to avoid overloading the column; splitless injection sends it all for trace work.</p>"
+            },
+            {
+              "title": "Column",
+              "html": "<p>Columns are described by length, internal diameter, and film thickness — for example 30 m × 0.25 mm × 0.25 µm. Longer columns separate better but take longer. The coating chemistry is matched to the analytes.</p>"
+            },
+            {
+              "title": "Oven",
+              "html": "<p>Most methods use a temperature programme: start cool to resolve the volatile compounds, then ramp steadily so heavier compounds do not take all day to emerge. Oven stability is critical to reproducible retention times.</p>"
+            },
+            {
+              "title": "Detector",
+              "html": "<p>The flame ionisation detector (FID) is the everyday choice for organic compounds — robust and linear across a huge range. Mass spectrometers add identification power; thermal conductivity detectors handle gases the FID cannot see.</p>"
+            }
+          ]
+        },
+        {
+          "id": "l3-column-image",
+          "type": "image",
+          "layout": "centered",
+          "media": {
+            "kind": "url",
+            "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1000' height='560'%3E%3Crect width='1000' height='560' fill='%239FC2AE'/%3E%3Ctext x='500' y='280' fill='%2323402F' font-family='Arial' font-size='40' text-anchor='middle' dominant-baseline='middle'%3EColumn%20cross-section%20%E2%80%94%20placeholder%3C/text%3E%3C/svg%3E",
+            "alt": "Placeholder cross-section diagram of a capillary column"
+          },
+          "caption": "In cross-section: fused silica wall, polyimide coating outside, stationary phase film inside."
+        },
+        {
+          "id": "l3-watch-heading",
+          "type": "heading",
+          "level": 2,
+          "text": "Watch the separation"
+        },
+        {
+          "id": "l3-watch-intro",
+          "type": "paragraph",
+          "html": "<p>The animation below shows three compounds travelling through a column. They enter together, but interact with the stationary phase differently — watch them arrive at the detector one at a time, each drawing its own peak on the chromatogram. <strong>Run the animation to the end to unlock the rest of the lesson.</strong></p>"
+        },
+        {
+          "id": "l3-interactive",
+          "type": "customHtml",
+          "title": "Interactive: column separation",
+          "heightMode": "auto",
+          "gateOnComplete": true,
+          "promptHistory": [],
+          "html": "<!doctype html>\n<html lang=\"en-GB\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>Column separation demo</title>\n<style>\n  body {\n    margin: 0;\n    padding: 24px 16px 20px;\n    font-family: var(--font-body, system-ui), sans-serif;\n    color: var(--text, #2b2b33);\n    background: #fff;\n  }\n  .stage { max-width: 680px; margin: 0 auto; }\n  .head {\n    display: flex; align-items: baseline; justify-content: space-between;\n    gap: 16px; margin-bottom: 14px; flex-wrap: wrap;\n  }\n  .head strong { font-size: 17px; }\n  #status { font-size: 13px; color: #6b6b76; }\n  #status.done { color: var(--accent, #1B5E3B); font-weight: 600; }\n  svg { width: 100%; height: auto; display: block; }\n  .controls { display: flex; gap: 10px; margin-top: 14px; }\n  .controls button {\n    font: 600 14px var(--font-body, system-ui), sans-serif;\n    padding: 9px 22px; border-radius: 999px; cursor: pointer;\n    border: 2px solid var(--accent, #1B5E3B);\n    background: var(--accent, #1B5E3B); color: #fff;\n  }\n  .controls button.secondary { background: #fff; color: var(--accent, #1B5E3B); }\n  .controls button:focus-visible { outline: 3px solid var(--accent, #1B5E3B); outline-offset: 2px; }\n  .label { font: 600 11px sans-serif; letter-spacing: 0.08em; text-transform: uppercase; fill: #6b6b76; }\n</style>\n</head>\n<body>\n<div class=\"stage\">\n  <div class=\"head\">\n    <strong>See separation happen</strong>\n    <span id=\"status\" role=\"status\">Press play to run the sample through the column.</span>\n  </div>\n\n  <svg viewBox=\"0 0 680 300\" role=\"img\" aria-label=\"Animated diagram: three sample components travel along a chromatography column at different speeds and reach the detector one at a time, producing three peaks.\">\n    <!-- oven outline -->\n    <rect x=\"90\" y=\"40\" width=\"440\" height=\"130\" rx=\"10\" fill=\"none\" stroke=\"#d8d8de\" stroke-width=\"2\" stroke-dasharray=\"6 5\"/>\n    <text x=\"110\" y=\"30\" class=\"label\">Oven</text>\n\n    <!-- injector -->\n    <rect x=\"30\" y=\"80\" width=\"52\" height=\"50\" rx=\"6\" fill=\"#e8ede9\" stroke=\"#b9c8bd\"/>\n    <text x=\"18\" y=\"152\" class=\"label\">Injector</text>\n\n    <!-- column -->\n    <rect x=\"82\" y=\"95\" width=\"460\" height=\"20\" rx=\"10\" fill=\"#eef2ef\" stroke=\"#b9c8bd\"/>\n    <text x=\"270\" y=\"152\" class=\"label\">Column</text>\n\n    <!-- detector -->\n    <rect x=\"556\" y=\"80\" width=\"52\" height=\"50\" rx=\"6\" fill=\"#e8ede9\" stroke=\"#b9c8bd\"/>\n    <text x=\"548\" y=\"152\" class=\"label\">Detector</text>\n\n    <!-- sample components -->\n    <circle id=\"c1\" cx=\"66\" cy=\"105\" r=\"8\" fill=\"#2e7d32\"/>\n    <circle id=\"c2\" cx=\"66\" cy=\"105\" r=\"8\" fill=\"#ef6c00\"/>\n    <circle id=\"c3\" cx=\"66\" cy=\"105\" r=\"8\" fill=\"#5e35b1\"/>\n\n    <!-- chromatogram -->\n    <line x1=\"60\" y1=\"265\" x2=\"620\" y2=\"265\" stroke=\"#c9c9d0\" stroke-width=\"2\"/>\n    <text x=\"60\" y=\"292\" class=\"label\">Chromatogram</text>\n    <path id=\"trace\" d=\"\" fill=\"none\" stroke=\"var(--accent, #1B5E3B)\" stroke-width=\"2.5\" stroke-linecap=\"round\"/>\n  </svg>\n\n  <div class=\"controls\">\n    <button id=\"play\" aria-pressed=\"false\">Play</button>\n    <button id=\"reset\" class=\"secondary\">Reset</button>\n  </div>\n</div>\n\n<script>\n(function () {\n  \"use strict\";\n  var playBtn = document.getElementById(\"play\");\n  var resetBtn = document.getElementById(\"reset\");\n  var status = document.getElementById(\"status\");\n  var trace = document.getElementById(\"trace\");\n  var reduced = window.matchMedia(\"(prefers-reduced-motion: reduce)\").matches;\n\n  var X_START = 66, X_END = 582;\n  var DURATION = 9000; // ms for the slowest component\n  var comps = [\n    { el: document.getElementById(\"c1\"), speed: 1.0 },\n    { el: document.getElementById(\"c2\"), speed: 0.72 },\n    { el: document.getElementById(\"c3\"), speed: 0.5 }\n  ];\n\n  var t = 0;             // 0..1 progress of the slowest component\n  var playing = false;\n  var finished = false;\n  var visible = true;\n  var lastTick = null;\n  var completedSent = false;\n\n  function positionFor(speed) {\n    // Normalised so the slowest component (speed 0.5) arrives exactly at t=1.\n    var p = Math.min(1, t * speed / 0.5);\n    return X_START + (X_END - X_START) * p;\n  }\n\n  function tracePath() {\n    // One Gaussian-ish peak per component, appearing once it has arrived.\n    var d = \"M 60 265\";\n    var peaks = [\n      { at: 0.5, x: 200, h: 70 },   // fastest arrives first (earlier retention time)\n      { at: 0.6944, x: 340, h: 55 },\n      { at: 1.0, x: 480, h: 80 }\n    ];\n    for (var i = 0; i < peaks.length; i++) {\n      var pk = peaks[i];\n      var grow = Math.max(0, Math.min(1, (t - pk.at + 0.08) / 0.08));\n      if (grow <= 0) continue;\n      var h = pk.h * grow;\n      d += \" L \" + (pk.x - 26) + \" 265\" +\n           \" C \" + (pk.x - 10) + \" 265 \" + (pk.x - 10) + \" \" + (265 - h) + \" \" + pk.x + \" \" + (265 - h) +\n           \" C \" + (pk.x + 10) + \" \" + (265 - h) + \" \" + (pk.x + 10) + \" 265 \" + (pk.x + 26) + \" 265\";\n    }\n    d += \" L 620 265\";\n    return d;\n  }\n\n  function render() {\n    for (var i = 0; i < comps.length; i++) {\n      comps[i].el.setAttribute(\"cx\", positionFor(comps[i].speed));\n    }\n    trace.setAttribute(\"d\", tracePath());\n  }\n\n  function finish() {\n    finished = true;\n    playing = false;\n    playBtn.textContent = \"Play\";\n    playBtn.setAttribute(\"aria-pressed\", \"false\");\n    status.textContent = \"Separation complete — three components resolved.\";\n    status.className = \"done\";\n    if (!completedSent && window.Bridge) {\n      completedSent = true;\n      Bridge.reportScore(1);\n      Bridge.complete();\n    }\n  }\n\n  function tick(now) {\n    if (!playing) return;\n    if (lastTick === null) lastTick = now;\n    if (visible) {\n      t = Math.min(1, t + (now - lastTick) / DURATION);\n      render();\n      if (t >= 1) { finish(); return; }\n    }\n    lastTick = now;\n    requestAnimationFrame(tick);\n  }\n\n  playBtn.addEventListener(\"click\", function () {\n    if (finished) return;\n    if (reduced) {\n      // Reduced motion: jump straight to the resolved end state.\n      t = 1;\n      render();\n      finish();\n      return;\n    }\n    playing = !playing;\n    playBtn.textContent = playing ? \"Pause\" : \"Play\";\n    playBtn.setAttribute(\"aria-pressed\", String(playing));\n    status.textContent = playing ? \"Components moving through the column…\" : \"Paused.\";\n    status.className = \"\";\n    if (playing) { lastTick = null; requestAnimationFrame(tick); }\n  });\n\n  resetBtn.addEventListener(\"click\", function () {\n    t = 0;\n    playing = false;\n    finished = false;\n    lastTick = null;\n    playBtn.textContent = \"Play\";\n    playBtn.setAttribute(\"aria-pressed\", \"false\");\n    status.textContent = \"Press play to run the sample through the column.\";\n    status.className = \"\";\n    render();\n    // Completion is not revoked — the course gate stays open once earned.\n  });\n\n  // Pause the animation loop while off-screen (60fps-safe).\n  if (typeof IntersectionObserver === \"function\") {\n    new IntersectionObserver(function (entries) {\n      visible = entries[0] ? entries[0].isIntersecting : true;\n    }).observe(document.body);\n  }\n\n  render();\n  if (window.Bridge) Bridge.ready();\n})();\n</script>\n</body>\n</html>\n"
+        },
+        {
+          "id": "l3-after-gate",
+          "type": "statement",
+          "style": "note",
+          "html": "<strong>What you just saw.</strong> The green compound interacted least with the stationary phase, so it reached the detector first — the shortest retention time. The purple compound clung hardest and arrived last. Same column, same gas, three different journeys."
+        },
+        {
+          "id": "l3-timeline",
+          "type": "timeline",
+          "items": [
+            {
+              "label": "Step 1",
+              "title": "Injection",
+              "html": "<p>A tiny volume of sample enters the heated injector and is vaporised in milliseconds.</p>"
+            },
+            {
+              "label": "Step 2",
+              "title": "Transfer",
+              "html": "<p>The carrier gas sweeps the vapour onto the head of the column.</p>"
+            },
+            {
+              "label": "Step 3",
+              "title": "Separation",
+              "html": "<p>Compounds partition between the moving gas and the stationary film, spreading out along the column.</p>",
+              "media": {
+                "kind": "url",
+                "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='840' height='360'%3E%3Crect width='840' height='360' fill='%23E7E7EC'/%3E%3Ctext x='420' y='180' fill='%234A4A55' font-family='Arial' font-size='32' text-anchor='middle' dominant-baseline='middle'%3EBands%20separating%20%E2%80%94%20placeholder%3C/text%3E%3C/svg%3E",
+                "alt": "Placeholder diagram of compound bands separating along a column"
+              }
+            },
+            {
+              "label": "Step 4",
+              "title": "Detection",
+              "html": "<p>Each compound leaves the column in turn and produces a peak proportional to its amount.</p>"
+            },
+            {
+              "label": "Step 5",
+              "title": "Data",
+              "html": "<p>The data system converts the detector signal into a chromatogram, then into concentrations via calibration.</p>"
+            }
+          ]
+        },
+        {
+          "id": "l3-kc",
+          "type": "knowledgeCheck",
+          "question": {
+            "id": "l3-kc-q",
+            "kind": "matching",
+            "prompt": "Match each component to its job.",
+            "pairs": [
+              {
+                "id": "p1",
+                "left": "Injector",
+                "right": "Vaporises the sample and introduces it to the column"
+              },
+              {
+                "id": "p2",
+                "left": "Oven",
+                "right": "Controls the column temperature throughout the run"
+              },
+              {
+                "id": "p3",
+                "left": "Detector",
+                "right": "Produces a signal as each compound emerges"
+              }
+            ]
+          },
+          "feedbackCorrect": "Spot on — you know your way around the instrument.",
+          "feedbackIncorrect": "Have another look at the schematic above: injector vaporises, oven controls temperature, detector produces the signal."
+        }
+      ]
+    },
+    {
+      "id": "lesson-good-practice",
+      "title": "Running a sample well",
+      "icon": "target",
+      "blocks": [
+        {
+          "id": "l4-heading",
+          "type": "heading",
+          "level": 1,
+          "text": "Good practice at the bench"
+        },
+        {
+          "id": "l4-intro",
+          "type": "paragraph",
+          "html": "<p>A gas chromatograph will happily produce beautiful, precise, <em>wrong</em> answers if it is fed poorly prepared samples or run with worn consumables. Most GC problems are preventable with a handful of habits.</p>"
+        },
+        {
+          "id": "l4-flashcards",
+          "type": "flashcards",
+          "cards": [
+            {
+              "front": "Carrier gas",
+              "back": "The inert mobile phase — helium, hydrogen, or nitrogen — that transports the sample through the column."
+            },
+            {
+              "front": "Septum",
+              "back": "The self-sealing disc the syringe pierces at injection. A worn septum leaks and causes ghost peaks — replace it on schedule."
+            },
+            {
+              "front": "Split ratio",
+              "back": "The proportion of vaporised sample discarded at injection. A 50:1 split sends one part in fifty onto the column."
+            },
+            {
+              "front": "Baseline",
+              "back": "The detector signal with nothing eluting. A rising or noisy baseline is an early warning of contamination or a failing component."
+            }
+          ]
+        },
+        {
+          "id": "l4-emphasis",
+          "type": "statement",
+          "style": "emphasis",
+          "html": "Consistency beats cleverness: the same method, the same consumables, the same habits — every run."
+        },
+        {
+          "id": "l4-video",
+          "type": "video",
+          "media": {
+            "kind": "url",
+            "src": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+            "alt": "Demonstration video (CC0 sample standing in for the real footage)"
+          },
+          "caption": "Video: preparing and loading a sample (CC0 sample video standing in for the real footage)."
+        },
+        {
+          "id": "l4-carousel",
+          "type": "gallery",
+          "layout": "carousel",
+          "items": [
+            {
+              "media": {
+                "kind": "url",
+                "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'%3E%3Crect width='1200' height='600' fill='%23F0E6CE'/%3E%3Ctext x='600' y='300' fill='%236B5B2A' font-family='Arial' font-size='40' text-anchor='middle' dominant-baseline='middle'%3EStep%201%20%E2%80%94%20check%20gas%20pressures%3C/text%3E%3C/svg%3E",
+                "alt": "Placeholder: checking gas pressures"
+              },
+              "caption": "Check carrier gas pressure before every sequence."
+            },
+            {
+              "media": {
+                "kind": "url",
+                "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'%3E%3Crect width='1200' height='600' fill='%23D8DEE7'/%3E%3Ctext x='600' y='300' fill='%233C4654' font-family='Arial' font-size='40' text-anchor='middle' dominant-baseline='middle'%3EStep%202%20%E2%80%94%20inspect%20the%20septum%3C/text%3E%3C/svg%3E",
+                "alt": "Placeholder: inspecting the septum"
+              },
+              "caption": "Inspect and replace the septum on schedule."
+            },
+            {
+              "media": {
+                "kind": "url",
+                "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='600'%3E%3Crect width='1200' height='600' fill='%23DCE7DF'/%3E%3Ctext x='600' y='300' fill='%23345247' font-family='Arial' font-size='40' text-anchor='middle' dominant-baseline='middle'%3EStep%203%20%E2%80%94%20run%20a%20blank%3C/text%3E%3C/svg%3E",
+                "alt": "Placeholder: running a blank"
+              },
+              "caption": "Run a blank to confirm a clean baseline."
+            }
+          ]
+        },
+        {
+          "id": "l4-startup",
+          "type": "list",
+          "style": "numbered",
+          "items": [
+            "Confirm carrier gas supply and check for leaks at the injector.",
+            "Verify the oven programme matches the method you intend to run.",
+            "Run a solvent blank and inspect the baseline.",
+            "Run a check standard and confirm retention times are within tolerance.",
+            "Only then start your sample sequence."
+          ]
+        },
+        {
+          "id": "l4-space",
+          "type": "divider",
+          "style": "space"
+        },
+        {
+          "id": "l4-gate",
+          "type": "continueGate",
+          "label": "I'm ready for the check"
+        },
+        {
+          "id": "l4-kc-mr",
+          "type": "knowledgeCheck",
+          "question": {
+            "id": "l4-kc-mr-q",
+            "kind": "multipleResponse",
+            "prompt": "Which of the following are sensible checks before starting a sample sequence?",
+            "choices": [
+              {
+                "id": "a",
+                "text": "Run a solvent blank and inspect the baseline"
+              },
+              {
+                "id": "b",
+                "text": "Confirm the oven programme matches the method"
+              },
+              {
+                "id": "c",
+                "text": "Increase the injection volume to get bigger peaks"
+              },
+              {
+                "id": "d",
+                "text": "Run a check standard and confirm retention times"
+              }
+            ],
+            "correctChoiceIds": [
+              "a",
+              "b",
+              "d"
+            ]
+          },
+          "feedbackCorrect": "Correct — blank, programme check, and check standard are all part of a sound start-up routine.",
+          "feedbackIncorrect": "Almost — but increasing the injection volume is not a routine check; it risks overloading the column and distorting peaks."
+        },
+        {
+          "id": "l4-kc-fill",
+          "type": "knowledgeCheck",
+          "question": {
+            "id": "l4-kc-fill-q",
+            "kind": "fillIn",
+            "prompt": "The time a compound takes to travel from injection to the detector is called its __________ time.",
+            "acceptableAnswers": [
+              "retention",
+              "retention time"
+            ]
+          },
+          "feedbackCorrect": "Correct — retention time is the fingerprint that lets you recognise a compound run after run.",
+          "feedbackIncorrect": "The answer we were looking for is <strong>retention</strong> — the retention time is a compound's journey time through the column."
+        },
+        {
+          "id": "l4-embed",
+          "type": "embed",
+          "url": "https://www.openstreetmap.org/export/embed.html?bbox=-2.6485%2C51.4340%2C-2.5065%2C51.5010&layer=mapnik",
+          "height": 380
+        }
+      ]
+    },
+    {
+      "id": "lesson-quiz",
+      "title": "Check your knowledge",
+      "icon": "clipboard",
+      "blocks": [
+        {
+          "id": "l5-intro",
+          "type": "paragraph",
+          "html": "<p>Time to put it together. This short quiz covers everything in the course. The pass mark is <strong>75%</strong>, and you can retake it as many times as you need.</p>"
+        },
+        {
+          "id": "l5-quiz",
+          "type": "quiz",
+          "title": "Gas chromatography essentials",
+          "usesCourseQuizSettings": true,
+          "questions": [
+            {
+              "id": "q1",
+              "kind": "multipleChoice",
+              "prompt": "What property of the instrument makes a compound's retention time reproducible from run to run?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Keeping the method conditions — temperature programme, flow, and column — the same"
+                },
+                {
+                  "id": "b",
+                  "text": "Using a larger injection volume"
+                },
+                {
+                  "id": "c",
+                  "text": "Replacing the detector before every sequence"
+                },
+                {
+                  "id": "d",
+                  "text": "Running samples only in the morning"
+                }
+              ],
+              "correctChoiceId": "a",
+              "feedbackCorrect": "Right — retention time is only reproducible when the method conditions are held constant.",
+              "feedbackIncorrect": "Retention time depends on method conditions: hold the temperature programme, flow rate, and column constant and it becomes a reliable fingerprint."
+            },
+            {
+              "id": "q2",
+              "kind": "multipleResponse",
+              "prompt": "Which of these are components of a gas chromatograph?",
+              "choices": [
+                {
+                  "id": "a",
+                  "text": "Injector"
+                },
+                {
+                  "id": "b",
+                  "text": "Column oven"
+                },
+                {
+                  "id": "c",
+                  "text": "Nebuliser"
+                },
+                {
+                  "id": "d",
+                  "text": "Detector"
+                }
+              ],
+              "correctChoiceIds": [
+                "a",
+                "b",
+                "d"
+              ],
+              "feedbackCorrect": "Correct — injector, oven, and detector. A nebuliser belongs to other techniques, not GC.",
+              "feedbackIncorrect": "The GC chain is injector → column (in its oven) → detector. A nebuliser is not part of a gas chromatograph."
+            },
+            {
+              "id": "q3",
+              "kind": "fillIn",
+              "prompt": "The inert gas that carries the sample through the column is called the __________ gas.",
+              "acceptableAnswers": [
+                "carrier"
+              ],
+              "feedbackCorrect": "Correct — the carrier gas is the mobile phase.",
+              "feedbackIncorrect": "The answer is <strong>carrier</strong> — the carrier gas is GC's mobile phase."
+            },
+            {
+              "id": "q4",
+              "kind": "matching",
+              "prompt": "Match each term to its meaning.",
+              "pairs": [
+                {
+                  "id": "m1",
+                  "left": "Mobile phase",
+                  "right": "The inert gas that moves the sample along"
+                },
+                {
+                  "id": "m2",
+                  "left": "Stationary phase",
+                  "right": "The film coated inside the column"
+                },
+                {
+                  "id": "m3",
+                  "left": "Retention time",
+                  "right": "A compound's journey time from injection to detection"
+                },
+                {
+                  "id": "m4",
+                  "left": "Chromatogram",
+                  "right": "The plot of detector signal against time"
+                }
+              ],
+              "feedbackCorrect": "Excellent — all four matched correctly.",
+              "feedbackIncorrect": "Review lesson 2: the mobile phase moves, the stationary phase stays, retention time is the journey time, and the chromatogram is the resulting plot."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

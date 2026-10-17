@@ -1,0 +1,1275 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asset Risk Register (synthetic demo)</title>
+<style>
+:root {
+  /* Site palette: one accent, dark ink, warm neutrals */
+  --brand: #0B6E69; --ink: #13201F; --accent: #5FC3B9; --dark-grey: #4A5559;
+  --light-grey: #D9D3C7; --midnight: #1B2428; --sage: #4F7F7B; --celadon: #8FC1BA;
+  --wheat: #E3B85C; --cement: #646966; --celadon-tint: #D6ECE8; --cement-tint: #E2DED6;
+  /* Risk and tier semantics */
+  --high: #D2663F; --medium: #E3B85C; --low: #8FC1BA;
+  --t-now: #D2663F; --t-soon: #E3B85C; --t-plan: #3E74A0; --t-none: #D9D3C7;
+  /* Type: one system typeface */
+  --serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, "Cascadia Mono", Consolas, "Courier New", monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body { background: var(--ink); color: #fff; font-family: var(--sans); -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+
+/* ---------- Act 1: film ---------- */
+.film { position: fixed; inset: 0; overflow: hidden; background: var(--ink); }
+.stage { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+#dots { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+.scene { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.scene.live { pointer-events: auto; }
+.abs { position: absolute; }
+.serif { font-family: var(--serif); font-weight: 400; letter-spacing: 0; line-height: 1; }
+.mono { font-family: var(--mono); text-transform: uppercase; color: var(--accent); font-size: 22px; letter-spacing: 0; }
+.h1 { font-size: 72px; }
+.num { font-family: var(--sans); font-weight: 600; font-variant-numeric: tabular-nums; line-height: .9; }
+.body { font-size: 26px; line-height: 1.2; color: var(--light-grey); }
+.muted { color: var(--light-grey); }
+.small { font-size: 20px; line-height: 1.25; color: var(--light-grey); }
+
+/* scene 1 */
+.title-xl { font-size: 150px; letter-spacing: -0.005em; line-height: .95; }
+.los { height: 10px; background: var(--celadon); transform-origin: left center; }
+
+/* scene 2 legend */
+.legend-row { display: flex; align-items: baseline; gap: 18px; font-size: 32px; }
+.legend-row .sw { width: 18px; height: 18px; border-radius: 50%; transform: translateY(-2px); }
+.legend-row .n { font-weight: 600; font-variant-numeric: tabular-nums; min-width: 110px; }
+
+/* scene 3 */
+.w-row .lab { font-size: 34px; font-weight: 500; }
+.w-row .cap { font-size: 22px; color: var(--light-grey); margin-top: 6px; }
+.w-bar { height: 40px; background: var(--celadon); transform-origin: left center; }
+.w-pct { font-size: 44px; }
+.band { height: 56px; transform-origin: left center; }
+.band-lab { font-size: 22px; color: var(--light-grey); }
+.thresh { width: 4px; height: 120px; background: #fff; transform-origin: center bottom; }
+
+/* scene 4 */
+.tower-lab { width: 150px; text-align: center; font-size: 20px; line-height: 1.1; color: var(--light-grey); }
+.tower-lab b { display: block; margin-top: 6px; font-size: 22px; font-weight: 600; color: var(--high); }
+.tower-lab b.zero { color: var(--cement); font-weight: 400; }
+
+/* scene 5 cards */
+.hcard { width: 870px; height: 100px; background: rgba(255,255,255,.05); border-left: 5px solid var(--high);
+  display: grid; grid-template-columns: 70px 1fr 120px; align-items: center; padding: 0 24px 0 18px; }
+.hcard .rk { font-family: var(--mono); color: var(--accent); font-size: 22px; }
+.hcard .nm { font-size: 28px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hcard .meta { font-size: 20px; color: var(--light-grey); margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.hcard .meta .id { font-family: var(--mono); font-size: 18px; color: var(--celadon); margin-right: 10px; }
+.hcard .sc { text-align: right; font-size: 48px; font-weight: 600; color: var(--high); font-variant-numeric: tabular-nums; }
+.hcard .sc small { display: block; font-size: 18px; font-weight: 400; color: var(--light-grey); letter-spacing: .04em; }
+
+/* scene 6 */
+.kpi .v { font-size: 76px; }
+.kpi .l { font-size: 22px; color: var(--light-grey); margin-top: 10px; width: 560px; line-height: 1.25; }
+.kpi .bar { width: 48px; height: 6px; margin-bottom: 16px; }
+.tier-lab { width: 260px; font-size: 22px; line-height: 1.2; color: var(--light-grey); }
+.tier-lab b { display: block; font-size: 30px; color: #fff; font-weight: 600; }
+.ph-col { width: 150px; }
+.ph-bar { position: absolute; left: 0; bottom: 0; width: 150px; display: flex; flex-direction: column-reverse; transform-origin: center bottom; }
+.ph-val { width: 150px; text-align: center; font-size: 28px; font-weight: 600; font-variant-numeric: tabular-nums; }
+.ph-yr { width: 150px; text-align: center; font-family: var(--mono); color: var(--accent); font-size: 22px; }
+.axis { height: 2px; background: var(--sage); }
+.cta { background: var(--accent); color: var(--brand); border: 0; padding: 22px 34px; font-size: 28px; font-weight: 600; cursor: pointer; }
+.cta:focus-visible, .ctl:focus-visible, .skip:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+/* film chrome */
+.skip { flex: none; height: 56px; background: transparent; border: 2px solid var(--sage); color: #fff;
+  font-size: 22px; padding: 0 22px; cursor: pointer; }
+.skip kbd { font-family: var(--mono); font-size: 16px; color: var(--accent); margin-left: 10px; }
+.controls { position: absolute; left: 60px; right: 60px; top: 990px; height: 56px; display: flex; align-items: center; gap: 28px; z-index: 5; }
+.ctl { width: 56px; height: 56px; border: 2px solid var(--sage); background: transparent; cursor: pointer; display: grid; place-items: center; flex: none; }
+.ctl svg { width: 22px; height: 22px; fill: #fff; }
+.track { position: relative; flex: 1; height: 56px; cursor: pointer; touch-action: none; }
+.track .slider { position: absolute; inset: 0; border-radius: 4px; }
+.track .slider:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.track .rail { position: absolute; left: 0; right: 0; top: 26px; height: 4px; background: rgba(202,209,211,.25); }
+.track .fill { position: absolute; left: 0; top: 26px; height: 4px; background: var(--accent); width: 0; }
+.track .sdot { position: absolute; top: 18px; width: 20px; height: 20px; margin-left: -10px; border-radius: 50%; border: 2px solid var(--sage);
+  background: var(--ink); cursor: pointer; padding: 0; }
+.track .sdot.on { border-color: var(--accent); background: var(--accent); }
+.track .sdot.done { border-color: var(--accent); }
+.tlabel { font-family: var(--mono); font-size: 20px; color: var(--light-grey); width: 150px; text-align: right; flex: none; }
+.logo { width: 52px; flex: none; color: #fff; display: block; }
+.logo svg { display: block; width: 100%; height: auto; fill: currentColor; }
+
+/* ---------- Act 2: explorer (light surface) ---------- */
+.explorer { min-height: 100%; background: #fff; color: var(--dark-grey); font-size: clamp(15px, .95vw, 19px); line-height: 1.35; }
+body.x-on { background: #fff; }
+.xw { max-width: 1800px; margin: 0 auto; padding: 0 clamp(16px, 3.125vw, 60px); }
+.explorer a { color: var(--brand); }
+.explorer h1, .explorer h2, .explorer h3, .explorer h4 { margin: 0; font-weight: 400; }
+.xh1 { font-family: var(--serif); color: var(--brand); font-size: clamp(34px, 3.2vw, 60px); line-height: 1; }
+.xh2 { font-family: var(--serif); color: var(--brand); font-size: clamp(24px, 1.9vw, 36px); line-height: 1.05; }
+.kick { font-family: var(--mono); text-transform: uppercase; font-size: .82em; color: var(--dark-grey); letter-spacing: 0; }
+.mono-d { font-family: var(--mono); font-size: .86em; color: var(--dark-grey); }
+.xnum { font-variant-numeric: tabular-nums; font-weight: 600; color: var(--ink); }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.explorer .small { font-size: .86em; line-height: 1.3; color: var(--dark-grey); }
+.explorer :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* header */
+.xh { position: sticky; top: 0; z-index: 20; background: #fff; border-bottom: 1px solid var(--light-grey); }
+.xh-top { display: flex; align-items: center; gap: 12px 28px; min-height: 68px; flex-wrap: wrap; }
+.xtitle { font-family: var(--serif); color: var(--brand); font-size: clamp(20px, 1.4vw, 26px); white-space: nowrap; }
+.xtitle span { font-family: var(--sans); color: var(--dark-grey); font-size: .7em; margin-left: 10px; }
+.tabs { display: flex; gap: 2px; }
+.tab { display: block; padding: 20px 14px 17px; border-bottom: 3px solid transparent; color: var(--dark-grey) !important; text-decoration: none; font-weight: 500; white-space: nowrap; }
+.tab:hover { color: var(--brand) !important; }
+.tab.on { border-color: var(--brand); color: var(--brand) !important; }
+.xh-right { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+.xlogo { width: 36px; color: var(--brand); display: block; }
+.xlogo svg { display: block; width: 100%; height: auto; fill: currentColor; }
+.lnk { background: none; border: 0; padding: 0; color: var(--brand); text-decoration: underline; cursor: pointer; font: inherit; }
+.xh-kpis { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 4px 0 14px; }
+.xh-kpis .tot { margin-right: 10px; }
+.xh-kpis .tot b { font-variant-numeric: tabular-nums; color: var(--ink); }
+.chip { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--light-grey); padding: 7px 14px; text-decoration: none; color: var(--dark-grey) !important; }
+.chip:hover { border-color: var(--brand); }
+.chip i, .sw-t { display: inline-block; width: 12px; height: 12px; flex: none; }
+.chip b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.bg-now { background: var(--t-now); } .bg-soon { background: var(--t-soon); } .bg-plan { background: var(--t-plan); } .bg-none { background: var(--t-none); }
+.bg-High { background: var(--high); } .bg-Medium { background: var(--medium); } .bg-Low { background: var(--low); }
+
+/* pills + badges */
+.pill { display: inline-block; min-width: 3.4em; text-align: center; padding: 3px 6px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--ink); }
+.pill.r-High { background: var(--high); } .pill.r-Medium { background: var(--medium); } .pill.r-Low { background: var(--celadon-tint); }
+.pill.big { font-size: 1.6em; padding: 6px 10px; }
+.hv { display: inline-block; font-size: .78em; font-weight: 600; color: #fff; background: var(--t-plan); padding: 1px 7px; margin-left: 8px; white-space: nowrap; vertical-align: 1px; }
+.assumed { font-size: .78em; color: var(--cement); margin-left: 6px; }
+
+/* estate view */
+.est { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); gap: 40px; padding: 32px 0 40px; align-items: start; }
+.est-h { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.ccard { display: block; border: 1px solid var(--light-grey); padding: 16px 18px; text-decoration: none; color: var(--dark-grey) !important; background: #fff; }
+.ccard:hover { border-color: var(--brand); box-shadow: inset 4px 0 0 var(--brand); }
+.cc-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.cc-name { font-size: 1.3em; font-weight: 500; color: var(--ink); margin: 2px 0 10px; }
+.cc-now { text-align: right; font-size: 1.45em; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1; }
+.cc-now small { display: block; font-size: .5em; font-weight: 400; color: var(--dark-grey); margin-top: 3px; }
+.mbar { display: flex; height: 10px; background: #f2f4f4; margin-bottom: 8px; }
+.mbar span { display: block; height: 100%; }
+.cc-leg { font-size: .88em; }
+.cc-tiers { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 8px; font-size: .9em; }
+.cc-tiers span { display: inline-flex; align-items: center; gap: 6px; }
+.cc-tiers b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.panel { position: sticky; top: 150px; border: 1px solid var(--light-grey); padding: 20px 22px; }
+.panel p { margin: 6px 0 12px; }
+.chart svg { display: block; width: 100%; height: auto; }
+.chart .seg { cursor: pointer; }
+.chart .seg:hover, .chart .seg:focus { stroke: var(--ink); stroke-width: 2; outline: none; }
+.legend { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 4px 16px; margin-top: 14px; font-size: .88em; }
+.legend a { display: flex; align-items: center; gap: 8px; color: var(--dark-grey) !important; text-decoration: none; }
+.legend a:hover { color: var(--brand) !important; text-decoration: underline; }
+.tip { position: fixed; z-index: 50; pointer-events: none; background: var(--ink); color: #fff; padding: 9px 12px; font-size: 15px; line-height: 1.35; max-width: 280px; }
+.tip b { color: var(--accent); font-weight: 600; }
+
+/* cost centre view */
+.cch { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(320px, 1fr); gap: 40px; padding: 30px 0 26px; border-bottom: 1px solid var(--light-grey); }
+.ccnav { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 14px; }
+.ccnav select, .filters select { font: inherit; color: var(--ink); padding: 7px 10px; border: 1px solid var(--light-grey); background: #fff; }
+.btn { font: inherit; border: 1px solid var(--brand); background: #fff; color: var(--brand); padding: 8px 14px; cursor: pointer; text-decoration: none; display: inline-block; }
+.btn:hover { background: #f2f6f4; }
+.btn.pri { background: var(--brand); color: #fff; }
+.btn.pri:hover { background: var(--ink); }
+.stats { margin: 12px 0 0; font-size: 1.05em; }
+.stats b { color: var(--ink); }
+.headline { font-size: 1.35em; color: var(--ink); margin: 14px 0 0; max-width: 46em; line-height: 1.25; }
+.side-k { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 16px; }
+.side-k div { border-top: 4px solid; padding-top: 8px; }
+.side-k b { display: block; font-size: 1.6em; color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1.05; }
+.side-k span { font-size: .85em; }
+.ph-mini { display: grid; grid-template-columns: 4.2em 1fr 5em; gap: 6px 10px; align-items: center; font-size: .9em; }
+.ph-mini .tr { height: 12px; background: #f2f4f4; display: flex; }
+.ph-mini .tr span { display: block; height: 100%; }
+.ph-mini .v { text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
+.recs-h { padding: 30px 0 6px; }
+.rec { margin: 18px 0 8px; border-top: 6px solid; }
+.rec.t-now { border-color: var(--t-now); } .rec.t-soon { border-color: var(--t-soon); } .rec.t-plan { border-color: var(--t-plan); } .rec.t-none { border-color: var(--t-none); }
+.rec > header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 24px; padding: 14px 0 10px; }
+.rec h3 { font-size: 1.45em; color: var(--ink); font-weight: 600; }
+.rec .rk { font-size: 1.15em; }
+.rec .rk b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.rec .rule { flex-basis: 100%; margin: 0; font-size: .92em; }
+.none-in { padding: 4px 0 14px; color: var(--cement); }
+.acards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-bottom: 14px; }
+.acard { border: 1px solid var(--light-grey); border-left: 5px solid var(--high); padding: 16px 18px; display: grid; gap: 12px; }
+.ac-top { display: flex; gap: 14px; align-items: flex-start; }
+.ac-top h4 { font-size: 1.12em; font-weight: 600; color: var(--ink); line-height: 1.2; }
+.ac-top p { margin: 4px 0 0; font-size: .88em; }
+.life-lab { display: flex; justify-content: space-between; gap: 10px; font-size: .9em; margin-bottom: 5px; }
+.life-lab b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.life-tr { position: relative; height: 14px; background: #eef1f1; }
+.life-tr .f { position: absolute; left: 0; top: 0; bottom: 0; background: var(--sage); }
+.life-tr .o { position: absolute; top: 0; bottom: 0; background: #AD2A2A; }
+.life-tr .m { position: absolute; top: -4px; bottom: -4px; width: 2px; background: var(--ink); }
+.life-sc { display: flex; justify-content: space-between; font-size: .75em; color: var(--cement); margin-top: 3px; position: relative; }
+.driver { margin: 0; font-size: .92em; }
+.ac-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px 14px; margin: 0; }
+.ac-stats dt { font-size: .78em; text-transform: uppercase; letter-spacing: .03em; color: var(--cement); }
+.ac-stats dd { margin: 2px 0 0; color: var(--ink); font-weight: 500; }
+.rows { border-top: 1px solid var(--light-grey); }
+.arow { display: grid; grid-template-columns: 4.4em 9.8em minmax(0, 1fr) 9.5em 7em; gap: 12px; align-items: center; padding: 9px 0; border-bottom: 1px solid #edf0f0; }
+.arow .an { min-width: 0; color: var(--ink); }
+.arow .an small { display: block; color: var(--dark-grey); font-size: .82em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.arow .atf, .arow .ab { text-align: right; font-variant-numeric: tabular-nums; }
+.arow .ab { color: var(--ink); font-weight: 600; }
+.arow.hvrow { background: linear-gradient(90deg, rgba(62,124,166,.08), transparent 60%); }
+details.more { margin: 6px 0 10px; }
+details.more > summary { cursor: pointer; color: var(--brand); padding: 10px 0; font-weight: 500; }
+.rollup { display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline; padding: 14px 0 6px; }
+
+/* replacement list */
+.lst { padding: 28px 0 40px; }
+.filters { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: end; margin: 18px 0 14px; }
+.filters label { display: grid; gap: 4px; font-size: .85em; }
+.lsum { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; margin-bottom: 10px; }
+.lsum b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.tbl-wrap { overflow-x: auto; border-top: 2px solid var(--brand); }
+table.rl { width: 100%; border-collapse: collapse; min-width: 880px; }
+.rl th { text-align: left; font-weight: 600; color: var(--ink); padding: 10px 10px; border-bottom: 1px solid var(--light-grey); white-space: nowrap; position: sticky; top: 0; background: #fff; }
+.rl th button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+.rl th button::after { content: " \2195"; color: var(--light-grey); }
+.rl th[aria-sort=ascending] button::after { content: " \2191"; color: var(--brand); }
+.rl th[aria-sort=descending] button::after { content: " \2193"; color: var(--brand); }
+.rl td { padding: 9px 10px; border-bottom: 1px solid #edf0f0; vertical-align: top; }
+.rl td.n { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.rl th.n { text-align: right; }
+.rl .nm { color: var(--ink); }
+.rl .nm small { display: block; color: var(--dark-grey); }
+.tierlab { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+
+/* footer + methodology */
+.xf { border-top: 1px solid var(--light-grey); padding: 16px 0 30px; font-size: .88em; display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; }
+dialog.method { max-width: 860px; width: calc(100% - 32px); border: 0; padding: 0; color: var(--dark-grey); font-size: 17px; line-height: 1.4; }
+dialog.method::backdrop { background: rgba(1, 42, 45, .6); }
+.method-in { padding: 28px 32px 30px; max-height: 86vh; overflow: auto; }
+.method h2 { margin-bottom: 10px; }
+.method h3 { font-size: 1.05em; font-weight: 600; color: var(--ink); margin: 20px 0 6px; }
+.method .verb { border-left: 4px solid var(--brand); padding: 8px 14px; background: #f4f7f6; margin: 10px 0; }
+.method table { border-collapse: collapse; width: 100%; font-size: .95em; }
+.method td, .method th { text-align: left; padding: 5px 8px; border-bottom: 1px solid #edf0f0; }
+.method ul { margin: 6px 0; padding-left: 20px; }
+.method-close { float: right; }
+
+@media (max-width: 1280px) {
+  .acards { grid-template-columns: 1fr; }
+}
+@media (max-width: 1100px) {
+  .est, .cch { grid-template-columns: 1fr; }
+  .panel { position: static; }
+}
+@media (max-width: 900px) {
+  .xh { position: static; }
+  .panel { top: 0; }
+}
+@media (max-width: 760px) {
+  .cards { grid-template-columns: 1fr; }
+  .arow { grid-template-columns: 4em minmax(0, 1fr) 6.5em; }
+  .arow .mono-d, .arow .atf { display: none; }
+  .ac-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .xh-right .lnk { display: none; }
+}
+</style>
+<script src="gsap.min.js"></script>
+</head>
+<body>
+
+<div class="film" id="film" role="region" aria-label="Estate risk film">
+  <div class="stage" id="stage">
+    <canvas id="dots" aria-hidden="true"></canvas>
+    <div id="scenes"></div>
+    <div class="controls" id="controls">
+      <button class="ctl" id="play" type="button" aria-label="Pause"></button>
+      <div class="track" id="track">
+        <div class="slider" id="slider" role="slider" aria-label="Film position" tabindex="0" aria-valuemin="0" aria-valuenow="0" aria-valuetext="0 seconds"></div>
+        <div class="rail"></div><div class="fill" id="fill"></div>
+      </div>
+      <div class="tlabel" id="tlabel">0:00 / 0:00</div>
+      <button class="skip" id="skip" type="button">Skip to explorer<kbd>ESC</kbd></button>
+      <span class="logo" aria-label="Mike Davies"><svg viewBox="13 19 38 26" fill-rule="evenodd" role="img" aria-label="MD monogram"><path d="M13 45V19h5.2L22 27.5 25.8 19H31v26h-5V29l-2.4 5.5h-3.2L18 29v16z"/><path d="M35 19h6.5C47.5 19 51 23.8 51 32s-3.5 13-9.5 13H35zm5 5v16h1.3c3.1 0 4.7-2.6 4.7-8s-1.6-8-4.7-8z"/></svg></span>
+    </div>
+  </div>
+</div>
+
+<div class="explorer" id="explorer" hidden>
+  <header class="xh">
+    <div class="xw">
+      <div class="xh-top">
+        <div class="xtitle">Asset Risk Register<span id="xclient"></span></div>
+        <nav class="tabs" aria-label="Explorer views">
+          <a class="tab" data-tab="estate" href="#explorer/estate">Estate</a>
+          <a class="tab" data-tab="cc" id="tab-cc" href="#explorer/cc">Cost centre</a>
+          <a class="tab" data-tab="list" href="#explorer/list">Replacement list</a>
+        </nav>
+        <div class="xh-right">
+          <button type="button" class="lnk" id="replay">Replay film</button>
+          <span class="xlogo" id="xlogo"></span>
+        </div>
+      </div>
+      <div class="xh-kpis" id="xkpis"></div>
+    </div>
+  </header>
+  <main class="xw" id="xview"></main>
+  <footer class="xw"><div class="xf" id="xfoot"></div></footer>
+  <dialog class="method" id="method" aria-labelledby="method-title"><div class="method-in" id="method-in"></div></dialog>
+  <div class="tip" id="tip" role="tooltip" hidden></div>
+</div>
+
+<script id="risk-data" type="application/json">/*__RISK_DATA__*/</script>
+<script>
+(function () {
+  'use strict';
+
+  /* ================= Data ================= */
+  var D = JSON.parse(document.getElementById('risk-data').textContent);
+  var M = D.meta, E = D.estate, CC = D.cost_centres, A = D.assets, HR = D.high_risk;
+  var TIERS = ['now', 'soon', 'plan'];
+  var YEARS = M.budget_years;
+  var R100 = M.display_round_to || 100;
+
+  var fmt = {
+    int: function (n) { return Math.round(n).toLocaleString('en-GB'); },
+    r100: function (x) { return Math.round(x / R100) * R100; },
+    money: function (x) { return '£' + fmt.r100(x).toLocaleString('en-GB'); },
+    short: function (x) {
+      x = fmt.r100(x);
+      if (x >= 1e6) return '£' + (x / 1e6).toFixed(1) + 'm';
+      if (x >= 1e4) return '£' + Math.round(x / 1e3) + 'k';
+      return '£' + x.toLocaleString('en-GB');
+    },
+    score: function (s) { return s.toFixed(2); },
+    pct: function (x) { return Math.round(x) + '%'; },
+    clock: function (t) { t = Math.max(0, Math.round(t)); return Math.floor(t / 60) + ':' + ('0' + t % 60).slice(-2); }
+  };
+  function sum(arr, f) { var s = 0; for (var i = 0; i < arr.length; i++) s += f(arr[i]); return s; }
+  function plural(n, one, many) { return n === 1 ? one : (many || one + 's'); }
+  var byCode = {}; CC.forEach(function (c) { byCode[c.code] = c; });
+
+  /* Reconciliation: estate totals vs cost centres vs asset rows */
+  (function reconcile() {
+    var rows = [];
+    function chk(label, estate, centres, assets) {
+      var ok = Math.abs(estate - centres) < 0.5 && Math.abs(estate - assets) < 0.5;
+      rows.push({ check: label, estate: estate, sum_cost_centres: centres, sum_assets: assets, ok: ok ? '✓' : '✗ MISMATCH' });
+    }
+    chk('Assets', E.assets, sum(CC, function (c) { return c.assets; }), A.length);
+    ['High', 'Medium', 'Low'].forEach(function (r) {
+      chk('Rating ' + r, E.by_rating[r], sum(CC, function (c) { return c.by_rating[r]; }), A.filter(function (a) { return a.rating === r; }).length);
+    });
+    TIERS.concat('none').forEach(function (t) {
+      chk('Tier ' + t + ' count', E.by_tier[t], sum(CC, function (c) { return c.by_tier[t]; }), A.filter(function (a) { return a.tier === t; }).length);
+      chk('Tier ' + t + ' £', E.budget_by_tier[t], sum(CC, function (c) { return c.budget_by_tier[t]; }), sum(A.filter(function (a) { return a.tier === t; }), function (a) { return a.budget; }));
+    });
+    YEARS.forEach(function (y) {
+      chk('Phased ' + y.label + ' £', E.phased[y.key], sum(CC, function (c) { return c.phased[y.key]; }),
+        sum(A.filter(function (a) { return a.budget_year === y.key; }), function (a) { return a.budget; }));
+    });
+    chk('High-risk list', E.by_rating.High, HR.length, A.filter(function (a) { return a.rating === 'High'; }).length);
+    console.info('Asset Risk Register — reconciliation (source: ' + M.source + ', data as of ' + M.data_as_of + ')');
+    console.table(rows);
+    if (rows.some(function (r) { return r.ok !== '✓'; })) console.error('Reconciliation failed: totals do not agree.');
+  })();
+
+  /* ================= DOM helpers ================= */
+  var STAGE_W = 1920, STAGE_H = 1080;
+  function h(tag, attrs, html) {
+    var el = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      if (k === 'style') el.style.cssText = attrs[k];
+      else if (k === 'cls') el.className = attrs[k];
+      else el.setAttribute(k, attrs[k]);
+    }
+    if (html != null) el.innerHTML = html;
+    return el;
+  }
+  function at(el, x, y, w) {
+    el.classList.add('abs'); el.style.left = x + 'px'; el.style.top = y + 'px';
+    if (w) el.style.width = w + 'px';
+    return el;
+  }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  /* ================= Timeline model =================
+     Every animated value is a tween with a start time, so the film is a pure
+     function of t: scrubbable and seekable. DOM tweens run on a GSAP master
+     timeline (or Web Animations API if GSAP is unavailable). Numeric values
+     (count-ups, dot field) are evaluated from the same tween list each frame. */
+  var DOMT = [], OBJT = [], COUNTERS = [];
+  var EASE = {
+    out: { fn: function (p) { return 1 - Math.pow(1 - p, 3); }, gsap: 'power3.out', css: 'cubic-bezier(.215,.61,.355,1)' },
+    inOut: { fn: function (p) { return p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }, gsap: 'power3.inOut', css: 'cubic-bezier(.645,.045,.355,1)' },
+    'in': { fn: function (p) { return p * p * p; }, gsap: 'power3.in', css: 'cubic-bezier(.55,.055,.675,.19)' },
+    linear: { fn: function (p) { return p; }, gsap: 'none', css: 'linear' }
+  };
+  function tw(el, t0, dur, from, to, ease) { DOMT.push({ el: el, t0: t0, dur: dur, from: from, to: to, ease: ease || 'out' }); }
+  function enter(el, t0, dur, dy) { tw(el, t0, dur || .8, { o: 0, y: dy == null ? 24 : dy }, { o: 1, y: 0 }, 'out'); }
+  function fadeOut(el, t0, dur) { tw(el, t0, dur || .5, { o: 1 }, { o: 0 }, 'inOut'); }
+  function val(obj, key, t0, dur, from, to, ease) { OBJT.push({ obj: obj, key: key, t0: t0, dur: dur, from: from, to: to, ease: ease || 'out' }); }
+  function counter(el, t0, dur, to, f, from) {
+    var o = { v: from || 0 };
+    if (el.hasAttribute('data-source')) el.setAttribute('data-value', to);
+    val(o, 'v', t0, dur, from || 0, to, 'out');
+    COUNTERS.push({ o: o, el: el, f: f, last: null });
+    return o;
+  }
+
+  /* ================= Scenes ================= */
+  var SCENES = [
+    { id: 's1', name: 'Title', dur: 6 },
+    { id: 's2', name: 'The estate', dur: 10 },
+    { id: 's3', name: 'How risk is scored', dur: 12 },
+    { id: 's4', name: 'Where the risk sits', dur: 14 },
+    { id: 's5', name: 'The High-risk assets', dur: 18 },
+    { id: 's6', name: 'What to do', dur: 18 }
+  ];
+  var tcur = 0;
+  SCENES.forEach(function (s) { s.t0 = tcur; tcur += s.dur; s.t1 = tcur; });
+  var TOTAL = tcur;
+  var host = document.getElementById('scenes');
+  SCENES.forEach(function (s, i) {
+    s.el = h('section', { cls: 'scene', id: s.id, 'aria-label': s.name });
+    host.appendChild(s.el);
+    // scene container in/out; the last scene stays up at the end
+    tw(s.el, s.t0, i === 0 ? .01 : .4, { o: 0 }, { o: 1 }, 'out');
+    if (i < SCENES.length - 1) fadeOut(s.el, s.t1 - .6, .6);
+  });
+  function S(i) { return SCENES[i]; }
+  function add(i, el) { SCENES[i].el.appendChild(el); return el; }
+
+  /* Dot-field state, tweened like everything else */
+  var F = { alpha: 0, appear: 0, colour: 0, lowDim: 0, toCC: 0, focus: 0, toTier: 0, noneOut: 0 };
+
+  /* ---- Scene 1: title ---- */
+  (function () {
+    var t = S(0).t0;
+    var k = add(0, at(h('div', { cls: 'mono' }, 'Synthetic demo · invented data'), 60, 330));
+    var t1 = add(0, at(h('div', { cls: 'serif title-xl' }, 'Asset Risk Register'), 54, 380, 1500));
+    var los = add(0, at(h('div', { cls: 'los' }), 60, 560, 520));
+    var sub = add(0, at(h('div', { style: 'font-size:46px;font-weight:500' }, 'Prepared for ' + esc(M.client)), 60, 610));
+    var dt = add(0, at(h('div', { cls: 'mono', 'data-source': 'meta.data_as_of' }, 'Data as of ' + esc(M.data_as_of)), 60, 690));
+    enter(k, t + .3, 1); enter(t1, t + .6, 1.2, 30);
+    tw(los, t + 1.6, 1.2, { sx: 0 }, { sx: 1 }, 'out');
+    enter(sub, t + 2.4, 1); enter(dt, t + 2.9, 1);
+  })();
+
+  /* ---- Scene 2: the estate ---- */
+  var s2caption;
+  (function () {
+    var t = S(1).t0;
+    var kick = add(1, at(h('div', { cls: 'mono' }, 'The estate'), 60, 210));
+    var n1 = add(1, at(h('div', { cls: 'num', style: 'font-size:220px', 'data-source': 'estate.assets' }, '0'), 52, 250));
+    var l1 = add(1, at(h('div', { style: 'font-size:36px' }, 'assets assessed'), 60, 460));
+    var n2 = add(1, at(h('div', { cls: 'num', style: 'font-size:120px', 'data-source': 'estate.cost_centres' }, '0'), 56, 540));
+    var l2 = add(1, at(h('div', { style: 'font-size:36px' }, 'cost centres (GL accounts)'), 60, 660));
+    enter(kick, t + .2, .8);
+    enter(n1, t + .4, .8, 16); counter(n1, t + .4, 2.4, E.assets, fmt.int); enter(l1, t + .8, .8);
+    enter(n2, t + 2.6, .8, 16); counter(n2, t + 2.6, 1.2, E.cost_centres, fmt.int); enter(l2, t + 2.9, .8);
+
+    var leg = add(1, at(h('div'), 60, 760, 600));
+    [['High', '--high'], ['Medium', '--medium'], ['Low', '--low']].forEach(function (r, i) {
+      var row = h('div', { cls: 'legend-row', style: 'margin-bottom:14px' },
+        '<span class="sw" style="background:var(' + r[1] + ')"></span><span class="n" data-source="estate.by_rating.' + r[0] + '">0</span><span>' + r[0] + ' risk</span>');
+      leg.appendChild(row);
+      enter(row, t + 4.6 + i * .35, .7, 12);
+      counter(row.querySelector('.n'), t + 4.6 + i * .35, 1.6, E.by_rating[r[0]], fmt.int);
+    });
+    // Dots: appear grey, then take their rating colour, then Low steps back
+    val(F, 'alpha', t, .01, 0, 1, 'linear');
+    val(F, 'appear', t + .8, 3.4, 0, 1, 'linear');
+    val(F, 'colour', t + 4.4, 2.2, 0, 1, 'linear');
+    val(F, 'lowDim', t + 7.0, 1.4, 0, 1, 'inOut');
+
+    var mh = E.by_rating.High + E.by_rating.Medium;
+    s2caption = add(1, at(h('div', { cls: 'body', 'data-source': 'estate.by_rating.High + estate.by_rating.Medium' },
+      '<b style="color:#fff">' + fmt.int(mh) + ' assets</b> carry Medium or High risk. They stay in focus.'), 830, 800, 980));
+    enter(s2caption, t + 7.4, .9, 14);
+    if (E.obs_assumed) {
+      var note = add(1, at(h('div', { cls: 'small', 'data-source': 'estate.obs_assumed' },
+        'Includes ' + fmt.int(E.obs_assumed) + ' assets with no obsolescence record, scored 1 (“no recorded support concern”) per the methodology.'), 830, 900, 980));
+      enter(note, t + 8.0, .8, 0);
+    }
+  })();
+
+  /* ---- Scene 3: how risk is scored ---- */
+  (function () {
+    var t = S(2).t0;
+    val(F, 'alpha', t + .0, .6, 1, 0, 'inOut');
+    var ti = add(2, at(h('div', { cls: 'serif h1' }, 'How Risk Is Scored'), 60, 70));
+    var no = add(2, at(h('div', { cls: 'body' }, esc(M.methodology.weighting_note)), 60, 165, 1500));
+    enter(ti, t + .4, 1); enter(no, t + 1.0, 1, 12);
+    var wkeys = ['criticality', 'age', 'breakdowns', 'obsolescence'];
+    var BAR_X = 640, PX_PER_PCT = 30;  // 30% -> 900px
+    M.methodology.components.forEach(function (c, i) {
+      var y = 290 + i * 118, ts = t + 1.6 + i * 1.5;
+      var w = M.weights[wkeys[i]] * 100;
+      var lab = add(2, at(h('div', { cls: 'w-row' }, '<div class="lab">' + esc(c.name) + '</div><div class="cap">' + esc(c.captures) + '</div>'), 60, y - 8, 560));
+      var bar = add(2, at(h('div', { cls: 'w-bar', 'data-source': 'meta.weights.' + wkeys[i] }), BAR_X, y, w * PX_PER_PCT));
+      var pct = add(2, at(h('div', { cls: 'num w-pct', 'data-source': 'meta.weights.' + wkeys[i] }, '0%'), BAR_X + w * PX_PER_PCT + 24, y - 2));
+      enter(lab, ts, .8, 12);
+      tw(bar, ts + .2, 1.2, { sx: 0 }, { sx: 1 }, 'out');
+      enter(pct, ts + .3, .6, 0); counter(pct, ts + .2, 1.2, w, fmt.pct);
+    });
+    // Score scale 1..5 with rating bands, then the High threshold draws in
+    var SX = 640, SW = 1080, y0 = 790, th = M.thresholds;
+    function sx(v) { return SX + (v - 1) / 4 * SW; }
+    var ts = t + 7.8;
+    var bands = [['Low < ' + th.Medium.toFixed(1), 1, th.Medium, '--low'], ['Medium ' + th.Medium.toFixed(1) + '–' + (th.High - .01).toFixed(2), th.Medium, th.High, '--medium'], ['High ≥ ' + th.High.toFixed(1), th.High, 5, '--high']];
+    var sl = add(2, at(h('div', { cls: 'w-row' }, '<div class="lab">Overall risk score</div><div class="cap">Weighted on a common 1–5 scale</div>'), 60, y0 - 4, 560));
+    enter(sl, ts, .8, 12);
+    bands.forEach(function (b, i) {
+      var el = add(2, at(h('div', { cls: 'band', style: 'background:var(' + b[3] + ');opacity:.9', 'data-source': 'meta.thresholds' }), sx(b[1]), y0, sx(b[2]) - sx(b[1]) - 4));
+      tw(el, ts + .2 + i * .5, .8, { sx: 0 }, { sx: 1 }, 'out');
+      var bl = add(2, at(h('div', { cls: 'band-lab' }, b[0]), sx(b[1]) + (b[1] === th.High ? 16 : 0), y0 + 70));
+      enter(bl, ts + .5 + i * .5, .6, 8);
+    });
+    var line = add(2, at(h('div', { cls: 'thresh' }), sx(th.High) - 2, y0 - 54));
+    tw(line, ts + 2.2, 1.2, { sy: 0 }, { sy: 1 }, 'out');
+    var tl = add(2, at(h('div', { style: 'font-size:26px;font-weight:600', 'data-source': 'meta.thresholds.High' }, 'High risk threshold ' + th.High.toFixed(1)), sx(th.High) + 16, y0 - 58));
+    enter(tl, ts + 3.0, .7, 8);
+  })();
+
+  /* ---- Scene 4: where the risk sits ---- */
+  var TOWER = { w: 12, gap: 10, base: 850, colW: 150 };
+  var focusCodes = CC.slice().sort(function (a, b) { return b.by_rating.High - a.by_rating.High || b.by_rating.Medium - a.by_rating.Medium; }).slice(0, 2).map(function (c) { return c.code; });
+  (function () {
+    var t = S(3).t0;
+    val(F, 'alpha', t + .2, .8, 0, 1, 'out');
+    val(F, 'toCC', t + 1.0, 4.4, 0, 1, 'linear');
+    var ti = add(3, at(h('div', { cls: 'serif h1' }, 'Where The Risk Sits'), 60, 60));
+    enter(ti, t + .4, 1);
+    CC.forEach(function (c, k) {
+      var cx = 60 + k * TOWER.colW + TOWER.colW / 2;
+      var hi = c.by_rating.High;
+      var lab = add(3, at(h('div', { cls: 'tower-lab' }, esc(c.name) + '<b class="' + (hi ? '' : 'zero') + '" data-source="cost_centres[' + c.code + '].by_rating.High">' + hi + ' High</b>'), cx - 75, TOWER.base + 18));
+      enter(lab, t + 5.4 + k * .08, .6, 8);
+    });
+    var f = focusCodes.map(function (c) { return byCode[c]; });
+    var cap = f[0].name + ' holds <b style="color:var(--high)">' + f[0].by_rating.High + ' of the ' + E.by_rating.High + '</b> High-risk assets' +
+      (f[1].by_rating.High ? '; ' + f[1].name + ' holds <b style="color:var(--high)">' + f[1].by_rating.High + '</b>.' : '.') +
+      ' Together they account for ' + fmt.int(f[0].by_rating.Medium + f[1].by_rating.Medium) + ' of the ' + fmt.int(E.by_rating.Medium) + ' Medium-risk assets.';
+    var capEl = add(3, at(h('div', { cls: 'body', style: 'font-size:30px;color:#fff', 'data-source': 'cost_centres[].by_rating (top two by High)' }, cap), 60, 160, 1500));
+    val(F, 'focus', t + 7.2, 1.6, 0, 1, 'inOut');
+    enter(capEl, t + 7.8, 1, 12);
+  })();
+
+  /* ---- Scene 5: the High-risk assets ---- */
+  function factorText(a, key) {
+    if (key === 'criticality') return 'criticality ' + a.criticality + '/5';
+    if (key === 'age') return Math.round(a.life_pct * 100) + '% of life used';
+    if (key === 'breakdowns') return a.breakdowns + ' ' + plural(a.breakdowns, 'breakdown') + '/12mo';
+    return a.obsolescence.toLowerCase();
+  }
+  (function () {
+    var t = S(4).t0;
+    val(F, 'alpha', t, .8, 1, 0, 'inOut');
+    val(F, 'focus', t + .8, .1, 1, 0, 'linear');
+    var n = HR.length;
+    var ti = add(4, at(h('div', { cls: 'serif h1', 'data-source': 'high_risk.length' }, 'The ' + n + ' High-Risk Assets'), 60, 60));
+    var allCrit = HR.every(function (a) { return a.criticality === 5; });
+    var past = HR.filter(function (a) { return a.life_pct > 1; }).length;
+    var unsup = HR.filter(function (a) { return a.obs_score >= 4; }).length;
+    var sub = (allCrit ? 'All ' + n + ' are business-critical. ' : '') + past + ' are past their expected life; ' + unsup + ' are out of, or nearing the end of, manufacturer support.';
+    var se = add(4, at(h('div', { cls: 'body', 'data-source': 'high_risk[] criticality, life_pct, obs_score' }, sub), 60, 155, 1150));
+    enter(ti, t + .6, 1); enter(se, t + 1.2, 1, 10);
+    var expo = sum(HR, function (a) { return a.budget; });
+    var ev = add(4, at(h('div', { cls: 'num', style: 'font-size:84px;text-align:right;color:var(--high)', 'data-source': 'sum(high_risk[].budget)' }, '£0'), 1260, 52, 600));
+    var el = add(4, at(h('div', { cls: 'body', style: 'text-align:right' }, 'High-risk replacement exposure'), 1260, 150, 600));
+    enter(ev, t + 1.4, .8, 0); enter(el, t + 1.4, .8, 0);
+    var tc = t + 1.8, step = Math.min(.9, 9.6 / n);
+    counter(ev, tc, step * n + .6, expo, fmt.money);
+    var rows = Math.ceil(n / 2);
+    HR.forEach(function (a, i) {
+      var col = i < rows ? 0 : 1, row = i < rows ? i : i - rows;
+      var c = byCode[a.cc];
+      var card = add(4, at(h('div', { cls: 'hcard', 'data-source': 'high_risk[' + i + ']' },
+        '<div class="rk">' + ('0' + (i + 1)).slice(-2) + '</div>' +
+        '<div style="min-width:0"><div class="nm">' + esc(a.short) + '</div>' +
+        '<div class="meta"><span class="id">' + esc(a.id) + '</span>' + esc(c.name) + ' · driven by ' + esc(factorText(a, a.driver)) + ' and ' + esc(factorText(a, a.driver2)) + '</div></div>' +
+        '<div class="sc" data-source="high_risk[' + i + '].score">' + fmt.score(a.score) + '<small>' + fmt.short(a.budget) + '</small></div>'),
+        60 + col * 930, 236 + row * 116));
+      enter(card, tc + i * step, .7, 26);
+    });
+  })();
+
+  /* ---- Scene 6: what to do ---- */
+  var TB = { x0: 60, colW: 300, cols: 20, gap: 12, base: 800 };
+  var cta;
+  (function () {
+    var t = S(5).t0;
+    val(F, 'alpha', t + .2, .8, 0, 1, 'out');
+    val(F, 'toTier', t + 1.0, 4.2, 0, 1, 'linear');
+    val(F, 'noneOut', t + 1.0, 2.0, 0, 1, 'inOut');
+    var ti = add(5, at(h('div', { cls: 'serif h1' }, 'What To Replace, And When'), 60, 60));
+    enter(ti, t + .4, 1);
+    // tier block labels
+    var tierNames = { now: M.tiers.now.label, soon: M.tiers.soon.label, plan: M.tiers.plan.label };
+    TIERS.forEach(function (k, i) {
+      var lab = add(5, at(h('div', { cls: 'tier-lab' },
+        '<b data-source="estate.by_tier.' + k + '" data-value="' + E.by_tier[k] + '">' + fmt.int(E.by_tier[k]) + '</b>' + esc(tierNames[k])), TB.x0 + i * TB.colW, TB.base + 22));
+      enter(lab, t + 4.6 + i * .2, .7, 10);
+    });
+    var noneNote = add(5, at(h('div', { cls: 'small', 'data-source': 'estate.by_tier.none' },
+      fmt.int(E.by_tier.none) + ' Low-risk assets need no action and drop out.'), TB.x0, TB.base + 112, 880));
+    enter(noneNote, t + 5.2, .7, 0);
+
+    // phased budget chart (stacked by tier)
+    var CX = 1060, CW = 150, CG = 60, CB = 800, CHmax = 300;
+    var maxV = Math.max.apply(null, YEARS.map(function (y) { return E.phased[y.key]; }));
+    var chartT = t + 6.0;
+    var axis = add(5, at(h('div', { cls: 'axis' }), CX - 20, CB, YEARS.length * (CW + CG) - CG + 40));
+    tw(axis, chartT - .4, .8, { sx: 0 }, { sx: 1 }, 'out'); axis.style.transformOrigin = 'left center';
+    var chartLab = add(5, at(h('div', { cls: 'body', style: 'font-size:24px' }, 'Phased replacement budget, stacked by tier'), CX - 20, 400));
+    enter(chartLab, chartT - .4, .8, 8);
+    YEARS.forEach(function (y, i) {
+      var x = CX + i * (CW + CG), v = E.phased[y.key], hpx = Math.max(4, v / maxV * CHmax);
+      var bar = add(5, at(h('div', { cls: 'ph-bar', 'data-source': 'estate.phased_by_tier.' + y.key }), x, CB - hpx));
+      bar.style.height = hpx + 'px';
+      TIERS.forEach(function (k) {
+        var seg = E.phased_by_tier[y.key][k];
+        if (seg > 0) bar.appendChild(h('div', { style: 'height:' + (seg / v * hpx) + 'px;background:var(--t-' + k + ')' }));
+      });
+      var tb = chartT + i * .6;
+      tw(bar, tb, 1.2, { sy: 0 }, { sy: 1 }, 'out');
+      var vl = add(5, at(h('div', { cls: 'ph-val', 'data-source': 'estate.phased.' + y.key }, '£0'), x, CB - hpx - 42));
+      enter(vl, tb + .2, .6, 0); counter(vl, tb, 1.2, v, fmt.short);
+      var yl = add(5, at(h('div', { cls: 'ph-yr' }, esc(y.label)), x, CB + 14));
+      enter(yl, tb, .6, 0);
+    });
+
+    // headline KPIs
+    var od = E.overdue.now;
+    var kpis = [
+      { v: E.budget_by_tier.now, c: '--t-now', src: 'estate.budget_by_tier.now',
+        l: 'Replace now: <b style="color:#fff">' + fmt.int(E.by_tier.now) + ' assets</b>, ' + fmt.int(od.count) + ' past replacement date' },
+      { v: E.budget_by_tier.soon, c: '--t-soon', src: 'estate.budget_by_tier.soon',
+        l: 'Replace within two years: <b style="color:#fff">' + fmt.int(E.by_tier.soon) + ' assets</b>' },
+      { v: E.high_value_budget, c: '--t-plan', src: 'estate.high_value_budget',
+        l: '<b style="color:#fff">' + fmt.int(E.high_value_flags) + ' high-value assets</b> (over ' + fmt.short(M.high_value_flag.min_budget) + ' each) to plan early' }
+    ];
+    var kt = chartT + YEARS.length * .6 + 1.4;
+    kpis.forEach(function (k, i) {
+      var el = add(5, at(h('div', { cls: 'kpi' }, '<div class="bar" style="background:var(' + k.c + ')"></div><div class="v num" data-source="' + k.src + '">£0</div><div class="l">' + k.l + '</div>'), 60 + i * 600, 170));
+      enter(el, kt + i * .7, .8, 16);
+      counter(el.querySelector('.v'), kt + i * .7, 1.4, k.v, fmt.short);
+    });
+    cta = add(5, at(h('button', { cls: 'cta', type: 'button' }, 'Explore by cost centre →'), 1480, 890));
+    enter(cta, kt + 3.2, .8, 10);
+  })();
+
+  /* ================= Dot field ================= */
+  var canvas = document.getElementById('dots'), ctx = canvas.getContext('2d');
+  var N = A.length;
+  function rng(seed) { return function () { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }; }
+  var rand = rng(20260616);
+  function hex(c) { c = c.replace('#', ''); return [parseInt(c.substr(0, 2), 16), parseInt(c.substr(2, 2), 16), parseInt(c.substr(4, 2), 16)]; }
+  var COL = { grey: hex('#4A5559'), High: hex('#D2663F'), Medium: hex('#E3B85C'), Low: hex('#8FC1BA'),
+    now: hex('#D2663F'), soon: hex('#E3B85C'), plan: hex('#3E74A0'), none: hex('#8FC1BA') };
+  var gx = new Float32Array(N), gy = new Float32Array(N), cx = new Float32Array(N), cy = new Float32Array(N),
+      tx = new Float32Array(N), ty = new Float32Array(N), dl = new Float32Array(N), ap = new Float32Array(N);
+  var meta = [];
+  (function layout() {
+    // grid (scene 2): shuffled so colours speckle as they settle
+    var order = A.map(function (_, i) { return i; });
+    for (var i = order.length - 1; i > 0; i--) { var j = Math.floor(rand() * (i + 1)); var tmp = order[i]; order[i] = order[j]; order[j] = tmp; }
+    var COLS = 76, SP = 13, GX = 830, GY = 250;
+    order.forEach(function (ai, k) {
+      gx[ai] = GX + (k % COLS) * SP; gy[ai] = GY + Math.floor(k / COLS) * SP;
+      ap[ai] = (Math.floor(k / COLS) / Math.ceil(N / COLS)) * .7 + rand() * .3;
+    });
+    // towers (scene 4): one column per cost centre, Low at the base, High on top
+    var rank = { Low: 0, Medium: 1, High: 2 };
+    CC.forEach(function (c, ci) {
+      var idx = [];
+      A.forEach(function (a, i) { if (a.cc === c.code) idx.push(i); });
+      idx.sort(function (p, q) { return rank[A[p].rating] - rank[A[q].rating] || A[p].score - A[q].score; });
+      var x0 = 60 + ci * TOWER.colW + (TOWER.colW - (TOWER.w - 1) * TOWER.gap) / 2;
+      idx.forEach(function (ai, k) { cx[ai] = x0 + (k % TOWER.w) * TOWER.gap; cy[ai] = TOWER.base - 6 - Math.floor(k / TOWER.w) * TOWER.gap; });
+    });
+    // tiers (scene 6): one block per action tier, highest score first
+    TIERS.forEach(function (t, ti) {
+      var idx = [];
+      A.forEach(function (a, i) { if (a.tier === t) idx.push(i); });
+      idx.sort(function (p, q) { return A[q].score - A[p].score; });
+      idx.forEach(function (ai, k) { tx[ai] = TB.x0 + ti * TB.colW + (k % TB.cols) * TB.gap + 5; ty[ai] = TB.base - 8 - Math.floor(k / TB.cols) * TB.gap; });
+    });
+    A.forEach(function (a, i) {
+      if (a.tier === 'none') { tx[i] = cx[i]; ty[i] = cy[i] + 40; }
+      dl[i] = rand();
+      meta.push({ r: COL[a.rating], t: COL[a.tier], low: a.rating === 'Low', none: a.tier === 'none', focus: focusCodes.indexOf(a.cc) >= 0 });
+    });
+  })();
+  function stag(P, d, spread) { var p = (P - d * spread) / (1 - spread); return p < 0 ? 0 : p > 1 ? 1 : p; }
+  var eio = EASE.inOut.fn;
+  function drawDots() {
+    var k = view.k * view.dpr;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (F.alpha <= 0.001) return;
+    ctx.setTransform(k, 0, 0, k, 0, 0);
+    var g = COL.grey;
+    for (var i = 0; i < N; i++) {
+      var m = meta[i];
+      var a = F.alpha * stag(F.appear, ap[i], .7);
+      if (a <= 0) continue;
+      if (m.low) a *= 1 - .8 * F.lowDim;
+      if (!m.focus) a *= 1 - .6 * F.focus;
+      var pt = eio(stag(F.toTier, dl[i], .5));
+      if (m.none) a *= 1 - F.noneOut;
+      if (a <= 0.01) continue;
+      var pc = eio(stag(F.toCC, dl[i], .5));
+      var x = gx[i] + (cx[i] - gx[i]) * pc, y = gy[i] + (cy[i] - gy[i]) * pc;
+      if (m.focus) y -= 26 * F.focus;
+      x += (tx[i] - x) * pt; y += (ty[i] - y) * pt;
+      var pcol = stag(F.colour, ap[i], .6), c1 = m.r, c2 = m.t;
+      var r = g[0] + (c1[0] - g[0]) * pcol, gg = g[1] + (c1[1] - g[1]) * pcol, b = g[2] + (c1[2] - g[2]) * pcol;
+      if (pt > 0) { r += (c2[0] - r) * pt; gg += (c2[1] - gg) * pt; b += (c2[2] - b) * pt; }
+      ctx.globalAlpha = a > 1 ? 1 : a;
+      ctx.fillStyle = 'rgb(' + (r | 0) + ',' + (gg | 0) + ',' + (b | 0) + ')';
+      ctx.beginPath(); ctx.arc(x, y, 4.2, 0, 6.2832); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+
+  /* ================= Engines ================= */
+  // Object tweens: grouped per (obj,key), evaluated in start order (later tweens win once started)
+  var groups = [];
+  (function () {
+    var map = new Map();
+    OBJT.forEach(function (o) {
+      var m = map.get(o.obj); if (!m) { m = {}; map.set(o.obj, m); }
+      (m[o.key] = m[o.key] || []).push(o);
+    });
+    map.forEach(function (m, obj) { for (var k in m) { m[k].sort(function (a, b) { return a.t0 - b.t0; }); groups.push({ obj: obj, key: k, list: m[k] }); } });
+  })();
+  function evalObjects(t) {
+    for (var g = 0; g < groups.length; g++) {
+      var L = groups[g].list, v = L[0].from;
+      for (var i = 0; i < L.length; i++) {
+        var w = L[i]; if (t < w.t0) break;
+        var p = w.dur <= 0 ? 1 : Math.min(1, (t - w.t0) / w.dur);
+        v = w.from + (w.to - w.from) * EASE[w.ease].fn(p);
+      }
+      groups[g].obj[groups[g].key] = v;
+    }
+    for (var c = 0; c < COUNTERS.length; c++) {
+      var C = COUNTERS[c], s = C.f(C.o.v);
+      if (s !== C.last) { C.el.textContent = s; C.last = s; }
+    }
+  }
+  // DOM tweens: GSAP master timeline, else Web Animations API
+  var engine;
+  function gsapProps(p, el) {
+    var o = {};
+    if ('o' in p) o.opacity = p.o; if ('x' in p) o.x = p.x; if ('y' in p) o.y = p.y;
+    if ('sx' in p) o.scaleX = p.sx; if ('sy' in p) o.scaleY = p.sy;
+    return o;
+  }
+  function kf(p, keys) {
+    var f = {};
+    if ('o' in keys) f.opacity = 'o' in p ? p.o : 1;
+    if ('x' in keys || 'y' in keys || 'sx' in keys || 'sy' in keys)
+      f.transform = 'translate(' + (p.x || 0) + 'px,' + (p.y || 0) + 'px) scale(' + ('sx' in p ? p.sx : 1) + ',' + ('sy' in p ? p.sy : 1) + ')';
+    return f;
+  }
+  var seen = new Set();
+  var noGsap = /[?&]nogsap/.test(location.search);   // QA switch: force the Web Animations fallback
+  if (window.gsap && gsap.timeline && !noGsap) {
+    var tl = gsap.timeline({ paused: true });
+    DOMT.forEach(function (d) {
+      var first = !seen.has(d.el); seen.add(d.el);
+      var to = gsapProps(d.to); to.duration = d.dur; to.ease = EASE[d.ease].gsap; to.immediateRender = first;
+      if (d.el.style.transformOrigin) to.transformOrigin = d.el.style.transformOrigin;
+      tl.fromTo(d.el, gsapProps(d.from), to, d.t0);
+    });
+    tl.set({}, {}, TOTAL);
+    engine = { name: 'GSAP ' + gsap.version, seek: function (t) { tl.time(t, true); } };
+  } else if (Element.prototype.animate) {
+    var anims = [];
+    DOMT.forEach(function (d) {
+      var first = !seen.has(d.el); seen.add(d.el);
+      var keys = Object.assign({}, d.from, d.to);
+      var a = d.el.animate([kf(d.from, keys), kf(d.to, keys)], { duration: d.dur * 1000, delay: d.t0 * 1000, fill: first ? 'both' : 'forwards', easing: EASE[d.ease].css });
+      a.pause(); anims.push(a);
+    });
+    engine = { name: 'Web Animations API', seek: function (t) { for (var i = 0; i < anims.length; i++) anims[i].currentTime = t * 1000; } };
+  } else {
+    engine = { name: 'none (static)', seek: function () {} };
+  }
+  console.info('Film engine: ' + engine.name + ' · ' + DOMT.length + ' DOM tweens · ' + OBJT.length + ' value tweens · ' + TOTAL + 's');
+
+  /* ================= View scaling ================= */
+  var stage = document.getElementById('stage');
+  var view = { k: 1, dpr: 1 };
+  function fit() {
+    var vw = window.innerWidth, vh = window.innerHeight;
+    view.k = Math.min(vw / STAGE_W, vh / STAGE_H);
+    view.dpr = Math.min(window.devicePixelRatio || 1, 2);
+    stage.style.transform = 'translate(' + ((vw - STAGE_W * view.k) / 2) + 'px,' + ((vh - STAGE_H * view.k) / 2) + 'px) scale(' + view.k + ')';
+    canvas.width = Math.round(STAGE_W * view.k * view.dpr);
+    canvas.height = Math.round(STAGE_H * view.k * view.dpr);
+    dirty = true;
+  }
+
+  /* ================= Clock + controls ================= */
+  var reduced = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var clock = { t: 0, playing: false, last: 0 };
+  var dirty = true, endTimer = null, active = 'film';
+  function sceneAt(t) { for (var i = 0; i < SCENES.length; i++) if (t < SCENES[i].t1) return i; return SCENES.length - 1; }
+  function shownTime(t) { return reduced ? Math.min(TOTAL, SCENES[sceneAt(t)].t1 - (sceneAt(t) < SCENES.length - 1 ? .7 : 0)) : t; }
+
+  var playBtn = document.getElementById('play'), track = document.getElementById('track'), slider = document.getElementById('slider'),
+      fill = document.getElementById('fill'), tlabel = document.getElementById('tlabel');
+  var ICON_PAUSE = '<svg viewBox="0 0 24 24"><rect x="5" y="4" width="5" height="16"/><rect x="14" y="4" width="5" height="16"/></svg>',
+      ICON_PLAY = '<svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg>';
+  var dots = SCENES.map(function (s, i) {
+    // pointer shortcut only: the slider itself takes the arrow keys, so the dots stay out of the tab order
+    var b = h('button', { cls: 'sdot', type: 'button', tabindex: '-1', 'aria-hidden': 'true', title: s.name });
+    b.style.left = (s.t0 / TOTAL * 100) + '%';
+    b.addEventListener('pointerdown', function (e) { e.stopPropagation(); });
+    b.addEventListener('click', function (e) { e.stopPropagation(); seek(s.t0); play(); });
+    track.appendChild(b); return b;
+  });
+  slider.setAttribute('aria-valuemax', String(TOTAL));
+
+  function play() { if (clock.t >= TOTAL) clock.t = 0; clock.playing = true; clock.last = performance.now(); cancelEnd(); dirty = true; }
+  function pause() { clock.playing = false; dirty = true; }
+  function toggle() { clock.playing ? pause() : play(); }
+  function seek(t) { clock.t = Math.max(0, Math.min(TOTAL, t)); clock.last = performance.now(); cancelEnd(); dirty = true; }
+  function cancelEnd() { if (endTimer) { clearTimeout(endTimer); endTimer = null; } }
+  function onEnd() { cancelEnd(); endTimer = setTimeout(function () { if (active === 'film') go('explorer'); }, 6000); }
+
+  function render() {
+    var t = shownTime(clock.t);
+    engine.seek(t);
+    evalObjects(t);
+    drawDots();
+    var si = sceneAt(clock.t);
+    fill.style.width = (clock.t / TOTAL * 100) + '%';
+    tlabel.textContent = fmt.clock(clock.t) + ' / ' + fmt.clock(TOTAL);
+    slider.setAttribute('aria-valuenow', String(Math.round(clock.t))); slider.setAttribute('aria-valuetext', fmt.clock(clock.t) + ' of ' + fmt.clock(TOTAL) + ', ' + SCENES[si].name);
+    playBtn.innerHTML = clock.playing ? ICON_PAUSE : ICON_PLAY;
+    playBtn.setAttribute('aria-label', clock.playing ? 'Pause' : 'Play');
+    dots.forEach(function (d, i) { d.classList.toggle('on', i === si); d.classList.toggle('done', i < si); });
+    SCENES.forEach(function (s, i) { s.el.classList.toggle('live', i === si); });
+  }
+  function frame(now) {
+    if (active === 'film') {
+      if (clock.playing) {
+        clock.t += Math.min(.1, (now - clock.last) / 1000); clock.last = now;
+        if (clock.t >= TOTAL) { clock.t = TOTAL; clock.playing = false; onEnd(); }
+        dirty = true;
+      }
+      if (dirty) { render(); dirty = false; }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // scrubbing
+  var drag = null;
+  function trackSeek(e) { var r = track.getBoundingClientRect(); seek((e.clientX - r.left) / r.width * TOTAL); }
+  track.addEventListener('pointerdown', function (e) { drag = { was: clock.playing }; pause(); track.setPointerCapture(e.pointerId); trackSeek(e); });
+  track.addEventListener('pointermove', function (e) { if (drag) trackSeek(e); });
+  track.addEventListener('pointerup', function () { if (drag && drag.was) play(); drag = null; });
+  playBtn.addEventListener('click', toggle);
+  document.getElementById('skip').addEventListener('click', function () { go('explorer'); });
+  cta.addEventListener('click', function () { go('explorer'); });
+  document.getElementById('replay').addEventListener('click', function () { go('film'); seek(0); play(); });
+
+  document.addEventListener('keydown', function (e) {
+    if (active !== 'film') return;
+    cancelEnd();
+    var si = sceneAt(clock.t);
+    if (e.key === ' ' || e.code === 'Space') { e.preventDefault(); toggle(); }
+    else if (e.key === 'ArrowRight') { e.preventDefault(); if (si < SCENES.length - 1) seek(SCENES[si + 1].t0); else seek(TOTAL); }
+    else if (e.key === 'ArrowLeft') { e.preventDefault(); seek(clock.t - SCENES[si].t0 > 1.5 ? SCENES[si].t0 : SCENES[Math.max(0, si - 1)].t0); }
+    else if (e.key === 'Escape') { e.preventDefault(); go('explorer'); }
+  });
+  ['pointerdown', 'wheel'].forEach(function (ev) { document.addEventListener(ev, function () { if (endTimer) cancelEnd(); }, { passive: true }); });
+
+  /* ================= Act 2: explorer ================= */
+  var X = (function () {
+    var view = document.getElementById('xview'), tip = document.getElementById('tip');
+    var TL = { now: M.tiers.now.label, soon: M.tiers.soon.label, plan: M.tiers.plan.label, none: M.tiers.none.label };
+    var TS = { now: 'Replace now', soon: '1–2 yrs', plan: 'Plan', none: 'No action' };
+    var YL = {}; YEARS.forEach(function (y) { YL[y.key] = y.label; });
+    var tr = M.tier_rules, th = M.thresholds;
+    // Categorical palette for cost centres
+    var SERIES = ['#0B6E69', '#D2663F', '#3E74A0', '#E3B85C', '#7B5EA7', '#2F9E8F', '#B04A6F', '#5A6B2F', '#8FC1BA', '#C98B3C', '#3B4A8C', '#9AA3A1'];
+    var ccCol = {}, byCC = {}, byId = {};
+    CC.forEach(function (c, i) { ccCol[c.code] = SERIES[i % SERIES.length]; byCC[c.code] = []; });
+    A.forEach(function (a) { byCC[a.cc].push(a); byId[a.id] = a; });   // assets arrive ranked by score
+    var RULE = {
+      now: 'High risk (score ≥ ' + th.High.toFixed(1) + '), or Medium risk that is past its replacement date with criticality ≥ ' + tr.now_min_criticality + '.',
+      soon: 'Medium risk, due for replacement within ' + tr.soon_max_timeframe + ' years ' + (tr.soon_logic === 'and' ? 'and' : 'or') + ' criticality ≥ ' + tr.soon_min_criticality + '.',
+      plan: 'Other Medium-risk assets: monitor and budget ahead. Assets over ' + fmt.short(M.high_value_flag.min_budget) + ' are flagged to plan early.',
+      none: 'Low risk (score < ' + th.Medium.toFixed(1) + '). No replacement action recommended.'
+    };
+    var last = { cc: CC[0].code, view: null };
+
+    function tf(a) {
+      if (a.timeframe < 0) return 'Overdue ' + Math.abs(a.timeframe).toFixed(1) + ' yrs';
+      if (a.timeframe === 0) return 'Due now';
+      return 'Due in ' + a.timeframe.toFixed(1) + ' yrs';
+    }
+    function pill(a, big) { return '<span class="pill r-' + a.rating + (big ? ' big' : '') + '" title="' + a.rating + ' risk" data-source="assets[' + a.id + '].score">' + fmt.score(a.score) + '</span>'; }
+    function hv(a) { return a.high_value ? '<span class="hv" title="Budget over ' + fmt.short(M.high_value_flag.min_budget) + '">High value, plan early</span>' : ''; }
+    function kv(src, v, txt) { return ' data-source="' + src + '" data-value="' + v + '">' + txt; }
+    function factor(a, key) {
+      if (key === 'criticality') return 'criticality ' + a.criticality + '/5';
+      if (key === 'age') return Math.round(a.life_pct * 100) + '% of life used';
+      if (key === 'breakdowns') return a.breakdowns + ' ' + plural(a.breakdowns, 'breakdown') + ' in 12 months';
+      return a.obsolescence.toLowerCase();
+    }
+    function counts(list, key) { var o = {}; list.forEach(function (a) { o[a[key]] = (o[a[key]] || 0) + 1; }); return o; }
+
+    /* ---- header, footer, methodology (built once) ---- */
+    function shell() {
+      document.getElementById('xclient').textContent = 'Prepared for ' + M.client;
+      document.getElementById('xlogo').innerHTML = document.querySelector('.logo').innerHTML;
+      var k = '<span class="tot"><b' + kv('estate.assets', E.assets, fmt.int(E.assets)) + '</b> assets · <b' + kv('estate.cost_centres', E.cost_centres, E.cost_centres) +
+        '</b> cost centres · <b' + kv('estate.by_rating.High', E.by_rating.High, E.by_rating.High) + '</b> High · <b' + kv('estate.by_rating.Medium', E.by_rating.Medium, fmt.int(E.by_rating.Medium)) + '</b> Medium</span>';
+      TIERS.forEach(function (t) {
+        k += '<a class="chip" href="#explorer/list?tier=' + t + '"><i class="bg-' + t + '"></i>' + TS[t] + ' <b' + kv('estate.by_tier.' + t, E.by_tier[t], fmt.int(E.by_tier[t])) + '</b> · <b' +
+          kv('estate.budget_by_tier.' + t, E.budget_by_tier[t], fmt.short(E.budget_by_tier[t])) + '</b></a>';
+      });
+      document.getElementById('xkpis').innerHTML = k;
+      document.getElementById('xfoot').innerHTML = '<span>Data as of <b data-source="meta.data_as_of">' + esc(M.data_as_of) + '</b> · Source: ' + esc(M.source) +
+        ' · GBP at $1 = £' + M.fx.usd_to_gbp + ' (' + esc(M.fx.date) + ')</span><button type="button" class="lnk" id="open-method">Methodology</button><span style="margin-left:auto">Synthetic demo by Mike Davies</span>';
+      var md = M.methodology, w = M.weights;
+      var rows = [['Asset criticality', w.criticality], ['Age vs expected life', w.age], ['Breakdown history', w.breakdowns], ['Obsolescence', w.obsolescence]];
+      document.getElementById('method-in').innerHTML =
+        '<button type="button" class="btn method-close" id="close-method">Close</button><h2 class="xh2" id="method-title">Methodology</h2>' +
+        '<div class="verb" data-source="meta.methodology_text">' + esc(M.methodology_text) + '</div>' +
+        '<h3>Weightings</h3><table><tr><th>Component</th><th>Weight</th><th>What it captures</th></tr>' +
+        md.components.map(function (c, i) { return '<tr><td>' + esc(c.name) + '</td><td>' + Math.round(rows[i][1] * 100) + '%</td><td>' + esc(c.captures) + '</td></tr>'; }).join('') + '</table>' +
+        '<h3>Rating thresholds</h3><table><tr><td>High</td><td>≥ ' + th.High.toFixed(2) + '</td></tr><tr><td>Medium</td><td>' + th.Medium.toFixed(2) + ' – ' + (th.High - .01).toFixed(2) + '</td></tr><tr><td>Low</td><td>< ' + th.Medium.toFixed(2) + '</td></tr></table>' +
+        '<h3>Recommended action tiers</h3><ul>' + ['now', 'soon', 'plan', 'none'].map(function (t) { return '<li><b>' + esc(TL[t]) + ':</b> ' + esc(RULE[t]) + '</li>'; }).join('') + '</ul>' +
+        '<h3>Budget phasing</h3><p>Replacement timeframe (expected life less age) sets the budget year: ' +
+        YEARS.map(function (y, i) { return y.label + (y.max == null ? ' beyond ' + YEARS[i - 1].max + ' yrs' : ' up to ' + y.max + ' yrs' + (i === 0 ? ' (including overdue)' : '')); }).join('; ') + '.' +
+        (M.force_now_to_first_year ? ' Every Replace-now asset is budgeted in ' + YEARS[0].label + '.' : '') + ' Low-risk assets are not phased.</p>' +
+        (E.obs_assumed ? '<h3>Obsolescence not recorded</h3><p>' + fmt.int(E.obs_assumed) + ' assets have no obsolescence status in the register. They are scored 1 (“no recorded support concern”), as the methodology defines.</p>' : '') +
+        '<h3>Data sources &amp; assumptions</h3><ul>' + md.assumptions.map(function (s) { return '<li>' + esc(s) + '</li>'; }).join('') + '</ul><p>' + esc(md.review) + '</p>' +
+        '<h3>Data as of</h3><p>' + esc(M.data_as_of) + ' · ' + esc(M.source) + ' (sheet “' + esc(M.sheet) + '”) · built ' + esc(M.built) + '. FX $1 = £' + M.fx.usd_to_gbp + ' (' + esc(M.fx.date) + '). Amounts shown to the nearest £' + R100 + '.</p>';
+      var dlg = document.getElementById('method');
+      document.getElementById('open-method').addEventListener('click', function () { dlg.showModal ? dlg.showModal() : dlg.setAttribute('open', ''); });
+      document.getElementById('close-method').addEventListener('click', function () { dlg.close ? dlg.close() : dlg.removeAttribute('open'); });
+      dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+    }
+
+    /* ---- A. estate view ---- */
+    function mbar(c) {
+      var n = c.assets || 1;
+      return '<div class="mbar" title="' + c.by_rating.High + ' High · ' + c.by_rating.Medium + ' Medium · ' + c.by_rating.Low + ' Low">' +
+        ['High', 'Medium', 'Low'].map(function (r) { var v = c.by_rating[r]; return v ? '<span class="bg-' + r + '" style="width:' + Math.max(1.5, v / n * 100) + '%"></span>' : ''; }).join('') + '</div>';
+    }
+    function phasedChart() {
+      var W = 760, H = 430, ml = 64, mr = 12, mt = 34, mb = 44, pw = W - ml - mr, ph = H - mt - mb;
+      var maxV = Math.max.apply(null, YEARS.map(function (y) { return E.phased[y.key]; }));
+      var raw = maxV / 4, mag = Math.pow(10, Math.floor(Math.log10(raw))), step = [1, 2, 2.5, 5, 10].map(function (m) { return m * mag; }).filter(function (s) { return s >= raw; })[0];
+      var top = Math.ceil(maxV / step) * step, yv = function (v) { return mt + ph - v / top * ph; };
+      var cnt = {};
+      A.forEach(function (a) { if (a.budget_year) { var k = a.cc + '|' + a.budget_year; cnt[k] = (cnt[k] || 0) + 1; } });
+      var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Phased replacement budget by financial year, stacked by cost centre">';
+      for (var v = 0; v <= top + 1; v += step) {
+        s += '<line x1="' + ml + '" x2="' + (W - mr) + '" y1="' + yv(v) + '" y2="' + yv(v) + '" stroke="' + (v ? '#e6eaea' : '#4A5559') + '"/>' +
+          '<text x="' + (ml - 10) + '" y="' + (yv(v) + 5) + '" text-anchor="end" font-size="14" fill="#4A5559" font-family="system-ui, Segoe UI, Arial, sans-serif">' + fmt.short(v) + '</text>';
+      }
+      var band = pw / YEARS.length, bw = band * .58;
+      YEARS.forEach(function (y, i) {
+        var x = ml + i * band + (band - bw) / 2, acc = 0;
+        CC.forEach(function (c) {
+          var val = c.phased[y.key]; if (!val) return;
+          var y0 = yv(acc), y1 = yv(acc + val); acc += val;
+          var n = cnt[c.code + '|' + y.key] || 0;
+          s += '<rect class="seg" tabindex="0" data-cc="' + c.code + '" data-source="cost_centres[' + c.code + '].phased.' + y.key + '" x="' + x + '" y="' + y1 + '" width="' + bw + '" height="' + Math.max(.5, y0 - y1) + '" fill="' + ccCol[c.code] + '" stroke="#fff" stroke-width=".75"' +
+            ' data-tip="<b>' + esc(c.name) + '</b><br>' + y.label + ': ' + fmt.money(val) + '<br>' + n + ' ' + plural(n, 'asset') + ' · click to open"><title>' + esc(c.name) + ' ' + y.label + ' ' + fmt.money(val) + '</title></rect>';
+        });
+        s += '<text x="' + (x + bw / 2) + '" y="' + (yv(acc) - 10) + '" text-anchor="middle" font-size="18" font-weight="600" fill="#13201F" font-family="system-ui, Segoe UI, Arial, sans-serif" data-source="estate.phased.' + y.key + '" data-value="' + E.phased[y.key] + '">' + fmt.short(E.phased[y.key]) + '</text>' +
+          '<text x="' + (x + bw / 2) + '" y="' + (H - 14) + '" text-anchor="middle" font-size="16" fill="#4A5559" font-family="ui-monospace, Consolas, monospace">' + y.label + '</text>';
+      });
+      return s + '</svg>';
+    }
+    function renderEstate() {
+      var cards = CC.map(function (c) {
+        return '<a class="ccard" href="#explorer/cc/' + c.code + '">' +
+          '<div class="cc-top"><span class="mono-d">' + c.code + '</span><span class="cc-now"' + kv('cost_centres[' + c.code + '].budget_by_tier.now', c.budget_by_tier.now, fmt.short(c.budget_by_tier.now)) + '<small>needed now</small></span></div>' +
+          '<div class="cc-name">' + esc(c.name) + '</div>' + mbar(c) +
+          '<div class="cc-leg" data-source="cost_centres[' + c.code + '].by_rating">' + fmt.int(c.assets) + ' assets · ' + c.by_rating.High + ' High · ' + c.by_rating.Medium + ' Medium · ' + fmt.int(c.by_rating.Low) + ' Low</div>' +
+          '<div class="cc-tiers">' + TIERS.map(function (t) { return '<span><i class="sw-t bg-' + t + '"></i><b data-source="cost_centres[' + c.code + '].by_tier.' + t + '">' + c.by_tier[t] + '</b> ' + TS[t].toLowerCase() + '</span>'; }).join('') + '</div></a>';
+      }).join('');
+      var plan = E.phased_by_tier[YEARS[0].key].plan;
+      view.innerHTML = '<div class="est"><section><div class="est-h"><h1 class="xh2">Cost Centres, By Money Needed Now</h1><span>Select a cost centre for its owner view</span></div><div class="cards">' + cards + '</div></section>' +
+        '<aside class="panel"><h2 class="xh2">Phased Replacement Budget</h2><p>Replace now, 1–2 yrs and Plan tiers, by financial year and cost centre. Hover for detail; click to open.</p>' +
+        '<div class="chart">' + phasedChart() + '</div>' +
+        '<div class="legend">' + CC.map(function (c) { return '<a href="#explorer/cc/' + c.code + '"><i class="sw-t" style="background:' + ccCol[c.code] + '"></i>' + esc(c.name) + '</a>'; }).join('') + '</div>' +
+        (plan ? '<p class="small" style="color:var(--dark-grey);margin-top:14px" data-source="estate.phased_by_tier.' + YEARS[0].key + '.plan">' + YEARS[0].label + ' includes ' + fmt.short(plan) + ' of Plan-tier assets that are due within a year or already overdue.</p>' : '') +
+        '</aside></div>';
+    }
+
+    /* ---- B. cost centre view ---- */
+    function lifeBar(a) {
+      var p = a.life_pct, S = Math.min(3, Math.max(2, Math.ceil(p * 2) / 2)), f = Math.min(p, 1) / S * 100;
+      var o = p > 1 ? '<div class="o" style="left:' + (100 / S) + '%;width:' + ((Math.min(p, S) - 1) / S * 100) + '%"></div>' : '';
+      return '<div><div class="life-lab"><span>Age vs expected life</span><b data-source="assets[' + a.id + '].age, .life">' + a.age.toFixed(1) + ' of ' + a.life + ' yrs (' + Math.round(p * 100) + '%)</b></div>' +
+        '<div class="life-tr" role="img" aria-label="' + Math.round(p * 100) + '% of expected life used"><div class="f" style="width:' + f + '%"></div>' + o + '<div class="m" style="left:' + (100 / S) + '%"></div></div>' +
+        '<div class="life-sc"><span>0</span><span style="position:absolute;left:' + (100 / S) + '%;transform:translateX(-50%)">100%</span><span>' + Math.round(S * 100) + '%' + (p > S ? '+' : '') + '</span></div></div>';
+    }
+    function acard(a) {
+      return '<article class="acard" id="a-' + a.id + '"><div class="ac-top">' + pill(a, true) + '<div><span class="mono-d">' + esc(a.id) + '</span><h4>' + esc(a.description || a.short) + '</h4>' +
+        '<p>Service provider: ' + esc(a.provider || 'Not recorded') + ' · ' + esc(a.location) + '</p></div></div>' + lifeBar(a) +
+        '<p class="driver">Driven by ' + esc(factor(a, a.driver)) + ' and ' + esc(factor(a, a.driver2)) + '.</p>' +
+        '<dl class="ac-stats"><div><dt>Criticality</dt><dd>' + a.criticality + '/5</dd></div><div><dt>Breakdowns, 12 months</dt><dd>' + a.breakdowns + '</dd></div>' +
+        '<div><dt>Obsolescence</dt><dd>' + esc(a.obsolescence) + '</dd></div><div><dt>Replacement timeframe</dt><dd>' + tf(a) + '</dd></div>' +
+        '<div><dt>Replacement budget</dt><dd data-source="assets[' + a.id + '].budget">' + fmt.money(a.budget) + '</dd></div><div><dt>Budget year</dt><dd>' + (YL[a.budget_year] || 'n/a') + '</dd></div></dl></article>';
+    }
+    function arow(a) {
+      return '<div class="arow' + (a.high_value ? ' hvrow' : '') + '" id="a-' + a.id + '">' + pill(a) + '<span class="mono-d">' + esc(a.id) + '</span>' +
+        '<span class="an">' + esc(a.short) + hv(a) + '<small>' + esc(a.obsolescence) + ' · ' + Math.round(a.life_pct * 100) + '% of life · criticality ' + a.criticality + '/5' + (a.obs_assumed ? ' (obsolescence not recorded)' : '') + '</small></span>' +
+        '<span class="atf">' + tf(a) + '</span><span class="ab">' + fmt.money(a.budget) + '</span></div>';
+    }
+    function rows(list, limit) {
+      if (!list.length) return '';
+      var head = list.slice(0, limit), rest = list.slice(limit);
+      return '<div class="rows">' + head.map(arow).join('') + '</div>' +
+        (rest.length ? '<details class="more"><summary>Show ' + rest.length + ' more</summary><div class="rows">' + rest.map(arow).join('') + '</div></details>' : '');
+    }
+    function renderCC(code) {
+      var c = byCode[code] || CC[0]; code = c.code; last.cc = code;
+      var list = byCC[code], by = {};
+      ['now', 'soon', 'plan', 'none'].forEach(function (t) { by[t] = list.filter(function (a) { return a.tier === t; }); });
+      var i = CC.indexOf(c), prev = CC[(i - 1 + CC.length) % CC.length], next = CC[(i + 1) % CC.length];
+      var maxP = Math.max(1, Math.max.apply(null, YEARS.map(function (y) { return c.phased[y.key]; })));
+      var side = '<div class="side-k">' + TIERS.map(function (t) {
+        return '<div style="border-color:var(--t-' + t + ')"><b' + kv('cost_centres[' + code + '].budget_by_tier.' + t, c.budget_by_tier[t], fmt.short(c.budget_by_tier[t])) + '</b><span>' + esc(TS[t]) + ' · ' + c.by_tier[t] + ' ' + plural(c.by_tier[t], 'asset') + '</span></div>';
+      }).join('') + '</div><div class="ph-mini">' + YEARS.map(function (y) {
+        return '<span class="mono-d">' + y.label + '</span><span class="tr">' + TIERS.map(function (t) { var v = c.phased_by_tier[y.key][t]; return v ? '<span class="bg-' + t + '" style="width:' + (v / maxP * 100) + '%" title="' + TS[t] + ' ' + fmt.money(v) + '"></span>' : ''; }).join('') +
+          '</span><span class="v" data-source="cost_centres[' + code + '].phased.' + y.key + '">' + fmt.short(c.phased[y.key]) + '</span>';
+      }).join('') + '</div>';
+      var blocks = TIERS.map(function (t) {
+        var L = by[t], hi = L.filter(function (a) { return a.rating === 'High'; }), other = L.filter(function (a) { return a.rating !== 'High'; });
+        var hvN = L.filter(function (a) { return a.high_value; }).length;
+        return '<section class="rec t-' + t + '"><header><h3>' + esc(TL[t]) + '</h3><span class="rk"><b' + kv('cost_centres[' + code + '].by_tier.' + t, c.by_tier[t], c.by_tier[t]) + '</b> ' + plural(c.by_tier[t], 'asset') + ' · <b' +
+          kv('cost_centres[' + code + '].budget_by_tier.' + t, c.budget_by_tier[t], fmt.money(c.budget_by_tier[t])) + '</b></span>' +
+          (hvN ? '<span><span class="hv" style="margin:0">' + hvN + ' high value, plan early</span></span>' : '') + '<p class="rule">' + esc(RULE[t]) + '</p></header>' +
+          (L.length ? (hi.length ? '<div class="acards">' + hi.map(acard).join('') + '</div>' : '') + rows(other, t === 'plan' ? 10 : 15)
+            : '<p class="none-in">No assets in this tier for ' + esc(c.name) + '.</p>') + '</section>';
+      }).join('');
+      var none = by.none;
+      blocks += '<section class="rec t-none"><div class="rollup"><h3 style="font-size:1.2em;color:var(--ink);font-weight:600">' + esc(TL.none) + '</h3><span><b class="xnum" data-source="cost_centres[' + code + '].by_tier.none">' + fmt.int(none.length) + '</b> Low-risk ' + plural(none.length, 'asset') +
+        ' · <b class="xnum" data-source="cost_centres[' + code + '].budget_by_tier.none">' + fmt.money(c.budget_by_tier.none) + '</b> replacement value</span><span>' + esc(RULE.none) + '</span></div>' +
+        (none.length ? '<details class="more"><summary>Show the ' + fmt.int(none.length) + ' Low-risk assets</summary>' + rows(none, 1e6) + '</details>' : '') + '</section>';
+      view.innerHTML = '<section class="cch"><div><div class="ccnav"><label class="sr" for="ccsel">Cost centre</label><select id="ccsel">' +
+        CC.map(function (x) { return '<option value="' + x.code + '"' + (x.code === code ? ' selected' : '') + '>' + esc(x.name) + ' (' + x.code + ')</option>'; }).join('') + '</select>' +
+        '<a class="btn" href="#explorer/cc/' + prev.code + '" aria-label="Previous: ' + esc(prev.name) + '">←</a><a class="btn" href="#explorer/cc/' + next.code + '" aria-label="Next: ' + esc(next.name) + '">→</a>' +
+        '<button type="button" class="btn pri" id="copy">Copy summary for this cost centre</button><span id="copied" role="status" class="small" style="color:var(--brand)"></span></div>' +
+        '<div class="kick">' + code + ' · Cost centre</div><h1 class="xh1" style="margin-top:6px">' + esc(c.name) + '</h1>' +
+        '<p class="stats" data-source="cost_centres[' + code + '].assets, .by_rating"><b>' + fmt.int(c.assets) + '</b> assets assessed · <b>' + c.by_rating.High + '</b> High · <b>' + c.by_rating.Medium + '</b> Medium · <b>' + fmt.int(c.by_rating.Low) + '</b> Low' + (c.max_score != null ? ' · highest score <b>' + fmt.score(c.max_score) + '</b>' : '') + '</p>' +
+        '<p class="headline" data-source="cost_centres[' + code + '].headline">' + esc(c.headline) + '</p></div><div>' + side + '</div></section>' +
+        '<h2 class="xh2 recs-h">What We Recommend</h2>' + blocks;
+      document.getElementById('ccsel').addEventListener('change', function () { location.hash = '#explorer/cc/' + this.value; });
+      document.getElementById('copy').addEventListener('click', function () { copyText(summary(c, by), document.getElementById('copied')); });
+    }
+    function summary(c, by) {
+      var L = [], line = function (a, i) { return '  ' + (i + 1) + '. ' + a.id + '  ' + a.short + ', score ' + fmt.score(a.score) + ', ' + fmt.money(a.budget) + ', ' + tf(a).toLowerCase() + (a.high_value ? ' [high value, plan early]' : ''); };
+      L.push(c.name + ' (' + c.code + '): asset risk summary');
+      L.push('Synthetic demo prepared for ' + M.client + '. Data as of ' + M.data_as_of + '.');
+      L.push('');
+      L.push(fmt.int(c.assets) + ' assets assessed: ' + c.by_rating.High + ' High, ' + c.by_rating.Medium + ' Medium, ' + fmt.int(c.by_rating.Low) + ' Low risk.');
+      L.push(c.headline);
+      TIERS.forEach(function (t) {
+        var list = by[t], cap = t === 'now' ? 1e6 : 15;
+        L.push(''); L.push(TL[t].toUpperCase() + ': ' + list.length + ' ' + plural(list.length, 'asset') + ', ' + fmt.money(c.budget_by_tier[t]));
+        if (!list.length) L.push('  None.');
+        list.slice(0, cap).forEach(function (a, i) { L.push(line(a, i)); });
+        if (list.length > cap) L.push('  …and ' + (list.length - cap) + ' more (see the replacement list).');
+        if (t === 'plan') {
+          var h = list.filter(function (a) { return a.high_value; }).filter(function (a, i) { return list.indexOf(a) >= cap; });
+          h.forEach(function (a) { L.push('  Also flagged high value: ' + a.id + ' ' + a.short + ', ' + fmt.money(a.budget)); });
+        }
+      });
+      L.push(''); L.push('No action: ' + fmt.int(by.none.length) + ' Low-risk assets.');
+      L.push('Phased budget: ' + YEARS.map(function (y) { return y.label + ' ' + fmt.short(c.phased[y.key]); }).join(' · '));
+      L.push(''); L.push('Method: ' + M.methodology_text);
+      return L.join('\n');
+    }
+    function copyText(text, status) {
+      function done(ok) { status.textContent = ok ? 'Copied to clipboard' : 'Copy failed: select and copy manually'; setTimeout(function () { status.textContent = ''; }, 3000); }
+      function legacy() {
+        var ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;left:-9999px;top:0';
+        document.body.appendChild(ta); ta.select(); var ok = false; try { ok = document.execCommand('copy'); } catch (e) {} ta.remove(); done(ok);
+      }
+      if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(function () { done(true); }, legacy); else legacy();
+    }
+
+    /* ---- C. replacement list ---- */
+    var LS = { tier: 'nowsoon', cc: 'all', obs: 'all', sort: 'score', dir: 'desc' };
+    var TIER_OPTS = [['nowsoon', 'Replace now + 1–2 yrs'], ['now', TL.now], ['soon', TL.soon], ['plan', TL.plan + ' (incl. high value)']];
+    var OBS = Object.keys(counts(A.filter(function (a) { return a.tier !== 'none'; }), 'obsolescence')).sort();
+    function parseQ(q) {
+      var s = { tier: 'nowsoon', cc: 'all', obs: 'all', sort: 'score', dir: 'desc' };
+      q.split('&').forEach(function (kvp) { var p = kvp.split('='); if (p[0] in s && p[1]) s[p[0]] = decodeURIComponent(p[1]); });
+      return s;
+    }
+    function qs(s) { return Object.keys(s).filter(function (k) { return s[k] !== { tier: 'nowsoon', cc: 'all', obs: 'all', sort: 'score', dir: 'desc' }[k]; }).map(function (k) { return k + '=' + encodeURIComponent(s[k]); }).join('&'); }
+    function filtered() {
+      var tiers = LS.tier === 'nowsoon' ? ['now', 'soon'] : [LS.tier];
+      var L = A.filter(function (a) { return tiers.indexOf(a.tier) >= 0 && (LS.cc === 'all' || a.cc === LS.cc) && (LS.obs === 'all' || a.obsolescence === LS.obs); });
+      var key = { score: function (a) { return a.score; }, budget: function (a) { return a.budget; }, timeframe: function (a) { return a.timeframe; }, cc: function (a) { return byCode[a.cc].name; } }[LS.sort] || function (a) { return a.score; };
+      var d = LS.dir === 'asc' ? 1 : -1;
+      return L.slice().sort(function (p, q) { var x = key(p), y = key(q); return (x < y ? -1 : x > y ? 1 : 0) * d || (q.score - p.score) || (q.budget - p.budget); });
+    }
+    function opt(v, l, cur) { return '<option value="' + esc(v) + '"' + (v === cur ? ' selected' : '') + '>' + esc(l) + '</option>'; }
+    function renderList(s) {
+      LS = s;
+      view.innerHTML = '<section class="lst"><h1 class="xh2">Replacement List</h1><p>Every asset recommended for replacement now or within two years, ranked by risk. Filter, sort and export for budget planning.</p>' +
+        '<div class="filters">' +
+        '<label>Tier<select data-f="tier">' + TIER_OPTS.map(function (o) { return opt(o[0], o[1], LS.tier); }).join('') + '</select></label>' +
+        '<label>Cost centre<select data-f="cc">' + opt('all', 'All cost centres', LS.cc) + CC.map(function (c) { return opt(c.code, c.name, LS.cc); }).join('') + '</select></label>' +
+        '<label>Obsolescence<select data-f="obs">' + opt('all', 'All statuses', LS.obs) + OBS.map(function (o) { return opt(o, o, LS.obs); }).join('') + '</select></label>' +
+        '<button type="button" class="btn" id="reset">Reset filters</button></div>' +
+        '<div class="lsum" id="lsum"></div><div class="tbl-wrap"><table class="rl"><thead><tr>' +
+        [['score', 'Score', 1], [null, 'Asset'], ['cc', 'Cost centre'], [null, 'Tier'], [null, 'Obsolescence'], ['timeframe', 'Timeframe', 1], ['budget', 'Budget', 1]].map(function (c) {
+          var sorted = c[0] && c[0] === LS.sort;
+          return '<th scope="col"' + (c[2] ? ' class="n"' : '') + (c[0] ? ' aria-sort="' + (sorted ? (LS.dir === 'asc' ? 'ascending' : 'descending') : 'none') + '"><button type="button" data-sort="' + c[0] + '">' + c[1] + '</button>' : '>' + c[1]) + '</th>';
+        }).join('') + '</tr></thead><tbody id="lbody"></tbody></table></div></section>';
+      fillList();
+      view.querySelectorAll('select[data-f]').forEach(function (sel) {
+        sel.addEventListener('change', function () { LS[sel.getAttribute('data-f')] = sel.value; syncHash(); fillList(); });
+      });
+      view.querySelectorAll('th button[data-sort]').forEach(function (b) {
+        b.addEventListener('click', function () {
+          var k = b.getAttribute('data-sort');
+          LS.dir = LS.sort === k ? (LS.dir === 'desc' ? 'asc' : 'desc') : (k === 'timeframe' || k === 'cc' ? 'asc' : 'desc');
+          LS.sort = k; syncHash(); renderList(LS);
+        });
+      });
+      document.getElementById('reset').addEventListener('click', function () { renderList(parseQ('')); syncHash(); });
+    }
+    function syncHash() { var q = qs(LS); history.replaceState(null, '', '#explorer/list' + (q ? '?' + q : '')); }
+    function fillList() {
+      var L = filtered(), tot = sum(L, function (a) { return a.budget; }), od = L.filter(function (a) { return a.timeframe <= 0; }).length, hvN = L.filter(function (a) { return a.high_value; }).length;
+      document.getElementById('lsum').innerHTML = '<span><b data-source="filtered assets (count)">' + fmt.int(L.length) + '</b> ' + plural(L.length, 'asset') + ' · <b data-source="filtered assets (sum budget)">' + fmt.money(tot) + '</b></span><span><b>' + od + '</b> past replacement date</span>' +
+        (hvN ? '<span><b>' + hvN + '</b> high value</span>' : '') + '<button type="button" class="btn pri" id="csv" style="margin-left:auto">Download CSV</button>';
+      document.getElementById('lbody').innerHTML = L.map(function (a) {
+        var c = byCode[a.cc];
+        return '<tr><td class="n">' + pill(a) + '</td><td class="nm"><span class="mono-d">' + esc(a.id) + '</span>' + hv(a) + '<small>' + esc(a.short) + '</small></td>' +
+          '<td><a href="#explorer/cc/' + c.code + '">' + esc(c.name) + '</a></td><td><span class="tierlab"><i class="sw-t bg-' + a.tier + '"></i>' + TS[a.tier] + '</span></td>' +
+          '<td>' + esc(a.obsolescence) + '</td><td class="n">' + tf(a) + '<br><span class="small" style="color:var(--dark-grey)">' + (YL[a.budget_year] || '') + '</span></td><td class="n"><b class="xnum">' + fmt.money(a.budget) + '</b></td></tr>';
+      }).join('') || '<tr><td colspan="7" class="none-in">No assets match these filters.</td></tr>';
+      document.getElementById('csv').addEventListener('click', function () { downloadCSV(L); });
+    }
+    function downloadCSV(L) {
+      var cols = [['Asset ID', 'id'], ['Asset description', 'description'], ['Cost centre code', 'cc'], ['Cost centre', function (a) { return byCode[a.cc].name; }], ['Service provider', 'provider'],
+        ['Location / function', 'location'], ['Risk rating', 'rating'], ['Overall risk score', 'score'], ['Action tier', function (a) { return TL[a.tier]; }], ['Budget year', function (a) { return YL[a.budget_year] || ''; }],
+        ['Replacement timeframe (years)', 'timeframe'], ['Estimated replacement budget (GBP)', 'budget'], ['Criticality score (1-5)', 'criticality'], ['Asset age (years)', 'age'], ['Expected lifetime (years)', 'life'],
+        ['% expected lifetime', function (a) { return Math.round(a.life_pct * 1000) / 10; }], ['Breakdowns last 12 months', 'breakdowns'], ['Obsolescence', 'obsolescence'],
+        ['High value, plan early', function (a) { return a.high_value ? 'Yes' : ''; }], ['Obsolescence not recorded (scored 1)', function (a) { return a.obs_assumed ? 'Yes' : ''; }]];
+      function cell(v) { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; }
+      var out = [cols.map(function (c) { return cell(c[0]); }).join(',')].concat(L.map(function (a) {
+        return cols.map(function (c) { return cell(typeof c[1] === 'function' ? c[1](a) : a[c[1]]); }).join(',');
+      })).join('\r\n');
+      var parts = ['synthetic', 'replacement_list', LS.tier, LS.cc !== 'all' ? LS.cc : '', LS.obs !== 'all' ? LS.obs.replace(/\W+/g, '-') : '', M.data_as_of.replace(/\s+/g, '')].filter(Boolean);
+      var blob = new Blob(['﻿' + out], { type: 'text/csv;charset=utf-8' });
+      if (navigator.msSaveOrOpenBlob) { navigator.msSaveOrOpenBlob(blob, parts.join('_') + '.csv'); return; }
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = parts.join('_') + '.csv';
+      document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+    }
+
+    /* ---- tooltips (chart) ---- */
+    function showTip(el, x, y) {
+      tip.innerHTML = el.getAttribute('data-tip'); tip.hidden = false;
+      var r = tip.getBoundingClientRect(), px = Math.min(window.innerWidth - r.width - 8, x + 14), py = y - r.height - 12;
+      tip.style.left = px + 'px'; tip.style.top = (py < 8 ? y + 18 : py) + 'px';
+    }
+    view.addEventListener('mousemove', function (e) { var t = e.target.closest && e.target.closest('[data-tip]'); if (t) showTip(t, e.clientX, e.clientY); else tip.hidden = true; });
+    view.addEventListener('mouseleave', function () { tip.hidden = true; });
+    view.addEventListener('focusin', function (e) { var t = e.target.closest && e.target.closest('[data-tip]'); if (t) { var r = t.getBoundingClientRect(); showTip(t, r.right, r.top + 10); } });
+    view.addEventListener('focusout', function () { tip.hidden = true; });
+    function openSeg(e) { var t = e.target.closest && e.target.closest('.seg'); if (t && (e.type === 'click' || e.key === 'Enter')) location.hash = '#explorer/cc/' + t.getAttribute('data-cc'); }
+    view.addEventListener('click', openSeg); view.addEventListener('keydown', openSeg);
+
+    /* ---- Act 1 vs Act 2: every KPI that carries the same data-source must agree ---- */
+    var reconciled = false;
+    function reconcileDom() {
+      reconciled = true;
+      var seen = {}, rows = [];
+      document.querySelectorAll('[data-source][data-value]').forEach(function (el) {
+        var k = el.getAttribute('data-source'), v = +el.getAttribute('data-value'), where = el.closest('#film') ? 'film' : 'explorer';
+        (seen[k] = seen[k] || { film: [], explorer: [] })[where].push(v);
+      });
+      Object.keys(seen).forEach(function (k) {
+        var s = seen[k]; if (!s.film.length || !s.explorer.length) return;
+        var all = s.film.concat(s.explorer), ok = all.every(function (v) { return Math.abs(v - all[0]) < .5; });
+        rows.push({ field: k, film: s.film[0], explorer: s.explorer[0], ok: ok ? '✓' : '✗ MISMATCH' });
+      });
+      console.info('Act 1 (film) vs Act 2 (explorer): shared KPIs');
+      console.table(rows);
+      if (rows.some(function (r) { return r.ok !== '✓'; })) console.error('Film and explorer disagree on a KPI.');
+    }
+
+    var built = false;
+    function render(hsh) {
+      if (!built) { shell(); built = true; }
+      var p = hsh.replace(/^#explorer\/?/, ''), q = '', qi = p.indexOf('?');
+      if (qi >= 0) { q = p.slice(qi + 1); p = p.slice(0, qi); }
+      var parts = p.split('/'), v = parts[0] || 'estate';
+      if (v === 'cc') renderCC(parts[1] || last.cc);
+      else if (v === 'list') renderList(parseQ(q));
+      else { v = 'estate'; renderEstate(); }
+      document.querySelectorAll('.tab').forEach(function (t) { t.classList.toggle('on', t.getAttribute('data-tab') === v); if (t.classList.contains('on')) t.setAttribute('aria-current', 'page'); else t.removeAttribute('aria-current'); });
+      document.getElementById('tab-cc').setAttribute('href', '#explorer/cc/' + last.cc);
+      document.title = (v === 'cc' ? byCode[last.cc].name + ' · ' : v === 'list' ? 'Replacement list · ' : '') + M.client + ' Asset Risk Register';
+      if (last.view !== p) window.scrollTo(0, 0);
+      last.view = p; tip.hidden = true;
+      if (!reconciled) reconcileDom();
+    }
+    return { render: render };
+  })();
+
+  /* ================= Routing (hash) ================= */
+  var film = document.getElementById('film'), explorer = document.getElementById('explorer');
+  function go(where) {
+    if (where === 'explorer') { if (location.hash.indexOf('#explorer') !== 0) location.hash = '#explorer'; else route(); }
+    else { if (location.hash !== '#film') location.hash = '#film'; else route(); }
+  }
+  function route() {
+    var hsh = location.hash || '#film';
+    if (hsh.indexOf('#explorer') === 0) {
+      active = 'explorer'; pause(); cancelEnd(); film.hidden = true; explorer.hidden = false;
+      document.body.classList.add('x-on'); X.render(hsh);
+    }
+    else {
+      active = 'film'; film.hidden = false; explorer.hidden = true; dirty = true; document.body.classList.remove('x-on');
+      // deep links: #film/s5 (start of scene 5), #film/t=59 (paused at 59s)
+      var m = hsh.match(/^#film\/(?:s(\d)|t=([\d.]+))$/);
+      if (m) { pause(); seek(m[1] ? SCENES[Math.min(SCENES.length, +m[1]) - 1].t0 : +m[2]); if (m[1]) play(); return 'deep'; }
+    }
+  }
+  window.addEventListener('hashchange', route);
+  window.addEventListener('resize', fit);
+
+  fit();
+  if (route() !== 'deep' && active === 'film') play();
+  requestAnimationFrame(frame);
+
+  // test hook for scripted checks
+  window.__film = { seek: seek, play: play, pause: pause, scenes: SCENES, total: TOTAL, engine: engine.name, state: clock };
+})();
+</script>
+</body>
+</html>
