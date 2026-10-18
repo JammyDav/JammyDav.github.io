@@ -232,6 +232,48 @@
       },
       "summary": "We were rebuilding our procedure library across eight workstreams, with several people drafting and AI doing a lot of the writing. Documents drifted and picked up steps nobody could back up. So I ran it like code. Every document has a markdown master, a build, a checker and a place in the register. Anything the AI can't support gets flagged for a named person to answer. It's at 82 documents and growing fast, with about 2,300 lines of Python behind it.",
       "headline": "82 documents and growing"
+    },
+    {
+      "id": "vr-robot",
+      "short": "VR robot trainer",
+      "title": "VR robot trainer (experimental)",
+      "headline": "Learning a robot in VR",
+      "summary": "This one's an experiment. I wanted to see if VR could teach someone to drive a lab robot before they go near the real one. With AI, I built a WebXR simulation of a six-axis arm moving plates between a dispenser and a plate reader. You jog it with a virtual pendant, teach points, build a program and run it. There's a guided tutorial, an E-stop and real faults to recover from. It runs in a Quest 3 browser or on a desktop.",
+      "stats": [
+        {
+          "value": 6,
+          "label": "axis arm you jog with a virtual pendant"
+        },
+        {
+          "value": 10,
+          "label": "step guided tutorial that waits for you to act"
+        },
+        {
+          "value": 5,
+          "label": "fault types to recover from, plus a latching E-stop"
+        }
+      ],
+      "panel": {
+        "type": "live",
+        "status": "ready",
+        "title": "Drive the robot cell on a desktop or a Quest 3",
+        "src": "demos/vr-robot/index.html?demo",
+        "height": 720,
+        "allow": "xr-spatial-tracking; fullscreen",
+        "poster": "assets/img/vr-robot-poster.webp",
+        "posterSize": [
+          1280,
+          800
+        ],
+        "preview": "assets/img/vr-robot-preview.webp",
+        "previewSize": [
+          960,
+          600
+        ],
+        "thumb": "assets/img/vr-robot-thumb.webp",
+        "note": "Still in progress, stage 5 of 6. On a desktop, hold Space for the enabling device and use the arrow keys to jog. On a Quest 3, open it full screen and press Enter VR.",
+        "alt": "A WebXR robot cell with a six-axis arm, a virtual teach pendant, a program board and a guided tutorial. Visitors can jog the arm, teach points, build a short plate-transfer program and run it, on a desktop or in a Quest 3 headset."
+      }
     }
   ],
   "contact": {

@@ -34,7 +34,7 @@
   // Five cards under the intro: what each build is and its standout number, linking to it.
   function renderIndex(cases) {
     document.getElementById('hero-index').innerHTML =
-      '<h2 class="ix-head" id="ix-head">The five builds</h2><ol class="index" aria-labelledby="ix-head">' + cases.map(function (cs, i) {
+      '<h2 class="ix-head" id="ix-head">The ' + (['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'][cases.length] || cases.length) + ' builds</h2><ol class="index" aria-labelledby="ix-head">' + cases.map(function (cs, i) {
         return '<li><a class="ix" href="#' + esc(cs.id) + '">' +
           '<img src="' + esc(cs.panel.thumb) + '" alt="" width="480" height="' + Math.round(480 * cs.panel.previewSize[1] / cs.panel.previewSize[0]) + '" decoding="async">' +
           '<span class="ix-n" aria-hidden="true">0' + (i + 1) + '</span><span class="ix-t">' + esc(cs.short) + '</span>' +
@@ -63,7 +63,7 @@
     var img = reduced ? p.poster : p.preview, wh = reduced ? p.posterSize : p.previewSize;
     var launch = '<div class="launch" style="aspect-ratio:' + wh[0] + ' / ' + wh[1] + '">' +
       '<img src="' + esc(img) + '" data-fallback="' + esc(p.poster) + '" alt="' + (reduced ? 'Still' : 'Looping preview') + ' of the ' + esc(cs.short) + ' demo" width="' + wh[0] + '" height="' + wh[1] + '" loading="lazy" decoding="async">' +
-      '<button type="button" class="launch-btn" data-src="' + esc(p.src) + '" data-size="' + esc(size) + '" data-title="' + esc(p.title) + '">' +
+      '<button type="button" class="launch-btn" data-src="' + esc(p.src) + '" data-size="' + esc(size) + '" data-title="' + esc(p.title) + '"' + (p.allow ? ' data-allow="' + esc(p.allow) + '"' : '') + '>' +
       '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg>Launch live demo</button></div>';
     return '<div class="panel"><div class="panel-head">' + badge + '<h3>' + esc(p.title) + '</h3>' +
       '<a class="fs" href="' + esc(p.src) + '" target="_blank" rel="noopener">Open full screen<span class="sr"> (new tab)</span> &#8599;</a></div>' +
@@ -149,7 +149,8 @@
       var frame = document.createElement('div');
       frame.className = 'frame';
       frame.style.cssText = b.getAttribute('data-size');
-      frame.innerHTML = '<iframe src="' + esc(src) + '" title="' + esc(b.getAttribute('data-title')) + ' (live demo, synthetic data)"></iframe>';
+      var allow = b.getAttribute('data-allow');
+      frame.innerHTML = '<iframe src="' + esc(src) + '" title="' + esc(b.getAttribute('data-title')) + ' (live demo, synthetic data)"' + (allow ? ' allow="' + esc(allow) + '"' : '') + '></iframe>';
       b.closest('.launch').replaceWith(frame);
       var f = frame.querySelector('iframe');
       f.addEventListener('load', function () { f.focus(); }, { once: true });

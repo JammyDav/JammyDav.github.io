@@ -52,7 +52,7 @@ def main():
         t = text_of(p)
         n += 1
         problems += [f"pattern  {rel}: {m.group(0)}" for rx in pats for m in rx.finditer(t)]
-        if p.suffix.lower() in (".webp", ".png", ".jpg", ".xlsx") or p.name == "gsap.min.js":
+        if p.suffix.lower() in (".webp", ".png", ".jpg", ".xlsx", ".woff", ".woff2", ".ttf") or p.name == "gsap.min.js":   # binary noise
             continue
         problems += [f"email    {rel}: {e}" for e in set(re.findall(r"[\w.+-]+@[\w-]+\.[a-z]{2,}(?:\.[a-z]{2,})?", t))
                      if e.lower() not in ALLOWED_EMAILS]

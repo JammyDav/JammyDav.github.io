@@ -1,6 +1,6 @@
 # Mike Davies: case study portfolio
 
-A single scrollable page of five case studies, each telling the problem, the build and the outcome, with a live demo where a browser can run one and an honest visual where it cannot. It is a plain static site: one `index.html`, one stylesheet, one script, no framework and no build step for the shell. It is live at https://jammydav.github.io: every push to `main` runs `.github/workflows/pages.yml`, which publishes the repo root to GitHub Pages as is (no build step).
+A single scrollable page of six case studies, each telling the problem, the build and the outcome, with a live demo where a browser can run one and an honest visual where it cannot. It is a plain static site: one `index.html`, one stylesheet, one script, no framework and no build step for the shell. It is live at https://jammydav.github.io: every push to `main` runs `.github/workflows/pages.yml`, which publishes the repo root to GitHub Pages as is (no build step).
 
 | # | Case study | Panel |
 |---|---|---|
@@ -9,6 +9,7 @@ A single scrollable page of five case studies, each telling the problem, the bui
 | 3 | Asset risk film and explorer: replacing a heavy dashboard with a 78-second answer | Live: the real film and explorer, rebuilt on an invented estate |
 | 4 | Training Store: find the course by the instrument in front of you | Live: the real course finder, rebuilt on an invented catalogue |
 | 5 | Document creation run like a codebase | Live: generated index, plus one invented procedure built and checked |
+| 6 | VR robot trainer (experimental) | Live: a WebXR robot cell, on a desktop or a Quest 3 |
 
 Around them: a short hero that says the page only shows things built with AI, an index of five thumbnail cards that jump to each build, and contact. Each demo sits behind a launch card: a looping preview of the real demo with a Launch live demo button that swaps in the live demo (on phones it opens full screen). Sections ease in as they scroll into view and a progress line runs along the top bar; all of that motion is off under reduced motion, where the cards show a still instead. Each case study is a title, one paragraph in Mike's voice, three numbers and the live demo. The page was cut right back after feedback that it had too much text.
 
@@ -77,6 +78,7 @@ pip install pandas openpyxl pillow python-docx pymupdf
 | Training Store | `cd demos/training-store && python make_synthetic.py && python build.py` | Writes an invented LMS export, skills-matrix JSON and equipment table, runs the real `build_data.py` from `_source/training-store/` with only its input-path lines swapped, and inlines the result into `template.html`. |
 | Procedure library | `cd demos/procedure-library && python make_synthetic.py && python build.py` | Writes an invented register, gap register and procedure, runs the real `build_docs.py`, `check_docs.py` and `build_index.py` from `_source/procedure-library/tools/`, renders the built .docx to page images through Word (Windows only), and assembles `index.html`. |
 | Training Designer | none | `index.html` is the real player export, copied byte for byte; `sample_course.json` is its course source. Re-export from the app to change it. |
+| VR robot trainer | none here | `demos/vr-robot/` is a static build of the separate VR_Robot_Training repo, re-coloured to the site palette and with the employer and team names taken out of the scene, page title and labels. That repo is unchanged. Rebuild it from that repo when it moves on, keep the same de-branding, and run both checks before committing. |
 | Posters | `python tools/make_posters.py` (with the local server running) | Headless Chrome or Edge stills of each live demo, saved as WebP. Used as the still shown under reduced motion. |
 | Previews and thumbnails | `python tools/make_previews.py` (with the local server running; needs `websocket-client`) | Drives each demo through a few real states in headless Chrome and saves a looping animated WebP for its launch card, plus a small thumbnail for the hero index. |
 
@@ -85,6 +87,7 @@ The `build.py` wrappers need `_source/` present, because that is where the real 
 ### What each demo contains
 
 - **Training Designer:** five lessons on gas chromatography, knowledge checks and a four-question quiz with results and retake. Outside an LMS it logs one expected console warning (no SCORM API, so it falls back to local storage) and remembers a visitor's progress in their browser.
+- **VR robot trainer:** opens with `?demo`, which preloads taught points and a reference plate-transfer program. On a desktop, hold Space for the enabling device and use the arrow keys to jog. The launch card's iframe allows `xr-spatial-tracking`, so Enter VR works on a Quest 3 from the page as well as full screen. It is still in progress (stage 5 of 6), and the case study says so.
 - **Skills matrix:** across all five sites no class falls below two competent engineers; pick a site and five or six classes do, which is the point the gap view makes. The view is linkable (for example `#site=brook&gap=1`).
 - **Asset risk:** 1,934 assets, 11 cost centres, 9 High and 379 Medium, after scoring blank obsolescence as 1 (the real pipeline's policy). The film runs 78 seconds and the console reconciliation tables show no mismatches. GSAP is vendored beside the page, with the Web Animations fallback intact. The estate is smaller than the real one so the page stays under the 1.5 MB demo budget.
 - **Training Store:** 242 catalogue cards (25 curricula), 177 mapped to equipment, 24 equipment classes and about 200 model and series synonyms. The made-up model number `AB500` returns HPLC training. LMS links are removed, and the request box points to `training-team@example.com`.
@@ -115,7 +118,7 @@ Case studies 3 and 4 quote the real projects only as ranges ("a few thousand ass
 - **Copy:** one paragraph per case study, 63 to 82 words, written in Mike's voice: short sentences, contractions, first person, no semicolons, no em or en dashes, British English. The hero states that only AI-built work is shown.
 - **Accessibility:** axe-core 4.10 reports no violations on the shell or on any demo built here, checked across the film at four points, all explorer views, the matrix grid and trainer view, and the procedure library tabs and index. The Training Designer export, embedded unchanged, has two moderate findings of its own (no `main` landmark, content outside landmarks), to fix in the app. Site colour pairs all pass WCAG AA. Every animation respects `prefers-reduced-motion`. Keyboard paths work throughout (skip link, visible focus, grid arrows, tab arrows, film slider and Esc). Every panel has a text description and every iframe a title.
 - **Small screens:** no sideways scroll at 360 px. Under 700 px each live demo shows a still and an Open full screen link instead of the iframe.
-- **Weight:** shell 82 KB before demos (budget 3 MB). Demos: skills matrix 44 KB, Training Designer 115 KB, Training Store 145 KB, procedure library 217 KB, asset risk 1.50 MB including GSAP (125 KB gzipped, as GitHub Pages serves it). Iframes and posters load lazily.
+- **Weight:** shell 82 KB before demos (budget 3 MB). Demos: skills matrix 44 KB, Training Designer 115 KB, Training Store 145 KB, procedure library 217 KB, asset risk 1.50 MB including GSAP (125 KB gzipped, as GitHub Pages serves it). Iframes and posters load lazily. VR robot trainer 1.49 MB (258 KB of gzipped script), loaded only when launched.
 - **Outside requests:** none on load. The Training Designer sample course requests a sample video from MDN and an OpenStreetMap embed, but only when a visitor opens lesson 4.
 
 ## Brief decisions applied
@@ -142,6 +145,7 @@ demos/procedure-library/       index.html (built, three tabs), register-index.ht
                                index_template.html, page_template.html, make_synthetic.py, build.py,
                                engine/ (neutral Word engine stand-in),
                                example/ (master .md, gaps.xlsx, check_report.txt, page-1..3.webp)
+demos/vr-robot/                index.html and assets/ (static WebXR build, de-branded)
 tools/                         anon_check.sh, deep_check.py, sync_noscript.py, list_placeholders.py, make_posters.py
 .github/workflows/pages.yml    deploys the repo root to GitHub Pages on every push to main
 .nojekyll                      tells Pages to serve the files as they are

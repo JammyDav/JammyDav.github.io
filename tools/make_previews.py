@@ -35,7 +35,8 @@ CANDIDATES = [r"C:\Program Files\Google\Chrome\Application\chrome.exe",
               "google-chrome", "chromium", "msedge"]
 
 # which captured frame becomes the hero thumbnail
-THUMB_FRAME = {"training-designer": 0, "skills-matrix": 1, "asset-risk": 3, "training-store": 1, "procedure-library": 1}
+THUMB_FRAME = {"training-designer": 0, "skills-matrix": 1, "asset-risk": 3, "training-store": 1, "procedure-library": 1, "vr-robot": 0}
+KEY = """(k => { const o = { key: k, code: /^[0-9]$/.test(k) ? "Digit" + k : "Key" + k.toUpperCase(), bubbles: true }; window.dispatchEvent(new KeyboardEvent("keydown", o)); document.dispatchEvent(new KeyboardEvent("keydown", o)); window.dispatchEvent(new KeyboardEvent("keyup", o)); document.dispatchEvent(new KeyboardEvent("keyup", o)); })(%s)"""
 
 CLICK_TEXT = """(t => { const b = [...document.querySelectorAll('button, a')].find(x => x.textContent.trim().startsWith(t)); if (b) b.click(); return !!b; })(%s)"""
 
@@ -79,6 +80,13 @@ DEMOS = {
         ("js", "document.getElementById('t-strip').click()"), ("wait", 800), ("shot", 1500),
         ("js", "document.querySelectorAll('.scroll')[1].scrollTop = 220"), ("wait", 400), ("shot", 1300),
         ("js", "document.getElementById('t-pack').click()"), ("wait", 600), ("shot", 1200),
+    ]),
+    "vr-robot": (W, H, [
+        ("nav", "demos/vr-robot/index.html?demo"), ("wait", 5000), ("shot", 1400),
+        ("js", KEY % json.dumps("2")), ("wait", 1200), ("shot", 1200),
+        ("js", KEY % json.dumps("3")), ("wait", 1200), ("shot", 1200),
+        ("js", KEY % json.dumps("4")), ("wait", 1200), ("shot", 1200),
+        ("js", "localStorage.clear()"),
     ]),
 }
 
@@ -127,7 +135,7 @@ def browser():
 def main():
     only = sys.argv[1:]
     with tempfile.TemporaryDirectory(ignore_cleanup_errors=True) as tmp:
-        proc = subprocess.Popen([browser(), "--headless=new", "--disable-gpu", "--hide-scrollbars", f"--remote-debugging-port={PORT}",
+        proc = subprocess.Popen([browser(), "--headless=new", "--disable-gpu", "--hide-scrollbars", "--use-angle=swiftshader", "--enable-unsafe-swiftshader", f"--remote-debugging-port={PORT}",
                                  f"--user-data-dir={tmp}", f"--window-size={W},{H}", "about:blank"],
                                 stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         try:

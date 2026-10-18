@@ -25,6 +25,7 @@ SHOTS = [
     ("asset-risk-poster", "demos/asset-risk/index.html#film/t=77", 1280, 720),
     ("training-store-poster", "demos/training-store/index.html", 1280, 800),
     ("procedure-library-poster", "demos/procedure-library/index.html#strip", 1280, 800),
+    ("vr-robot-poster", "demos/vr-robot/index.html?demo", 1280, 800),
 ]
 CANDIDATES = [
     r"C:\Program Files\Google\Chrome\Application\chrome.exe",
