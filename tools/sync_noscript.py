@@ -28,35 +28,15 @@ def main():
     out.append('<div class="wrap static">')
     out.append(f"<h1>{t(h['name'])}</h1>")
     out += [f"<p>{t(p)}</p>" for p in h["pitch"]]
-    if h.get("proof"):
-        out.append(f"<p>{t(h['proof'])}</p>")
     out.append(f'<p><a href="{h["links"][0]["href"]}">{t(h["links"][0]["label"])}</a></p>')
-    p = d["pattern"]
-    out.append(f"<h2>{t(p['title'])}</h2>")
-    out.append(f"<p>{t(p['intro'])}</p>")
-    out.append("<ul>")
-    out += [f"<li><strong>{t(s['title'])}.</strong> {t(s['text'])}</li>" for s in p["steps"]]
-    out.append("</ul>")
     for cs in d["caseStudies"]:
         out.append(f'<article id="{cs["id"]}-static">')
         out.append(f"<h2>{t(cs['title'])}</h2>")
-        out.append(f"<p><em>{t(cs['pitch'])}</em></p>")
-        for head, key in (("Context", "context"), ("What I built", "built"), ("How", "how")):
-            out.append(f"<h3>{head}</h3>")
-            out += [f"<p>{t(x)}</p>" for x in cs[key]]
-        out.append("<h3>Outcome</h3>")
-        out.append("<ul>")
-        out += [f"<li>{t(x)}</li>" for x in cs["outcome"]]
-        out.append("</ul>")
+        out.append(f"<p>{t(cs['summary'])}</p>")
         pn = cs["panel"]
         link = f' <a href="{pn["src"]}">Open the demo</a>' if pn.get("src") else ""
         out.append(f"<p>{'Demo' if pn['type'] == 'live' else 'Visual'}: {t(pn['alt'])}{link}</p>")
         out.append("</article>")
-    a = d["alsoBuilt"]
-    out.append(f"<h2>{t(a['title'])}</h2>")
-    out.append("<ul>")
-    out += [f"<li><strong>{t(x['title'])}.</strong> {t(x['text'])}</li>" for x in a["tiles"]]
-    out.append("</ul>")
     c = d["contact"]
     out.append(f"<h2>{t(c['title'])}</h2>")
     out.append(f"<p>{t(c['intro'])}</p>")

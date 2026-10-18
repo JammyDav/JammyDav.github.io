@@ -10,7 +10,7 @@ A single scrollable page of five case studies, each telling the problem, the bui
 | 4 | Training Store: find the course by the instrument in front of you | Live: the real course finder, rebuilt on an invented catalogue |
 | 5 | A procedure library run like a codebase, with an operating pack for the AI that drafts in it | Live: generated index, plus one invented procedure built and checked |
 
-Around them: a hero, the three-step pattern, six Also built tiles, and contact.
+Around them: a short hero that says the page only shows things built with AI, and contact. Each case study is a title, one paragraph in Mike's voice, three numbers and the live demo. The page was cut right back after feedback that it had too much text.
 
 ## Anonymisation statement
 
@@ -91,13 +91,9 @@ The `build.py` wrappers need `_source/` present, because that is where the real 
 
 ## Placeholders
 
-Anything still missing shows on the page as a yellow **PLACEHOLDER** marker. `python tools/list_placeholders.py` prints the live list.
+None on the page. `python tools/list_placeholders.py` prints any that are added back with `{{PLACEHOLDER:...}}`.
 
-| Where | What is needed |
-|---|---|
-| Case study 1 panel | Sandbox editor view (optional in the brief; needs the app source, which is not in `_source/`) |
-
-Not marked on the page, but still worth doing: two Training Designer editor screenshots with real course titles removed, and replacing the sample course's own placeholder images ("Cover image placeholder", "Analytical laboratory: placeholder") with your photos in the app, then re-exporting.
+Still worth doing: two Training Designer editor screenshots with real course titles removed, and replacing the sample course's own placeholder images ("Cover image placeholder", "Analytical laboratory: placeholder") with your photos in the app, then re-exporting.
 
 ### Figures used (confirmed 17 Oct 2026)
 
@@ -105,7 +101,7 @@ Not marked on the page, but still worth doing: two Training Designer editor scre
 |---|---|
 | More than £3,000 a year saved on the authoring licence | Case study 1 |
 | First drafts cut from days to under an hour | Case study 1 |
-| Around 50 eLearning courses since 2022 | Hero, case study 1, Also built |
+| Around 50 eLearning courses since 2022 | Case study 1 stats |
 | 200+ engineers; 25,000+ assets in the equipment hierarchy | Hero, case study 2 |
 | "An R&D sciences client" as the public description | Case study 3 (the demo's fictional client is "Example R&D Sciences") |
 | Several hundred courses; Power App launched 2022; new store launched August 2026, rollout under way | Case study 4 |
@@ -115,7 +111,7 @@ Case studies 3 and 4 quote the real projects only as ranges ("a few thousand ass
 
 ## Quality checks
 
-- **Copy:** each case study runs 212 to 243 words of prose (brief: 180 to 260): context, what I built, how and outcome; the pattern section is 54 words (limit 60). British English, no em or en dashes. The through-line is stated in the hero and restated in the closing section.
+- **Copy:** one paragraph per case study, 63 to 82 words, written in Mike's voice: short sentences, contractions, first person, no semicolons, no em or en dashes, British English. The hero states that only AI-built work is shown.
 - **Accessibility:** axe-core 4.10 reports no violations on the shell or on any demo built here, checked across the film at four points, all explorer views, the matrix grid and trainer view, and the procedure library tabs and index. The Training Designer export, embedded unchanged, has two moderate findings of its own (no `main` landmark, content outside landmarks), to fix in the app. Site colour pairs all pass WCAG AA. Every animation respects `prefers-reduced-motion`. Keyboard paths work throughout (skip link, visible focus, grid arrows, tab arrows, film slider and Esc). Every panel has a text description and every iframe a title.
 - **Small screens:** no sideways scroll at 360 px. Under 700 px each live demo shows a still and an Open full screen link instead of the iframe.
 - **Weight:** shell 82 KB before demos (budget 3 MB). Demos: skills matrix 44 KB, Training Designer 115 KB, Training Store 145 KB, procedure library 217 KB, asset risk 1.50 MB including GSAP (125 KB gzipped, as GitHub Pages serves it). Iframes and posters load lazily.
