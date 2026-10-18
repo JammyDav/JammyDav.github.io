@@ -1,4 +1,4 @@
-/* Portfolio shell: renders content/case-studies.json, top bar dots, stat count-up, demo panels. */
+/* Portfolio shell: renders content/case-studies.json, hero index, top bar dots and progress, stat count-up, launch cards, reveals. */
 (function () {
   'use strict';
 
@@ -28,8 +28,18 @@
       '<div><h1 id="hero-name">' + esc(h.name) + '</h1>' +
       '<p class="lede">' + rich(h.pitch[0]) + '</p><p class="ai-note">' + rich(h.pitch[1]) + '</p>' +
       '<ul class="chips" aria-label="Roles I am looking at">' + h.chips.map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('') + '</ul>' +
-      '<div class="hero-links">' + links + '</div>' +
-      '<a class="scroll-cue" href="#case-studies"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 4v15M5 13l7 7 7-7"/></svg>Five case studies, each with a live demo</a></div>';
+      '<div class="hero-links">' + links + '</div></div>';
+  }
+
+  // Five cards under the intro: what each build is and its standout number, linking to it.
+  function renderIndex(cases) {
+    document.getElementById('hero-index').innerHTML =
+      '<h2 class="ix-head" id="ix-head">The five builds</h2><ol class="index" aria-labelledby="ix-head">' + cases.map(function (cs, i) {
+        return '<li><a class="ix" href="#' + esc(cs.id) + '">' +
+          '<img src="' + esc(cs.panel.thumb) + '" alt="" width="480" height="' + Math.round(480 * cs.panel.previewSize[1] / cs.panel.previewSize[0]) + '" decoding="async">' +
+          '<span class="ix-n" aria-hidden="true">0' + (i + 1) + '</span><span class="ix-t">' + esc(cs.short) + '</span>' +
+          '<span class="ix-h">' + esc(cs.headline) + '</span></a></li>';
+      }).join('') + '</ol>';
   }
 
   function statValue(s) {
@@ -48,22 +58,24 @@
       return '<div class="panel"><div class="panel-head">' + badge + '<h3>' + esc(p.title) + '</h3></div>' +
         '<div class="ph-box" role="note"><b>PLACEHOLDER</b><span>' + esc(p.placeholder) + '</span></div>' + alt + '</div>';
     }
+    // Launch card: a looping preview (a still under reduced motion) until the visitor launches the real demo.
     var size = p.aspect ? 'aspect-ratio:' + p.aspect : 'height:' + p.height + 'px';
-    var poster = '<a class="poster" href="' + esc(p.src) + '" target="_blank" rel="noopener">' +
-      '<img src="' + esc(p.poster) + '" alt="Preview of the ' + esc(cs.short) + ' demo" width="' + p.posterSize[0] + '" height="' + p.posterSize[1] + '" loading="lazy" decoding="async">' +
-      '<span>Open the demo full screen</span></a>';
-    return '<div class="panel small-poster"><div class="panel-head">' + badge + '<h3>' + esc(p.title) + '</h3>' +
+    var img = reduced ? p.poster : p.preview, wh = reduced ? p.posterSize : p.previewSize;
+    var launch = '<div class="launch" style="aspect-ratio:' + wh[0] + ' / ' + wh[1] + '">' +
+      '<img src="' + esc(img) + '" data-fallback="' + esc(p.poster) + '" alt="' + (reduced ? 'Still' : 'Looping preview') + ' of the ' + esc(cs.short) + ' demo" width="' + wh[0] + '" height="' + wh[1] + '" loading="lazy" decoding="async">' +
+      '<button type="button" class="launch-btn" data-src="' + esc(p.src) + '" data-size="' + esc(size) + '" data-title="' + esc(p.title) + '">' +
+      '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg>Launch live demo</button></div>';
+    return '<div class="panel"><div class="panel-head">' + badge + '<h3>' + esc(p.title) + '</h3>' +
       '<a class="fs" href="' + esc(p.src) + '" target="_blank" rel="noopener">Open full screen<span class="sr"> (new tab)</span> &#8599;</a></div>' +
-      '<div class="frame" style="' + size + '"><iframe src="' + esc(p.src) + '" title="' + esc(p.title) + ' (live demo, synthetic data)" loading="lazy"></iframe></div>' +
-      poster + (p.note ? '<p class="note">' + rich(p.note) + '</p>' : '') + alt + '</div>';
+      launch + (p.note ? '<p class="note">' + rich(p.note) + '</p>' : '') + alt + '</div>';
   }
 
   function renderCase(cs, i, n) {
     return '<section class="cs" id="' + esc(cs.id) + '" aria-labelledby="' + esc(cs.id) + '-title"><div class="wrap">' +
-      '<header class="cs-head"><div class="kicker">Case study ' + (i + 1) + ' of ' + n + '</div>' +
+      '<header class="cs-head rv"><div class="kicker">Case study ' + (i + 1) + ' of ' + n + '</div>' +
       '<h2 id="' + esc(cs.id) + '-title">' + rich(cs.title) + '</h2><p class="summary">' + rich(cs.summary) + '</p></header>' +
-      '<ul class="stats" aria-label="Outcome in numbers">' + cs.stats.map(function (s) { return '<li>' + statValue(s) + '<span class="l">' + rich(s.label) + '</span></li>'; }).join('') + '</ul>' +
-      renderPanel(cs) +
+      '<ul class="stats rv" aria-label="Outcome in numbers">' + cs.stats.map(function (s) { return '<li>' + statValue(s) + '<span class="l">' + rich(s.label) + '</span></li>'; }).join('') + '</ul>' +
+      '<div class="rv">' + renderPanel(cs) + '</div>' +
       '</div></section>';
   }
 
@@ -79,7 +91,7 @@
 
   /* ---------- behaviour ---------- */
   function topbar(cases) {
-    var bar = document.getElementById('topbar'), hero = document.getElementById('top');
+    var bar = document.getElementById('topbar'), hero = document.getElementById('top'), progress = document.getElementById('progress');
     document.getElementById('dots').innerHTML = cases.map(function (cs, i) {
       return '<li><a href="#' + esc(cs.id) + '" title="' + esc(cs.short) + '"><span class="lbl">Case study ' + (i + 1) + ': ' + esc(cs.short) + '</span></a></li>';
     }).join('');
@@ -89,6 +101,8 @@
     function update() {
       ticking = false;
       var heroGone = hero.getBoundingClientRect().bottom < 0;
+      var room = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.transform = 'scaleX(' + (room > 0 ? Math.min(1, window.scrollY / room) : 0) + ')';
       bar.classList.toggle('on', heroGone);
       bar.inert = !heroGone;   // off-screen bar: out of the tab order and the accessibility tree
       var mid = window.innerHeight * 0.4, cur = -1;
@@ -125,24 +139,54 @@
     els.forEach(function (el) { io.observe(el); });
   }
 
-  // A poster that has not been made yet becomes a visible placeholder, not a broken image.
-  function posterFallbacks() {
-    [].slice.call(document.querySelectorAll('.poster img')).forEach(function (img) {
-      img.addEventListener('error', function () {
-        var a = img.parentNode;
-        a.innerHTML = '<div class="ph-box" style="min-height:160px"><b>PLACEHOLDER</b><span>Small-screen preview image not made yet. Tap to open the demo full screen.</span></div>';
-      });
+  // Launch: swap the preview for the live demo. On small screens the demos open full screen instead.
+  function launchers() {
+    document.getElementById('case-studies').addEventListener('click', function (e) {
+      var b = e.target.closest('.launch-btn');
+      if (!b) return;
+      var src = b.getAttribute('data-src');
+      if (window.innerWidth < 700) { window.open(src, '_blank', 'noopener'); return; }
+      var frame = document.createElement('div');
+      frame.className = 'frame';
+      frame.style.cssText = b.getAttribute('data-size');
+      frame.innerHTML = '<iframe src="' + esc(src) + '" title="' + esc(b.getAttribute('data-title')) + ' (live demo, synthetic data)"></iframe>';
+      b.closest('.launch').replaceWith(frame);
+      var f = frame.querySelector('iframe');
+      f.addEventListener('load', function () { f.focus(); }, { once: true });
     });
+    // A preview that fails to load falls back to the still poster.
+    [].slice.call(document.querySelectorAll('.launch img')).forEach(function (img) {
+      img.addEventListener('error', function () { img.src = img.getAttribute('data-fallback'); }, { once: true });
+    });
+  }
+
+  // Sections ease in as they arrive. Skipped entirely under reduced motion.
+  function reveals() {
+    if (reduced || !('IntersectionObserver' in window)) return;
+    document.documentElement.classList.add('motion');
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    var els = [].slice.call(document.querySelectorAll('.rv'));
+    els.forEach(function (el) { io.observe(el); });
+    // Safety net: anything already scrolled past (a jump link, a fast flick) is shown, never left hidden.
+    var t = null;
+    function sweep() { els.forEach(function (el) { if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in'); }); }
+    window.addEventListener('scroll', function () { clearTimeout(t); t = setTimeout(sweep, 150); }, { passive: true });
+    window.addEventListener('hashchange', function () { setTimeout(sweep, 50); });
+    setTimeout(sweep, 1200);
   }
 
   function render(data) {
     renderHero(data.hero);
+    renderIndex(data.caseStudies);
     var n = data.caseStudies.length;
     document.getElementById('case-studies').innerHTML = data.caseStudies.map(function (cs, i) { return renderCase(cs, i, n); }).join('');
     renderContact(data.contact);
     topbar(data.caseStudies);
     countUps();
-    posterFallbacks();
+    launchers();
+    reveals();
     if (location.hash) { var t = document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView({ behavior: 'instant' }); }
   }
 

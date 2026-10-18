@@ -10,7 +10,7 @@ A single scrollable page of five case studies, each telling the problem, the bui
 | 4 | Training Store: find the course by the instrument in front of you | Live: the real course finder, rebuilt on an invented catalogue |
 | 5 | Document creation run like a codebase | Live: generated index, plus one invented procedure built and checked |
 
-Around them: a short hero that says the page only shows things built with AI, and contact. Each case study is a title, one paragraph in Mike's voice, three numbers and the live demo. The page was cut right back after feedback that it had too much text.
+Around them: a short hero that says the page only shows things built with AI, an index of five thumbnail cards that jump to each build, and contact. Each demo sits behind a launch card: a looping preview of the real demo with a Launch live demo button that swaps in the live demo (on phones it opens full screen). Sections ease in as they scroll into view and a progress line runs along the top bar; all of that motion is off under reduced motion, where the cards show a still instead. Each case study is a title, one paragraph in Mike's voice, three numbers and the live demo. The page was cut right back after feedback that it had too much text.
 
 ## Anonymisation statement
 
@@ -77,7 +77,8 @@ pip install pandas openpyxl pillow python-docx pymupdf
 | Training Store | `cd demos/training-store && python make_synthetic.py && python build.py` | Writes an invented LMS export, skills-matrix JSON and equipment table, runs the real `build_data.py` from `_source/training-store/` with only its input-path lines swapped, and inlines the result into `template.html`. |
 | Procedure library | `cd demos/procedure-library && python make_synthetic.py && python build.py` | Writes an invented register, gap register and procedure, runs the real `build_docs.py`, `check_docs.py` and `build_index.py` from `_source/procedure-library/tools/`, renders the built .docx to page images through Word (Windows only), and assembles `index.html`. |
 | Training Designer | none | `index.html` is the real player export, copied byte for byte; `sample_course.json` is its course source. Re-export from the app to change it. |
-| Posters | `python tools/make_posters.py` (with the local server running) | Headless Chrome or Edge stills of each live demo, saved as WebP for screens under 700 px. |
+| Posters | `python tools/make_posters.py` (with the local server running) | Headless Chrome or Edge stills of each live demo, saved as WebP. Used as the still shown under reduced motion. |
+| Previews and thumbnails | `python tools/make_previews.py` (with the local server running; needs `websocket-client`) | Drives each demo through a few real states in headless Chrome and saves a looping animated WebP for its launch card, plus a small thumbnail for the hero index. |
 
 The `build.py` wrappers need `_source/` present, because that is where the real pipelines live. Without it the committed `index.html` files still work; they just cannot be regenerated. `index.src.html`, `template.html` and `index_template.html` are the original page templates with the brand colours, logo, fonts, client name, mailbox, LMS links and product names replaced by the site's own.
 

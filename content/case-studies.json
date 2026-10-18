@@ -25,7 +25,7 @@
   "caseStudies": [
     {
       "id": "training-designer",
-      "short": "Training Designer",
+      "short": "eLearning Training Designer",
       "title": "eLearning Training Designer",
       "stats": [
         {
@@ -56,13 +56,20 @@
           800
         ],
         "note": "The real export, unchanged. Five short lessons on a neutral topic, with a quiz at the end.",
-        "alt": "An embedded course player running a short sample course on gas chromatography, with text, media and one knowledge check."
+        "alt": "An embedded course player running a short sample course on gas chromatography, with text, media and one knowledge check.",
+        "preview": "assets/img/training-designer-preview.webp",
+        "previewSize": [
+          960,
+          600
+        ],
+        "thumb": "assets/img/training-designer-thumb.webp"
       },
-      "summary": "Our training team paid more than £3,000 a year for an authoring tool we barely used. When the licence came up for renewal, I built our own with AI instead. It's a block editor and course player that exports to HTML and SCORM, so courses run in our LMS. Courses save as open JSON, so I can now draft a full course from a manual with AI in under an hour. That used to take days."
+      "summary": "Our training team paid more than £3,000 a year for an authoring tool we barely used. When the licence came up for renewal, I built our own with AI instead. It's a block editor and course player that exports to HTML and SCORM, so courses run in our LMS. Courses save as open JSON, so I can now draft a full course from a manual with AI in under an hour. That used to take days.",
+      "headline": "£3,000+ a year saved"
     },
     {
       "id": "skills-matrix",
-      "short": "Skills matrix",
+      "short": "Workforce Skills Matrix",
       "title": "Workforce Skills Matrix",
       "stats": [
         {
@@ -90,13 +97,20 @@
           1280,
           800
         ],
-        "alt": "A heatmap of 60 invented engineers across five invented sites and twelve generic equipment classes. Visitors can filter by site, class and minimum level, switch on a gap view that highlights classes with fewer than two competent engineers, list who is qualified to train each class, and open any engineer's row."
+        "alt": "A heatmap of 60 invented engineers across five invented sites and twelve generic equipment classes. Visitors can filter by site, class and minimum level, switch on a gap view that highlights classes with fewer than two competent engineers, list who is qualified to train each class, and open any engineer's row.",
+        "preview": "assets/img/skills-matrix-preview.webp",
+        "previewSize": [
+          960,
+          600
+        ],
+        "thumb": "assets/img/skills-matrix-thumb.webp"
       },
-      "summary": "We had 200+ engineers and 25,000+ assets, but no clear view of who could work on what. I started with an Excel matrix fed by Forms. Then a Power BI dashboard linked to the equipment hierarchy. Then I built a proper matrix app with AI, with self-assessment and manager sign-off. It's now how we spot gaps, plan training, pick trainers and show clients what we can cover."
+      "summary": "We had 200+ engineers and 25,000+ assets, but no clear view of who could work on what. I started with an Excel matrix fed by Forms. Then a Power BI dashboard linked to the equipment hierarchy. Then I built a proper matrix app with AI, with self-assessment and manager sign-off. It's now how we spot gaps, plan training, pick trainers and show clients what we can cover.",
+      "headline": "200+ engineers mapped"
     },
     {
       "id": "asset-risk",
-      "short": "Asset risk",
+      "short": "Asset risk film and explorer",
       "title": "Asset risk film and explorer: replacing a heavy dashboard with a 78-second answer",
       "stats": [
         {
@@ -125,9 +139,16 @@
           720
         ],
         "note": "Synthetic register: every asset, cost centre, supplier and budget is invented. The scoring rules are the real ones.",
-        "alt": "A 78-second animated film in six scenes that walks from an invented estate of a few thousand laboratory assets to its High-risk assets and a phased replacement budget, followed by an explorer with estate, cost centre and replacement list views, a copy-summary button and CSV export."
+        "alt": "A 78-second animated film in six scenes that walks from an invented estate of a few thousand laboratory assets to its High-risk assets and a phased replacement budget, followed by an explorer with estate, cost centre and replacement list views, a copy-summary button and CSV export.",
+        "preview": "assets/img/asset-risk-preview.webp",
+        "previewSize": [
+          960,
+          540
+        ],
+        "thumb": "assets/img/asset-risk-thumb.webp"
       },
-      "summary": "An R&D sciences client had a risk-scored asset register and a dashboard nobody could get a decision from. Working with AI, I turned it into one HTML file that gives the answer. A 78-second film walks from the whole estate to the High-risk assets and a phased budget. Then an explorer lets each budget holder see their cost centre and export a list. Behind it, a Python build recomputes every score and fails if a single number doesn't reconcile."
+      "summary": "An R&D sciences client had a risk-scored asset register and a dashboard nobody could get a decision from. Working with AI, I turned it into one HTML file that gives the answer. A 78-second film walks from the whole estate to the High-risk assets and a phased budget. Then an explorer lets each budget holder see their cost centre and export a list. Behind it, a Python build recomputes every score and fails if a single number doesn't reconcile.",
+      "headline": "A 78-second answer"
     },
     {
       "id": "training-store",
@@ -159,13 +180,20 @@
           800
         ],
         "note": "Try the made-up model number AB500. Every course, manufacturer and model is invented; links and the request mailbox point nowhere.",
-        "alt": "A course finder over an invented catalogue of a few hundred training cards. Visitors search by course name, equipment class or a made-up model number, filter by category and class, switch between Training and Validation tabs, add courses to a selection and export it as CSV."
+        "alt": "A course finder over an invented catalogue of a few hundred training cards. Visitors search by course name, equipment class or a made-up model number, filter by category and class, switch between Training and Validation tabs, add courses to a selection and export it as CSV.",
+        "preview": "assets/img/training-store-preview.webp",
+        "previewSize": [
+          960,
+          600
+        ],
+        "thumb": "assets/img/training-store-thumb.webp"
       },
-      "summary": "We had several hundred courses in the LMS, but the search only knew titles. An engineer in front of an instrument couldn't ask if there was training for it. The first fix was a Power App in 2022. This year I rebuilt it with AI as a single web page. It joins the LMS, the skills matrix and the asset table, so you type a model number and get the training. It launched in August 2026 and rollout is still under way."
+      "summary": "We had several hundred courses in the LMS, but the search only knew titles. An engineer in front of an instrument couldn't ask if there was training for it. The first fix was a Power App in 2022. This year I rebuilt it with AI as a single web page. It joins the LMS, the skills matrix and the asset table, so you type a model number and get the training. It launched in August 2026 and rollout is still under way.",
+      "headline": "Search by model number"
     },
     {
       "id": "procedure-library",
-      "short": "Procedure library",
+      "short": "Document creation",
       "title": "Document creation run like a codebase",
       "stats": [
         {
@@ -194,9 +222,16 @@
           800
         ],
         "note": "The real build, check and index tools, run on an invented register and one invented procedure. The checker's two failures are deliberate: a banned word, and a VERIFY marker with no gap-register row.",
-        "alt": "A filterable document index generated from a synthetic register, and a three-pane strip for one invented procedure: the markdown master, a checker report with two deliberate failures, and the rendered page."
+        "alt": "A filterable document index generated from a synthetic register, and a three-pane strip for one invented procedure: the markdown master, a checker report with two deliberate failures, and the rendered page.",
+        "preview": "assets/img/procedure-library-preview.webp",
+        "previewSize": [
+          960,
+          600
+        ],
+        "thumb": "assets/img/procedure-library-thumb.webp"
       },
-      "summary": "We were rebuilding our procedure library across eight workstreams, with several people drafting and AI doing a lot of the writing. Documents drifted and picked up steps nobody could back up. So I ran it like code. Every document has a markdown master, a build, a checker and a place in the register. Anything the AI can't support gets flagged for a named person to answer. It's at 82 documents and growing fast, with about 2,300 lines of Python behind it."
+      "summary": "We were rebuilding our procedure library across eight workstreams, with several people drafting and AI doing a lot of the writing. Documents drifted and picked up steps nobody could back up. So I ran it like code. Every document has a markdown master, a build, a checker and a place in the register. Anything the AI can't support gets flagged for a named person to answer. It's at 82 documents and growing fast, with about 2,300 lines of Python behind it.",
+      "headline": "82 documents and growing"
     }
   ],
   "contact": {
