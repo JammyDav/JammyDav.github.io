@@ -4,11 +4,11 @@ A single scrollable page of five case studies, each telling the problem, the bui
 
 | # | Case study | Panel |
 |---|---|---|
-| 1 | Training Designer: a course authoring and player app that replaced a paid product | Live: the real player export, playing a sample course |
-| 2 | Workforce skills matrix: from a spreadsheet to the system sales decisions run on | Live: heatmap of invented engineers with gap and trainer views |
+| 1 | eLearning Training Designer | Live: the real player export, playing a sample course |
+| 2 | Workforce Skills Matrix | Live: heatmap of invented engineers with gap and trainer views |
 | 3 | Asset risk film and explorer: replacing a heavy dashboard with a 78-second answer | Live: the real film and explorer, rebuilt on an invented estate |
 | 4 | Training Store: find the course by the instrument in front of you | Live: the real course finder, rebuilt on an invented catalogue |
-| 5 | A procedure library run like a codebase, with an operating pack for the AI that drafts in it | Live: generated index, plus one invented procedure built and checked |
+| 5 | Document creation run like a codebase | Live: generated index, plus one invented procedure built and checked |
 
 Around them: a short hero that says the page only shows things built with AI, and contact. Each case study is a title, one paragraph in Mike's voice, three numbers and the live demo. The page was cut right back after feedback that it had too much text.
 
